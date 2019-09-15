@@ -7,9 +7,11 @@
     <el-main>
       <el-row class="main" style="height: 100%">
         <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="电量" class="graph-item xpanel-wrapper-3">
+            <power-line-chart></power-line-chart>
           </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="产量" class="graph-item xpanel-wrapper-3">
+            <output-bar-chart></output-bar-chart>
           </GraphContainer>
           <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
           </GraphContainer>
@@ -34,11 +36,15 @@
 <script type="text/ecmascript-6">
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+import PowerLineChart from './PowerLineChart'
+import OutputBarChart from './OutputBarChart'
 export default {
   name: 'DataVisualOverview',
   components: {
     Screenfull,
     GraphContainer,
+    PowerLineChart,
+    OutputBarChart
   },
   data() {
     return {}

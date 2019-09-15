@@ -6,7 +6,6 @@
 import resize from '@/mixins/resize'
 import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
-import echarts from 'echarts'
 export default {
   name: 'IncomeBarChart',
   mixins: [resize],
