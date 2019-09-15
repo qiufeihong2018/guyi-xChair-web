@@ -50,7 +50,7 @@ export default {
     handleRowClick(row) {
       let { id } = row
       let newRouter = this.$router.resolve({
-        path: '/data-visual/company-detail',
+        path: '/data-visual/company',
         query: {
           id
         }

@@ -41,7 +41,7 @@ export default {
     left 15px
     height 40px
     line-height 40px
-    font-size 16px
+    font-size 20px
   }
 }
 </style>

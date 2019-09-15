@@ -6,7 +6,7 @@
 /**
  * 获取坐标 http://api.map.baidu.com/lbsapi/getpoint/index.html
  * 
- * */ 
+ * */
 import echarts from 'echarts'
 const anjiData = require('./anji.json')
 export default {
@@ -33,7 +33,14 @@ export default {
             normal: {
               show: true,
               textStyle: {
-                color: '#05C3F9'
+                color: '#05C3F9',
+                fontSize: 20
+              }
+            },
+            emphasis: {
+              textStyle: {
+                color: '#05C3F9',
+                fontSize: 21
               }
             }
           },
@@ -137,7 +144,7 @@ export default {
       const { alias, id, name } = data.data
       if (id.length === 24) {
         let newRouter = this.$router.resolve({
-          path: '/data-visual/company-detail',
+          path: '/data-visual/company',
           query: {
             id
           }

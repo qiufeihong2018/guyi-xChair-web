@@ -6,26 +6,35 @@
     </el-header>
     <el-main>
       <el-row class="main" style="height: 100%">
-        <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
-          <GraphContainer title="电量" class="graph-item xpanel-wrapper-3">
-            <power-line-chart></power-line-chart>
+        <el-col :xs="24" :sm="24" :md="24" :lg="16" class="col-item">
+
+          <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
+            <ProdlineStatus />
+            <ProdlineListTable />
           </GraphContainer>
-          <GraphContainer title="产量" class="graph-item xpanel-wrapper-3">
-            <output-bar-chart></output-bar-chart>
-          </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
-          </GraphContainer>
+
+          <el-row class="xpanel-wrapper-3">
+            <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
+              <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
+                <OutputBarChart />
+              </GraphContainer>
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
+              <GraphContainer title="昨日单位能耗系数" class="graph-item xpanel-wrapper-1">
+                <OutputBarChart />
+              </GraphContainer>
+            </el-col>
+          </el-row>
+
         </el-col>
-        <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item">
-          <GraphContainer title="企业介绍" class="graph-item xpanel-wrapper-1">
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
+          <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
+            
           </GraphContainer>
-        </el-col>
-        <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
+            <PowerLineChart />
           </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
-          </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="本月设备有效利用率" class="graph-item xpanel-wrapper-3">
           </GraphContainer>
         </el-col>
       </el-row>
@@ -39,13 +48,18 @@ import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 import PowerLineChart from './PowerLineChart'
 import OutputBarChart from './OutputBarChart'
+import ProdlineListTable from './ProdlineListTable'
+import ProdlineStatus from './ProdlineStatus'
+
 export default {
   name: 'DataVisualOverview',
   components: {
     Screenfull,
     GraphContainer,
     PowerLineChart,
-    OutputBarChart
+    OutputBarChart,
+    ProdlineListTable,
+    ProdlineStatus,
   },
   data() {
     return {
@@ -100,5 +114,8 @@ export default {
 }
 .xpanel-wrapper-3 {
   height 33.33333%
+}
+.xpanel-wrapper-6 {
+  height 66.66666%
 }
 </style>
