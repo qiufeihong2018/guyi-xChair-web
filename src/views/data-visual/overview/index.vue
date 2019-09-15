@@ -8,8 +8,10 @@
       <el-row class="main" style="height: 100%">
         <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
           <GraphContainer title="工业总产值" class="graph-item xpanel-wrapper-2">
+            <output-bar-chart></output-bar-chart>
           </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-2">
+          <GraphContainer title="销售收入与营业总收入" class="graph-item xpanel-wrapper-2">
+            <income-bar-chart></income-bar-chart>
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item">
@@ -17,11 +19,14 @@
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="缴税总额与税后收入" class="graph-item xpanel-wrapper-3">
+            <tax-bar-chart></tax-bar-chart>
           </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="资产总额与固定资产" class="graph-item xpanel-wrapper-3">
+            <asset-bar-chart></asset-bar-chart>
           </GraphContainer>
-          <GraphContainer title="待定" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="出口创汇" class="graph-item xpanel-wrapper-3">
+            <export-bar-chart></export-bar-chart>
           </GraphContainer>
         </el-col>
       </el-row>
@@ -32,11 +37,22 @@
 <script type="text/ecmascript-6">
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+import OutputBarChart from './OutputBarChart'
+import IncomeBarChart from './IncomeBarChart'
+import TaxBarChart from './TaxBarChart'
+import AssetBarChart from './AssetBarChart'
+import ExportBarChart from './ExportBarChart'
+
 export default {
   name: 'DataVisualOverview',
   components: {
     Screenfull,
     GraphContainer,
+    OutputBarChart,
+    IncomeBarChart,
+    TaxBarChart,
+    AssetBarChart,
+    ExportBarChart
   },
   data() {
     return {}
