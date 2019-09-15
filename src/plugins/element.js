@@ -24,6 +24,8 @@ import {
   Tooltip,
   Row,
   Col,
+  Tabs,
+  TabPane
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -53,4 +55,6 @@ loadPlugins([
   Tooltip,
   Row,
   Col,
+  Tabs,
+  TabPane
 ])

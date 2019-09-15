@@ -23,7 +23,7 @@ export const companies = [
         averageSale: 40.73, // 人均销售收入
         totalAsset: 37074, // 资产总额
         fixedAsset: 9467, // 固定资产
-        debtRatio: 0.65, // 资产负债率
+        debtRatio: 65, // 资产负债率
       }
     ]
   },
@@ -51,7 +51,7 @@ export const companies = [
         averageSale: 41.10, // 人均销售收入
         totalAsset: 73975, // 资产总额
         fixedAsset: 7105, // 固定资产
-        debtRatio: 0.43, // 资产负债率
+        debtRatio: 35, // 资产负债率
       }
     ]
   },
@@ -79,7 +79,7 @@ export const companies = [
         averageSale: 61, // 人均销售收入
         totalAsset: 27770, // 资产总额
         fixedAsset: 4926, // 固定资产
-        debtRatio: 0.58, // 资产负债率
+        debtRatio: 58.8, // 资产负债率
       }
     ]
   },
@@ -107,7 +107,7 @@ export const companies = [
         averageSale: 62.27, // 人均销售收入
         totalAsset: 89283, // 资产总额
         fixedAsset: 11486, // 固定资产
-        debtRatio: 0.43, // 资产负债率
+        debtRatio: 43.66, // 资产负债率(%)
       }
     ]
   }

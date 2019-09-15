@@ -4,70 +4,131 @@
       <h2>企业信息</h2>
     </el-header>
     <el-container style="margin-top: 10px">
-      <el-aside width="200px" class="aside">
-        <el-table :data="companyList" style="width: 100%" header-align="center">
-          <el-table-column prop="name" label="企业列表">
-          </el-table-column>
-        </el-table>
-      </el-aside>
-      <el-main class="main">
-        <el-form ref="form" :model="form">
-          <el-form :inline="true" label-width="100px">
-            <el-form-item label="企业名称:">
-              {{ form.name }}
-            </el-form-item>
-          </el-form>
-          <el-form :inline="true" label-width="100px">
-            <el-form-item label="企业地址:">
-              {{form.address}}
-            </el-form-item>
-            <el-form-item label="企业邮编:">
-              {{ form.zipCode }}
-            </el-form-item>
-          </el-form>
-        </el-form>
-        <el-menu :default-active="activeIndex" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="2016">2016年</el-menu-item>
-          <el-menu-item index="2017">2017年</el-menu-item>
-          <el-menu-item index="2018">2018年</el-menu-item>
-        </el-menu>
-      </el-main>
+      <!--<el-aside width="230px" class="aside">-->
+        <!--<el-table :data="companyList" style="width: 100%" header-align="center">-->
+          <!--<el-table-column prop="name" label="企业列表">-->
+          <!--</el-table-column>-->
+        <!--</el-table>-->
+
+        <el-tabs tab-position="left" type="border-card" style="width: 100%">
+          <el-tab-pane v-for="company in companyList" :key="company.name" :label="company.name">
+
+            <el-main class="main">
+              <el-form ref="form" :model="company" label-width="100px">
+                <el-form :inline="true" label-width="100px">
+                  <el-form-item label="企业名称:">
+                    {{ company.name }}
+                  </el-form-item>
+                </el-form>
+                <el-form :inline="true" label-width="100px">
+                  <el-form-item label="企业地址:">
+                    {{company.address}}
+                  </el-form-item>
+                  <el-form-item label="企业邮编:">
+                    {{ company.zipCode }}
+                  </el-form-item>
+                </el-form>
+                  <el-form-item label="职工人数:">
+                    {{company.totalStaff}}
+                  </el-form-item>
+                <el-form :inline="true" label-width="100px">
+                  <el-form-item label="经营范围:">
+                    {{ company.businessScope }}
+                  </el-form-item>
+                  <el-form-item label="主导产品:">
+                    {{ company.mainProduct }}
+                  </el-form-item>
+                </el-form>
+                <el-form :inline="true" label-width="100px">
+                  <el-form-item label="获奖情况:">
+                    {{ company.honor }}
+                  </el-form-item>
+                  <el-form-item label="认证情况:">
+                    {{ company.certification }}
+                  </el-form-item>
+                </el-form>
+              </el-form>
+              <el-tabs v-model="activeIndex">
+                <el-tab-pane label="2016年" name="2016">
+                  <table style="margin-top: 10px;">
+                    <tr>
+                      <th>工业总产数值(万元)</th>
+                      <td>{{company.kpi[0].output}}</td>
+                      <th>营业总收入(万元)</th>
+                      <td>{{company.kpi[0].operatingIncome}}</td>
+                    </tr>
+                    <tr>
+                      <th>销售收入(万元)</th>
+                      <td>{{company.kpi[0].sale}}</td>
+                      <th>出口创汇(万美元)</th>
+                      <td>{{company.kpi[0].export}}</td>
+                    </tr>
+                    <tr>
+                      <th>交税总额(万元)</th>
+                      <td>{{company.kpi[0].tax}}</td>
+                      <th>税后收入(万元)</th>
+                      <td>{{company.kpi[0].profitAfterTax}}</td>
+                    </tr>
+                    <tr>
+                      <th>人均销售收入(万元)</th>
+                      <td>{{company.kpi[0].averageSale}}</td>
+                      <th>资产总额(万元)</th>
+                      <td>{{company.kpi[0].totalAsset}}</td>
+                    </tr>
+                    <tr>
+                      <th>固定资产(万元)</th>
+                      <td>{{company.kpi[0].fixedAsset}}</td>
+                      <th>资产负债率(%)</th>
+                      <td>{{company.kpi[0].debtRatio}}</td>
+                    </tr>
+                  </table>
+                </el-tab-pane>
+                <el-tab-pane label="2017年" name="2017"></el-tab-pane>
+                <el-tab-pane label="2018年" name="2018"></el-tab-pane>
+              </el-tabs>
+            </el-main>
+
+          </el-tab-pane>
+        </el-tabs>
+      <!--</el-aside>-->
     </el-container>
   </el-container>
 </template>
 
 <script type="text/ecmascript-6">
+import { companies } from 'assets/data/company'
 export default {
   name: 'OperateCompany',
   components: {},
   data() {
     return {
-      companyList: [
-        {
-          id: 1,
-          name: '中源家居股份有限公司',
-        },
-        {
-          id: 2,
-          name: '永艺家具股份有限公司',
-        },
-        {
-          id: 3,
-          name: '浙江恒林椅业股份有限公司',
-        },
-        {
-          id: 4,
-          name: '安吉富和家具股份有限公司',
-        },
-        {
-          id: 5,
-          name: '安吉隆博家具股份有限公司',
-        },
-        {
-          id: 6,
-          name: '浙江盛信椅业股份有限公司',
-        }
-      ],
+      companyList: companies,
+      //   [
+      //   {
+      //     id: 1,
+      //     name: '中源家居股份有限公司',
+      //   },
+      //   {
+      //     id: 2,
+      //     name: '永艺家具股份有限公司',
+      //   },
+      //   {
+      //     id: 3,
+      //     name: '浙江恒林椅业股份有限公司',
+      //   },
+      //   {
+      //     id: 4,
+      //     name: '安吉富和家具股份有限公司',
+      //   },
+      //   {
+      //     id: 5,
+      //     name: '安吉隆博家具股份有限公司',
+      //   },
+      //   {
+      //     id: 6,
+      //     name: '浙江盛信椅业股份有限公司',
+      //   }
+      // ],
       form: {
         name: '中源家居股份有限公司',
         address: '安吉县递铺街道塘浦工业园区2-5幢',
@@ -113,6 +174,7 @@ export default {
   label {
     font-size 18px
     color black
+    border-left solid 2px #409EFF
   }
   .el-form-item__content {
     font-size 18px
@@ -128,6 +190,19 @@ export default {
   }
   .main {
     margin-left 10px
+    table {
+      tr {
+        border-bottom 1px solid #d1dbe5
+        th {
+          padding 10px
+        }
+        td {
+          padding 5px 10px
+          text-align right
+          width 200px
+        }
+      }
+    }
   }
 }
 </style>
