@@ -10,16 +10,16 @@ export default {
   },
   children: [
     {
-      path: '/operate/add',
-      component: _import('operate/add'),
-      name: 'OperateAdd',
+      path: '/operate/company',
+      component: _import('operate/company'),
+      name: 'OperateCompany',
       meta: { title: '企业配置', icon: 'fa fa-wrench' },
     },
     {
       path: '/operate/setting',
       component: _import('operate/setting'),
       name: 'OperateSetting',
-      meta: { title: '流水线配置', icon: 'fa fa-wrench' },
+      meta: { title: '生产线配置', icon: 'fa fa-wrench' },
     },
   ],
 }
