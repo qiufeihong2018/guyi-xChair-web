@@ -7,12 +7,12 @@ import resize from '@/mixins/resize'
 import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
 export default {
-  name: 'AssetBarChart',
+  name: 'OutputBarChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'AssetBarChart'
+      default: 'OutputBarChart'
     },
   },
   data() {
@@ -29,10 +29,10 @@ export default {
         grid: {
           left: '15%'
         },
-        color: color.category6,
         xAxis: {
           type: 'category',
-          data: companies.map(item => item.abbreviation),
+          axisTick: { show: false },
+          data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -46,7 +46,6 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: '单位：万元',
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -58,20 +57,40 @@ export default {
             }
           },
         },
+        color: color.category6,
         series: [
           {
-            name: '资产总额',
-            data: companies.map(item => item.kpi[0].totalAsset),
+            name: 'Forest',
             type: 'bar',
+            barGap: 0,
+            data: [320, 332, 301, 334, 390, 320]
           },
           {
-            name: '固定资产',
-            data: companies.map(item => item.kpi[0].fixedAsset),
+            name: 'Steppe',
             type: 'bar',
-          }]
+            data: [220, 182, 191, 234, 290, 332]
+          },
+          {
+            name: 'Desert',
+            type: 'bar',
+            data: [150, 232, 201, 154, 190, 390]
+          }
+        ]
       }
     }
-  }
+  },
+  watch: {
+    option(prev, next) {
+      this.updateChart()
+    },
+  },
+  mounted() {
+    // setInterval(() => {
+    //   let now = new Date()
+    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
+    //   this.chartData.push(Math.round(Math.random() * 10))
+    // }, 1000 * 60 *60)
+  },
 }
 </script>
 
