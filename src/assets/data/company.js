@@ -1,6 +1,8 @@
 export const companies = [
   {
     name: '中源家居股份有限公司',
+    id: '5d7e63c1ba35562fe1084626',
+    alias: '中源家居',
     abbreviation: '中源',
     address: '安吉县递铺街道塘浦工业园区2-5幢',
     gis: [], // 地图坐标
@@ -29,6 +31,8 @@ export const companies = [
   },
   {
     name: '永艺家具股份有限公司',
+    id: '5d7e642d201b65318803e39f',
+    alias: '永艺家具',
     abbreviation: '永艺',
     address: '浙江省湖州市安吉县递铺镇永艺西路1号',
     gis: [], // 地图坐标
@@ -57,6 +61,8 @@ export const companies = [
   },
   {
     name: '安吉富和家具有限公司',
+    id: '5d7e6450201b65318803e3a1',
+    alias: '富和家具',
     abbreviation: '富和',
     address: '安吉递铺范潭工业园区',
     gis: [], // 地图坐标
@@ -85,6 +91,8 @@ export const companies = [
   },
   {
     name: '浙江恒林椅业股份有限公司',
+    id: '5d7e6443201b65318803e3a0',
+    alias: '恒林椅业',
     abbreviation: '恒林',
     address: '浙江省湖州市安吉县递铺镇阳光工业园区',
     gis: [], // 地图坐标
@@ -113,6 +121,8 @@ export const companies = [
   },
   {
     name: '安吉隆博家具股份有限公司',
+    id: '5d7e6459201b65318803e3a2',
+    alias: '隆博家具',
     abbreviation: '隆博',
     address: '',
     gis: [], // 地图坐标
@@ -141,6 +151,8 @@ export const companies = [
   },
   {
     name: '浙江盛信椅业股份有限公司',
+    id: '5d7e6467201b65318803e3a3',
+    alias: '盛信椅业',
     abbreviation: '盛信',
     address: '',
     gis: [], // 地图坐标

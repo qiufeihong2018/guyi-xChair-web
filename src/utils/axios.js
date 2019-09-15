@@ -11,8 +11,8 @@ let interceptorList = [
 
 // 创建请求实例
 const _axios = axios.create({
-  // baseURL: 'http://192.168.1.246:5001/api/v1/',
-  baseURL: 'http://121.40.107.95:5001/api/v1/',
+  baseURL: 'http://192.168.1.246:5001/api/v1/',
+  // baseURL: 'http://121.40.107.95:5001/api/v1/',
   timeout: 5 * 1000 // 请求超时时间设置
 })
 
@@ -29,17 +29,17 @@ _axios.interceptors.request.use(
 
 // request 拦截
 _axios.interceptors.response.use(response => {
-  const { error_code: errorCode, msg, data } = response.data
-  // 成功的errorCode为0，其他都是
-  if (errorCode >= 100) {
-    Notification({
-      message: msg || '服务端异常',
-      type: 'warning',
-      duration: 5 * 1000
-    })
-    return Promise.reject(msg || '服务端异常')
-  }
-  return data
+  // const { error_code: errorCode, msg, data } = response.data
+  // // 成功的errorCode为0，其他都是
+  // if (errorCode >= 100) {
+  //   Notification({
+  //     message: msg || '服务端异常',
+  //     type: 'warning',
+  //     duration: 5 * 1000
+  //   })
+  //   return Promise.reject(msg || '服务端异常')
+  // }
+  return response.data
   }, error => {
     return Promise.reject(error)
   },

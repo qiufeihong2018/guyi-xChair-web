@@ -4,85 +4,87 @@
       <h2>企业信息</h2>
     </el-header>
     <el-container style="margin-top: 10px">
-        <el-tabs tab-position="left" type="border-card" style="width: 100%">
-          <el-tab-pane v-for="company in companyList" :key="company.name" :label="company.name">
-            <el-main class="main">
-              <el-form ref="form" :model="company" label-width="100px">
-                <el-form :inline="true" label-width="100px">
-                  <el-form-item label="企业名称:">
-                    {{ company.name }}
-                  </el-form-item>
-                </el-form>
-                <el-form :inline="true" label-width="100px">
-                  <el-form-item label="企业地址:">
-                    {{company.address}}
-                  </el-form-item>
-                  <el-form-item label="企业邮编:">
-                    {{ company.zipCode }}
-                  </el-form-item>
-                </el-form>
-                  <el-form-item label="职工人数:">
-                    {{company.totalStaff}}
-                  </el-form-item>
-                <el-form :inline="true" label-width="100px">
-                  <el-form-item label="经营范围:">
-                    {{ company.businessScope }}
-                  </el-form-item>
-                  <el-form-item label="主导产品:">
-                    {{ company.mainProduct }}
-                  </el-form-item>
-                </el-form>
-                <el-form :inline="true" label-width="100px">
-                  <el-form-item label="获奖情况:">
-                    {{ company.honor }}
-                  </el-form-item>
-                  <el-form-item label="认证情况:">
-                    {{ company.certification }}
-                  </el-form-item>
-                </el-form>
+      <el-tabs tab-position="left" type="border-card" style="width: 100%">
+        <el-tab-pane v-for="company in companyList" :key="company.name" :label="company.name">
+          <el-main class="main">
+            <el-form ref="form" :model="company" label-width="100px">
+              <el-form :inline="true" label-width="100px">
+                <el-form-item label="企业名称:">
+                  {{ company.name }}
+                </el-form-item>
               </el-form>
-              <el-tabs v-model="activeIndex">
-                <el-tab-pane label="2016年" name="2016">
-                  <table style="margin-top: 10px;">
-                    <tr>
-                      <th>工业总产数值(万元)</th>
-                      <td>{{company.kpi[0].output}}</td>
-                      <th>营业总收入(万元)</th>
-                      <td>{{company.kpi[0].operatingIncome}}</td>
-                    </tr>
-                    <tr>
-                      <th>销售收入(万元)</th>
-                      <td>{{company.kpi[0].sale}}</td>
-                      <th>出口创汇(万美元)</th>
-                      <td>{{company.kpi[0].export}}</td>
-                    </tr>
-                    <tr>
-                      <th>交税总额(万元)</th>
-                      <td>{{company.kpi[0].tax}}</td>
-                      <th>税后收入(万元)</th>
-                      <td>{{company.kpi[0].profitAfterTax}}</td>
-                    </tr>
-                    <tr>
-                      <th>人均销售收入(万元)</th>
-                      <td>{{company.kpi[0].averageSale}}</td>
-                      <th>资产总额(万元)</th>
-                      <td>{{company.kpi[0].totalAsset}}</td>
-                    </tr>
-                    <tr>
-                      <th>固定资产(万元)</th>
-                      <td>{{company.kpi[0].fixedAsset}}</td>
-                      <th>资产负债率(%)</th>
-                      <td>{{company.kpi[0].debtRatio}}</td>
-                    </tr>
-                  </table>
-                </el-tab-pane>
-                <el-tab-pane label="2017年" name="2017"></el-tab-pane>
-                <el-tab-pane label="2018年" name="2018"></el-tab-pane>
-              </el-tabs>
-            </el-main>
+              <el-form :inline="true" label-width="100px">
+                <el-form-item label="企业地址:">
+                  {{company.address}}
+                </el-form-item>
+                <el-form-item label="企业邮编:">
+                  {{ company.zipCode }}
+                </el-form-item>
+              </el-form>
+              <el-form-item label="职工人数:">
+                {{company.totalStaff}}
+              </el-form-item>
+              <el-form :inline="true" label-width="100px">
+                <el-form-item label="经营范围:">
+                  {{ company.businessScope }}
+                </el-form-item>
+                <el-form-item label="主导产品:">
+                  {{ company.mainProduct }}
+                </el-form-item>
+              </el-form>
+              <el-form :inline="true" label-width="100px">
+                <el-form-item label="获奖情况:">
+                  {{ company.honor }}
+                </el-form-item>
+              </el-form>
+              <el-form :inline="true" label-width="100px">
+                <el-form-item label="认证情况:">
+                  {{ company.certification }}
+                </el-form-item>
+              </el-form>
+            </el-form>
+            <el-tabs v-model="activeIndex">
+              <el-tab-pane label="2016年" name="2016">
+                <table style="margin-top: 10px;">
+                  <tr>
+                    <th>工业总产数值(万元)</th>
+                    <td>{{company.kpi[0].output}}</td>
+                    <th>营业总收入(万元)</th>
+                    <td>{{company.kpi[0].operatingIncome}}</td>
+                  </tr>
+                  <tr>
+                    <th>销售收入(万元)</th>
+                    <td>{{company.kpi[0].sale}}</td>
+                    <th>出口创汇(万美元)</th>
+                    <td>{{company.kpi[0].export}}</td>
+                  </tr>
+                  <tr>
+                    <th>交税总额(万元)</th>
+                    <td>{{company.kpi[0].tax}}</td>
+                    <th>税后收入(万元)</th>
+                    <td>{{company.kpi[0].profitAfterTax}}</td>
+                  </tr>
+                  <tr>
+                    <th>人均销售收入(万元)</th>
+                    <td>{{company.kpi[0].averageSale}}</td>
+                    <th>资产总额(万元)</th>
+                    <td>{{company.kpi[0].totalAsset}}</td>
+                  </tr>
+                  <tr>
+                    <th>固定资产(万元)</th>
+                    <td>{{company.kpi[0].fixedAsset}}</td>
+                    <th>资产负债率(%)</th>
+                    <td>{{company.kpi[0].debtRatio}}</td>
+                  </tr>
+                </table>
+              </el-tab-pane>
+              <el-tab-pane label="2017年" name="2017"></el-tab-pane>
+              <el-tab-pane label="2018年" name="2018"></el-tab-pane>
+            </el-tabs>
+          </el-main>
 
-          </el-tab-pane>
-        </el-tabs>
+        </el-tab-pane>
+      </el-tabs>
     </el-container>
   </el-container>
 </template>
@@ -154,7 +156,7 @@ export default {
   },
   computed: {},
   created() { },
-  async mounted() { 
+  async mounted() {
     let list = await CompanyModel.getList()
     console.log('list', list)
     this.setCompanyList(list)

@@ -4,7 +4,7 @@
       <h2>生产线配置</h2>
     </el-header>
     <el-main>
-      某个公司的具体信息
+      
     </el-main>
   </el-container>
 </template>

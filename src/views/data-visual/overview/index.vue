@@ -16,6 +16,7 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item">
           <GraphContainer title="入驻企业分布" class="graph-item xpanel-wrapper-1">
+            <CompanyListTable />
             <GisMap />
           </GraphContainer>
         </el-col>
@@ -44,6 +45,7 @@ import TaxBarChart from './TaxBarChart'
 import AssetBarChart from './AssetBarChart'
 import ExportBarChart from './ExportBarChart'
 import GisMap from './GisMap'
+import CompanyListTable from './CompanyListTable'
 
 export default {
   name: 'DataVisualOverview',
@@ -55,7 +57,8 @@ export default {
     TaxBarChart,
     AssetBarChart,
     ExportBarChart,
-    GisMap
+    GisMap,
+    CompanyListTable,
   },
   data() {
     return {}

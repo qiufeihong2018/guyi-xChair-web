@@ -3,6 +3,9 @@
     <el-header class="header">
       <h2>关于安吉椅艺大数据</h2>
     </el-header>
+    <el-main>
+      
+    </el-main>
   </el-container>
 </template>
 

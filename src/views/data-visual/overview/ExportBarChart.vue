@@ -29,6 +29,8 @@ export default {
         },
         legend: {
           type: 'scroll',
+          orient: 'vertical',
+          x: 'left',
           textStyle: {
             color: '#fff'
           }
@@ -47,6 +49,7 @@ export default {
                 show: false
               }
             },
+            center: ['50%', '40%'],
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
             label: {
@@ -69,6 +72,4 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>

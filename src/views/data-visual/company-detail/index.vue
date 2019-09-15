@@ -2,7 +2,7 @@
   <el-container class="overview">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
     <el-header class="header" height="72px">
-      <p>企业详情</p>
+      <p>{{this.title}}·详情</p>
     </el-header>
     <el-main>
       <el-row class="main" style="height: 100%">
@@ -32,6 +32,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { companies } from 'assets/data/company'
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 export default {
@@ -41,10 +42,20 @@ export default {
     GraphContainer,
   },
   data() {
-    return {}
+    return {
+      title: '暂无'
+    }
   },
   computed: {},
-  created() { },
+  created() {
+    let { id } = this.$route.query
+    let company = companies.find(item => item.id === id)
+    if ((id && id.length !== 24) || !company) {
+      // 返回到overview
+      this.$router.push({ path: '/data-visual/overview' })
+    }
+    this.title = company.alias
+  },
   mounted() { },
   methods: {},
 }
