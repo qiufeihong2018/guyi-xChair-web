@@ -12,7 +12,7 @@ export default class Company {
    * @returns 
    */
   static async getList() {
-    const data = await get('company/all')
+    const data = await get('company')
     return data
   }
 
@@ -23,6 +23,16 @@ export default class Company {
    * @static
    * @param {*} id
    * @returns
+    {
+      companyId: '', // 公司ID
+      companyName: '', // 公司名
+      pipelineList: [
+      {
+        id: '', // 生产线的ID
+        name: '', // 生产线的别名
+        no: '', // 生产线的编号(自定义)
+        }
+      ]
    */
   static async getPipelineList(id) {
     const data = await get(`company/${id}/pipeline`)

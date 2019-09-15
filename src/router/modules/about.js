@@ -13,7 +13,13 @@ export default {
       path: '/about/line',
       component: _import('about/index'),
       name: 'AboutIndex',
-      meta: { title: '团队信息', icon: 'el-icon-house' },
+      meta: { title: '行业介绍', icon: 'el-icon-house' },
+    },
+    {
+      path: '/about/company',
+      component: _import('about/company'),
+      name: 'AboutCompany',
+      meta: { title: '公司详情', icon: 'el-icon-house' },
     },
   ],
 }

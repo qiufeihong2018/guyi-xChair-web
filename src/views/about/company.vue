@@ -1,14 +1,17 @@
 <template>
-  <el-container class="about">
+  <el-container class="company">
     <el-header class="header">
-      <h2>关于安吉椅艺大数据</h2>
+      <h2>公司详情</h2>
     </el-header>
+    <el-main>
+      某个公司的具体信息
+    </el-main>
   </el-container>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  name: 'AboutIndex',
+  name: 'AboutCompany',
   components: {},
   data() {
     return {
@@ -20,7 +23,7 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.about {
+.company {
   .header {
     text-align center
     line-height 60px

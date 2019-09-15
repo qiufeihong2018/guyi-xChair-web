@@ -1,20 +1,17 @@
 <template>
-  <div class=”pipeline“>
-    <h2>生产线配置</h2>
-    <p>点击生产线配置</p>
-  </div>
+  <div>生产线配置</div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  name: 'OperatePipeline',
+  name: 'CompanyIndex',
   components: {},
   data() {
     return {}
   },
   computed: {},
-  created() { },
-  mounted() { },
+  created() {},
+  mounted() {},
   methods: {},
 }
 </script>

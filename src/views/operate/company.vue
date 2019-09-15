@@ -4,15 +4,8 @@
       <h2>企业信息</h2>
     </el-header>
     <el-container style="margin-top: 10px">
-      <!--<el-aside width="230px" class="aside">-->
-        <!--<el-table :data="companyList" style="width: 100%" header-align="center">-->
-          <!--<el-table-column prop="name" label="企业列表">-->
-          <!--</el-table-column>-->
-        <!--</el-table>-->
-
         <el-tabs tab-position="left" type="border-card" style="width: 100%">
           <el-tab-pane v-for="company in companyList" :key="company.name" :label="company.name">
-
             <el-main class="main">
               <el-form ref="form" :model="company" label-width="100px">
                 <el-form :inline="true" label-width="100px">
@@ -90,13 +83,14 @@
 
           </el-tab-pane>
         </el-tabs>
-      <!--</el-aside>-->
     </el-container>
   </el-container>
 </template>
 
 <script type="text/ecmascript-6">
 import { companies } from 'assets/data/company'
+import CompanyModel from '@/models/company'
+import { mapMutations } from 'vuex'
 export default {
   name: 'OperateCompany',
   components: {},
@@ -160,21 +154,31 @@ export default {
   },
   computed: {},
   created() { },
-  mounted() { },
+  async mounted() { 
+    let list = await CompanyModel.getList()
+    console.log('list', list)
+    this.setCompanyList(list)
+  },
   methods: {
+    ...mapMutations({
+      setCompanyList: 'company/SET_COMPANY_LIST'
+    }),
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
-    }
+    },
+
   },
 }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 >>> .el-form-item {
+  margin-bottom 5px
+  margin-right 20px
   label {
     font-size 18px
     color black
-    border-left solid 2px #409EFF
+    border-left solid 4px #409EFF
   }
   .el-form-item__content {
     font-size 18px
@@ -184,7 +188,6 @@ export default {
   .header {
     text-align center
     line-height 60px
-    box-shadow 0.5px 0.5px 4px
   }
   .aside {
   }

@@ -16,10 +16,16 @@ export default {
       meta: { title: '企业配置', icon: 'fa fa-wrench' },
     },
     {
-      path: '/operate/setting',
-      component: _import('operate/setting'),
-      name: 'OperateSetting',
+      path: '/operate/prodline',
+      component: _import('operate/prodline'),
+      name: 'OperateProdline',
       meta: { title: '生产线配置', icon: 'fa fa-wrench' },
+    },
+    {
+      path: '/operate/probe',
+      component: _import('operate/probe'),
+      name: 'OperateProbe',
+      meta: { title: '采集器配置', icon: 'fa fa-wrench' },
     },
   ],
 }

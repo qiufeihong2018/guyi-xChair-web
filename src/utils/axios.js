@@ -11,7 +11,8 @@ let interceptorList = [
 
 // 创建请求实例
 const _axios = axios.create({
-  baseURL: 'https://api.izjgk.com/v1',
+  // baseURL: 'http://192.168.1.246:5001/api/v1/',
+  baseURL: 'http://121.40.107.95:5001/api/v1/',
   timeout: 5 * 1000 // 请求超时时间设置
 })
 

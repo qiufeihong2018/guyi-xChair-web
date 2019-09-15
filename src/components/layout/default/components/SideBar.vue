@@ -1,8 +1,9 @@
 <template>
   <div class="sidebar">
     <router-link class="logo" to="/">
-      <img v-if="!isCollapse" class="name" src="../../../../assets/images/company/name.png" alt="">
-      <img v-else class="brand" src="../../../../assets/images/company/logo.png" alt="">
+      <!-- <img v-if="!isCollapse" class="name" src="" alt=""> -->
+      <div v-if="!isCollapse" class="title">安吉椅艺</div>
+      <img v-else class="brand" src="" alt="">
     </router-link>
     <el-menu style="margin-bottom:50px" :default-active="defaultActive" :collapse="isCollapse" @open="handleOpen" @close="handleClose">
       <template v-for="item in routes">
@@ -111,6 +112,9 @@ export default {
     .name {
       width 148px
       transition height 0, width 0.3s linear // all 0.3s linear
+    }
+    .title {
+      font-size 32px
     }
     .brand {
       width 40px

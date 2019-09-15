@@ -11,5 +11,6 @@ app.get('*', function(req, res) {
 })
 
 app.listen(8010, res => {
-  console.log(chalk.yellow('服务器正常启动运行 >>  localhost:8010'));
-});
+  console.log(chalk.yellow('服务器正常启动运行 >>  localhost:8010'))
+})
+

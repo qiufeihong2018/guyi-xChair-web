@@ -9,6 +9,7 @@ import adminRouter from './modules/admin'
 import aboutRouter from './modules/about'
 import chartRouter from './modules/chart'
 import operateRouter from './modules/operate'
+import companyRouter from './modules/company'
 import formRouter from './modules/form'
 import tableRouter from './modules/table'
 // lazy-loaded when the route is visited
@@ -45,10 +46,11 @@ const viewRouters = [
   homeRouter,
   aboutRouter,
   adminRouter,
-  chartRouter,
+  // chartRouter,
   operateRouter,
-  formRouter,
-  tableRouter,
+  companyRouter,
+  // formRouter,
+  // tableRouter,
 ].map(item => processRouterWithTemplate(item))
 
 const routes = [

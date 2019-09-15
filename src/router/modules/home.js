@@ -20,14 +20,14 @@ export default {
         icon: 'el-icon-menu',
       },
     },
-    {
-      path: '/guide',
-      name: 'guide',
-      component: _import('guide/index'),
-      meta: {
-        title: '规范指南',
-        icon: 'el-icon-setting',
-      },
-    },
+    // {
+    //   path: '/guide',
+    //   name: 'guide',
+    //   component: _import('guide/index'),
+    //   meta: {
+    //     title: '规范指南',
+    //     icon: 'el-icon-setting',
+    //   },
+    // },
   ],
 }

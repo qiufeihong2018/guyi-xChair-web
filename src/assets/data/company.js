@@ -110,5 +110,61 @@ export const companies = [
         debtRatio: 43.66, // 资产负债率(%)
       }
     ]
+  },
+  {
+    name: '安吉隆博家具股份有限公司',
+    abbreviation: '隆博',
+    address: '',
+    gis: [], // 地图坐标
+    zipCode: '313300',
+    totalStaff: 0,
+    businessScope: '',
+    honor: '',
+    certification: '',
+    mainProduct: '',
+    pctOfMainProduct: 0,
+    kpi: [
+      {
+        year: 2016, // 2016的数据
+        output: 0, // 工业总产数值(万)
+        operatingIncome: 0, // 营业总收入
+        sale: 0, // 销售收入
+        export: 0, // 出口创汇(万·美元)
+        tax: 0, // 缴税总额
+        profitAfterTax: 0, // 税后收入
+        averageSale: 0, // 人均销售收入
+        totalAsset: 0, // 资产总额
+        fixedAsset: 0, // 固定资产
+        debtRatio: 0, // 资产负债率(%)
+      }
+    ]
+  },
+  {
+    name: '浙江盛信椅业股份有限公司',
+    abbreviation: '盛信',
+    address: '',
+    gis: [], // 地图坐标
+    zipCode: '313300',
+    totalStaff: 0,
+    businessScope: '',
+    honor: '',
+    certification: '',
+    mainProduct: '',
+    pctOfMainProduct: 0,
+    kpi: [
+      {
+        year: 2016, // 2016的数据
+        output: 0, // 工业总产数值(万)
+        operatingIncome: 0, // 营业总收入
+        sale: 0, // 销售收入
+        export: 0, // 出口创汇(万·美元)
+        tax: 0, // 缴税总额
+        profitAfterTax: 0, // 税后收入
+        averageSale: 0, // 人均销售收入
+        totalAsset: 0, // 资产总额
+        fixedAsset: 0, // 固定资产
+        debtRatio: 0, // 资产负债率(%)
+      }
+    ]
   }
 ]

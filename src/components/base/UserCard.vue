@@ -6,13 +6,10 @@
       </div>
       <el-dropdown-menu slot="dropdown" class="detail">
         <el-dropdown-item>
-          <router-link to="/home">用户信息</router-link>
+          <router-link to="/home">首页</router-link>
         </el-dropdown-item>
         <el-dropdown-item>
           <router-link to="/admin/config">页面配置</router-link>
-        </el-dropdown-item>
-        <el-dropdown-item>
-          <a target="_blank" href="https://github.com/TaleCeres/ceres-admin">Github地址</a>
         </el-dropdown-item>
         <el-dropdown-item divided icon="el-icon-switch-button" @click.native="handleLogout">
           注销
@@ -24,13 +21,13 @@
 
 <script type="text/ecmascript-6">
 import { mapActions } from 'vuex'
-import defaultAvatar from 'assets/images/company/logo.png'
+// import defaultAvatar from 'assets/images/company/logo.png'
 export default {
   name: 'UserCard',
   components: {},
   data() {
     return {
-      defaultAvatar,
+      defaultAvatar: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
     }
   },
   computed: {},
