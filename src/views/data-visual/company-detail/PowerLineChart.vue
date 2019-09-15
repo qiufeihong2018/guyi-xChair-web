@@ -4,27 +4,29 @@
 
 <script>
 import resize from '@/mixins/resize'
-import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
+
 export default {
-  name: 'AssetBarChart',
+  name: 'PowerLineChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'AssetBarChart'
+      default: 'PowerLineChart'
     },
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      timeData: [],
+      chartData: []
     }
   },
   computed: {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          trigger: 'axis',
         },
         grid: {
           left: '15%'
@@ -32,7 +34,7 @@ export default {
         color: color.category6,
         xAxis: {
           type: 'category',
-          data: companies.map(item => item.abbreviation),
+          data: this.timeData,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -46,7 +48,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: '单位：万元',
+          name: '单位: 千瓦时',
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -60,18 +62,28 @@ export default {
         },
         series: [
           {
-            name: '资产总额',
-            data: companies.map(item => item.kpi[0].totalAsset),
-            type: 'bar',
-          },
-          {
-            name: '固定资产',
-            data: companies.map(item => item.kpi[0].fixedAsset),
-            type: 'bar',
+            name: '耗电量',
+            data: this.chartData,
+            type: 'line',
+            showSymbol: false,
+            hoverAnimation: false,
+            smooth: true
           }]
       }
     }
-  }
+  },
+  watch: {
+    option(prev, next) {
+      this.updateChart()
+    },
+  },
+  mounted() {
+    // setInterval(() => {
+    //   let now = new Date()
+    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
+    //   this.chartData.push(Math.round(Math.random() * 10))
+    // }, 1000)
+  },
 }
 </script>
 

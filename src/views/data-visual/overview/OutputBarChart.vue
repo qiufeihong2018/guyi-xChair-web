@@ -5,7 +5,6 @@
 <script>
 import resize from '@/mixins/resize'
 import { companies } from 'assets/data/company'
-import echarts from 'echarts'
 import color from 'assets/data/color'
 export default {
   name: 'OutputBarChart',
