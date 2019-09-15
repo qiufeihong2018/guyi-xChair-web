@@ -37,11 +37,11 @@ export default {
   color $color-white
   .title {
     position relative
-    top 10px
+    top 2px
     left 15px
     height 40px
     line-height 40px
-    font-size 20px
+    font-size 16px
   }
 }
 </style>
