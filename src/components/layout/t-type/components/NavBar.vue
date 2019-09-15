@@ -1,38 +1,30 @@
 <template>
   <nav class="nav-bar">
     <div class="left-menu">
-      <i v-show="true" class="icon-font el-icon-s-fold" :class="{rotate: foldState}" @click="toggleSlidebarState" />
-      <Breadcrumb />
+      <router-link class="logo" to="/">
+        <img class="icon" src="@/assets/images/company/logo.png" alt="">
+        <img class="name" src="@/assets/images/company/name.png" alt="">
+      </router-link>
     </div>
     <div class="right-menu">
-      <el-tooltip effect="dark" content="数据大屏" placement="bottom">
-        <router-link to="/data-graph/overview">
-          <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
-        </router-link>
-      </el-tooltip>
-      <el-tooltip effect="dark" content="全屏显示" placement="bottom">
-        <Screenfull style="margin-right: 15px;" />
-      </el-tooltip>
-      <LangSelect style="margin-right: 15px;" />
-      <UserCard style="margin-right: 10px;" />
+    <DigitalClock style="margin-right: 15px;"/>
+    <Screenfull style="margin-right: 15px;"/>
+    <UserCard style="margin-right: 10px;"/>
     </div>
   </nav>
 </template>
 
 <script type="text/ecmascript-6">
 import { mapGetters } from 'vuex'
-import UserCard from 'comps/base/UserCard'
-import Breadcrumb from 'comps/base/Breadcrumb'
-import LangSelect from 'comps/base/LangSelect'
+import DigitalClock from 'comps/base/DigitalClock'
 import Screenfull from 'comps/base/Screenfull'
+import UserCard from 'comps/base/UserCard'
 export default {
   name: 'NavBar',
   components: {
-    UserCard,
-    Breadcrumb,
-    LangSelect,
+    DigitalClock,
     Screenfull,
-
+    UserCard,
   },
   data() {
     return {}
@@ -58,31 +50,44 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.nav-bar {
+.nav-bar
   width 100%
   display flex
   justify-content space-between
   align-items center
+
   .left-menu,
-  .right-menu {
+  .right-menu
     display flex
     align-items center
-  }
-  .left-menu {
-    .icon-font {
+
+  .left-menu
+    .icon-font
       margin 0 10px
       font-size 22px
       font-weight 500
       transform rotate(0deg)
       transition all 0.3s linear
-      &:hover {
+
+      &:hover
         color #3963bc
-      }
-    }
-    .rotate {
+
+    .rotate
       transform rotate(180deg)
       transition all 0.3s linear
+  .logo {
+    margin-left 20px
+    display flex
+    .icon{
+      margin-top 5px
+      width 40px
+      height 40px
+    }
+    .name{
+      margin 10px
+      width 148px
+      height 35px
     }
   }
-}
+
 </style>
