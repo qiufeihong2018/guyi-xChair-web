@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "start": "pm2 start app.js --name='xChair-web'",
+    "restart": "pm2 delete xChair-web && npm run start",
+    "delete": "pm2 delete xChair-web",
     "lint": "vue-cli-service lint",
     "commit": "git-cz"
   },
@@ -22,6 +25,7 @@
     "js-base64": "^2.5.1",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
+    "pm2": "^3.5.1",
     "screenfull": "^4.2.0",
     "vue": "^2.6.10",
     "vue-awesome-swiper": "^3.1.3",
