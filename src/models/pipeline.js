@@ -5,6 +5,11 @@ import {
 } from '@/utils/request'
 
 export default class Pipeline {
+  // 获取某个企业所有的pipeline
+  static async getList(companyId) {
+    const data = await get(`pipeline/${companyId}`)
+    return data
+  }
 
   /**
    * 获取某个pipeline的详情
@@ -17,7 +22,6 @@ export default class Pipeline {
     const data = await get(`pipeline/${id}`)
     return data
   }
-
 
   /**
    * 修改/新增 pipeline的详情
@@ -37,8 +41,8 @@ export default class Pipeline {
       }
    * @returns
    */
-  static async modifyDetail(data) {
-    const data = await post('pipeline', data)
+  static async modifyDetail(params) {
+    const data = await post('pipeline', params)
     return data
   }
 
