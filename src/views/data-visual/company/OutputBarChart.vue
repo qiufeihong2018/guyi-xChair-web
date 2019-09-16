@@ -60,18 +60,18 @@ export default {
         color: color.category6,
         series: [
           {
-            name: 'Forest',
+            name: '入口数量',
             type: 'bar',
             barGap: 0,
             data: [320, 332, 301, 334, 390, 320]
           },
           {
-            name: 'Steppe',
+            name: '次品数量',
             type: 'bar',
             data: [220, 182, 191, 234, 290, 332]
           },
           {
-            name: 'Desert',
+            name: '出品数量',
             type: 'bar',
             data: [150, 232, 201, 154, 190, 390]
           }
