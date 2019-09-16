@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="mapContainer" style="width:700px;height:500px;"></div>
+    <div id="mapContainer" style="width:100%;height: 95%"></div>
   </div>
 </template>
 
@@ -24,7 +24,6 @@ export default {
     init() {
       let map = new TMap.Map('mapContainer', {
         center: new TMap.LatLng(30.6003898649, 119.5540173328), // 地图显示中心点
-        zoom: 10.5,
         pitch: 30,
         mapStyleId: 'style1',
         scrollable: false,
@@ -86,7 +85,7 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.zoom-control{
-  display none
-}
+  .zoom-control{
+    display none
+  }
 </style>

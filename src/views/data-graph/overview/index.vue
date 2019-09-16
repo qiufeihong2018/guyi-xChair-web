@@ -21,7 +21,7 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" class="col-item">
           <GraphContainer title="全国高等院校城市分布" class="graph-item xpanel-wrapper-1">
-            <ChinaMap id="chinaMap" />
+            <MainMap />
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="6" :lg="6" class="col-item">
@@ -48,12 +48,13 @@ import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 // 业务组件
 import TopProvince from './TopProvince'
-import ChinaMap from './ChinaMap'
+import MainMap from '@/components/base/MainMap/index'
 import HeatMap from './HeatMap'
 import DonutForSchoolLevel from './DonutForSchoolLevel'
 import DonutForCooperateType from './DonutForCooperateType'
 import TopCity from './TopCity' // 省份级组件
 import KeyMajorPieChart from './KeyMajorPieChart'
+
 
 export default {
   name: 'Overview',
@@ -61,7 +62,7 @@ export default {
     Screenfull,
     GraphContainer,
     TopProvince,
-    ChinaMap,
+    MainMap,
     HeatMap,
     DonutForSchoolLevel,
     DonutForCooperateType,
