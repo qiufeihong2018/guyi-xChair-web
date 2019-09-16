@@ -29,7 +29,7 @@ const chinaDatas = [
     id: '1',
     name: '云服务',
     alias: '云服务中心',
-    value: [119.858748, 30.820739, 3, '云服务']
+    value: [119.858748, 30.820739, 0, '云服务']
   },
   {
     id: '5d7e63c1ba35562fe1084626',
@@ -67,6 +67,37 @@ const chinaDatas = [
     alias: '盛信椅业',
     value: [119.619262, 30.622846, 1, '入驻']
   },
+  {
+    id: '1111',
+    name: '安吉联胜家具有限公司',
+    alias: '联胜家具',
+    value: [119.675287, 30.57134, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '浙江五星家具有限公司',
+    alias: '五星家具',
+    value: [119.684128, 30.693911, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '安吉联胜家具有限公司',
+    alias: '联胜家具',
+    value: [119.475287, 30.61134, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '浙江强盛家具有限公司',
+    alias: '强盛家具',
+    value: [119.617488, 30.703658, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '浙江安吉铭成椅业有限责任公司',
+    alias: '铭成椅业',
+    value: [119.575287, 30.51134, 10, '未入驻']
+  },
+
 ]
 const anjiData = require('./anji.json')
 export default {
@@ -85,6 +116,8 @@ export default {
             }
             if (params.data.value[3] === '入驻') {
               return `${params.name} <br> 生产线: ${params.value[2]} 条`
+            } if (params.data.value[3] === '未入驻') {
+              return `${params.name} <br> 未入驻`
             }
             return `${params.name}`
           }
@@ -268,6 +301,8 @@ export default {
               color(params) {
                 if (params.value[3] === '入驻') {
                   return 'green'
+                } if (params.value[3] === '未入驻') {
+                  return '#cccccc'
                 }
                 return 'yellow'
               }

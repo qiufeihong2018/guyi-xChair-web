@@ -3,7 +3,7 @@
   "features": [
     {
       "type": "Feature",
-      "properties": { "name": "安吉市", "id": "313300" },
+      "properties": { "name": "安吉县", "id": "313300" },
       "geometry": {
         "type": "MultiPolygon",
         "coordinates": [
