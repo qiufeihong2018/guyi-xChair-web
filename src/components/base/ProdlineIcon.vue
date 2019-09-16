@@ -1,0 +1,85 @@
+<template>
+  <div class="wrapper">
+    <svg id="生产线" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+      x="0px" y="0px" viewBox="0 0 566.9 566.9" enable-background="new 0 0 566.9 566.9" xml:space="preserve">
+      <g opacity="0.3">
+        <circle :fill="normalFill" cx="283.5" cy="283.5" r="229.6" />
+      </g>
+      <g>
+        <path :fill="normalFill" d="M268.5,518.6c-41.2-2.6-81-16-115.4-38.8l6.6-10c32.6,21.6,70.4,34.4,109.5,36.8L268.5,518.6z M307.5,517.9
+          l-1.2-11.9c38.9-3.9,76.2-18.1,108-41l7,9.7C387.8,498.8,348.4,513.7,307.5,517.9z M122.6,455.7c-30.2-28.2-52.5-63.9-64.5-103.2
+          l11.5-3.5c11.4,37.3,32.6,71.2,61.3,97.9L122.6,455.7z M450.8,449.3l-8.5-8.4c27.6-27.9,47.5-62.5,57.4-100.2l11.6,3.1
+          C500.8,383.5,479.9,420,450.8,449.3z M49.8,314.4c-1.3-10.2-2-20.6-2-31c0-31.1,5.9-61.2,17.7-89.7l11.1,4.6
+          c-11.1,27-16.8,55.7-16.8,85.1c0,9.8,0.6,19.7,1.9,29.4L49.8,314.4z M518.1,305.4l-11.9-1.1c0.6-6.9,1-13.9,1-20.8
+          c0-39.2-10.3-77.8-29.8-111.6l10.4-6c20.5,35.6,31.4,76.3,31.4,117.6C519.1,290.8,518.8,298.1,518.1,305.4z M93.5,165.5l-10.2-6.3
+          c21.8-35,52.5-63.8,88.7-83.3l5.7,10.6C143.3,104.9,114.1,132.2,93.5,165.5z M456.3,141.5c-24.9-30.3-57.4-53.6-93.9-67.3l4.2-11.2
+          c38.5,14.5,72.6,39,98.9,70.9L456.3,141.5z M211.6,71.6l-3.9-11.4c24.3-8.3,49.8-12.4,75.7-12.4c15.4,0,30.8,1.5,45.7,4.4L326.9,64
+          c-14.2-2.8-28.8-4.2-43.4-4.2C258.9,59.8,234.7,63.8,211.6,71.6z" />
+      </g>
+      <g>
+        <path :fill="normalFill" d="M283.5,562.6c-19.9,0-39.8-2.1-59.2-6.3l5.3-24.4c17.6,3.8,35.7,5.7,53.9,5.7c45.8,0,90.7-12.3,129.9-35.6
+          l12.8,21.5C383.1,549.1,333.8,562.6,283.5,562.6z M562.6,283.5h-25c0-64.5-24.2-126-68.1-173.2l18.3-17
+          C536,145.1,562.6,212.6,562.6,283.5z M31.9,247.4l-24.8-3.5c9.9-70,45.9-133.1,101.1-177.7l15.7,19.5
+          C73.6,126.3,40.9,183.7,31.9,247.4z" />
+      </g>
+    </svg>
+    <div class="num">{{num}}</div>
+    <div class="name">{{name}}</div>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+export default {
+  name: 'ProdlineIcon',
+  props: {
+    num: {
+      type: Number,
+      default: 0
+    },
+    name: {
+      type: String,
+      default: '未知'
+    },
+  },
+  data() {
+    return {
+      normalFill: 'red'
+    }
+  }
+}
+</script>
+
+<style scoped lang="stylus" rel="stylesheet/stylus">
+.wrapper {
+  position relative
+  svg {
+    position relative
+    z-index 10
+    width 140px
+    height 140px
+    cursor pointer
+    fill $color-grey
+    &:hover {
+      transform rotate(90deg)
+    }
+  }
+  .num {
+    position absolute
+    top 0
+    left 0
+    width 140px
+    height 140px
+    text-align center
+    line-height 140px
+    font-size 18px
+  }
+  .name {
+    position absolute
+    bottom -20px
+    width 140px
+    text-align center
+    color yellow
+    font-size 18px
+  }
+}
+</style>
