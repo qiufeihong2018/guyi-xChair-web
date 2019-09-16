@@ -29,7 +29,7 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
-            
+            <operating-status-bar-chart></operating-status-bar-chart>
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
             <PowerLineChart />
@@ -50,7 +50,7 @@ import PowerLineChart from './PowerLineChart'
 import OutputBarChart from './OutputBarChart'
 import ProdlineListTable from './ProdlineListTable'
 import ProdlineStatus from './ProdlineStatus'
-
+import OperatingStatusBarChart from './OperatingStatusBarChart'
 export default {
   name: 'DataVisualOverview',
   components: {
@@ -60,6 +60,7 @@ export default {
     OutputBarChart,
     ProdlineListTable,
     ProdlineStatus,
+    OperatingStatusBarChart
   },
   data() {
     return {

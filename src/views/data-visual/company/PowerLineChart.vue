@@ -78,11 +78,13 @@ export default {
     },
   },
   mounted() {
-    // setInterval(() => {
-    //   let now = new Date()
-    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-    //   this.chartData.push(Math.round(Math.random() * 10))
-    // }, 1000)
+    let i = 11
+    setInterval(() => {
+      let now = new Date()
+      this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
+      this.chartData.push(i)
+      i += Math.round(Math.random() * 10)
+    }, 10000)
   },
 }
 </script>
