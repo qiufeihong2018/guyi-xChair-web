@@ -10,6 +10,7 @@
 
 import echarts from 'echarts'
 const chinaGeoCoordMap = {
+  '云服务': [119.858748, 30.820739],
   '中源家居股份有限公司': [119.616093, 30.62116],
   '永艺家具股份有限公司': [119.675803, 30.607438],
   '浙江恒林椅业股份有限公司': [119.681168, 30.661117],
@@ -28,7 +29,7 @@ const chinaDatas = [
     id: '1',
     name: '云服务',
     alias: '云服务中心',
-    value: [119.858748, 30.820739, 3, '中心']
+    value: [119.858748, 30.820739, 0, '云服务']
   },
   {
     id: '5d7e63c1ba35562fe1084626',
@@ -66,6 +67,37 @@ const chinaDatas = [
     alias: '盛信椅业',
     value: [119.619262, 30.622846, 1, '入驻']
   },
+  {
+    id: '1111',
+    name: '安吉联胜家具有限公司',
+    alias: '联胜家具',
+    value: [119.675287, 30.57134, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '浙江五星家具有限公司',
+    alias: '五星家具',
+    value: [119.684128, 30.693911, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '安吉联胜家具有限公司',
+    alias: '联胜家具',
+    value: [119.475287, 30.61134, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '浙江强盛家具有限公司',
+    alias: '强盛家具',
+    value: [119.617488, 30.703658, 10, '未入驻']
+  },
+  {
+    id: '1111',
+    name: '浙江安吉铭成椅业有限责任公司',
+    alias: '铭成椅业',
+    value: [119.575287, 30.51134, 10, '未入驻']
+  },
+
 ]
 const anjiData = require('./anji.json')
 export default {
@@ -79,8 +111,15 @@ export default {
           trigger: 'item',
           formatter(params) {
             if (params.name === '杭电安吉研究院') return '数据中心'
-            console.log(params)
-            return `${params.name} <br> 生产线: ${params.value[2]} 条`
+            if (params.seriesType === 'lines') {
+              return
+            }
+            if (params.data.value[3] === '入驻') {
+              return `${params.name} <br> 生产线: ${params.value[2]} 条`
+            } if (params.data.value[3] === '未入驻') {
+              return `${params.name} <br> 未入驻`
+            }
+            return `${params.name}`
           }
         },
         geo: {
@@ -160,12 +199,16 @@ export default {
     },
     initSeries() {
       let convertData = function (data) {
-        console.log(data)
         let res = []
         for (let i = 0; i < data.length; i += 1) {
           let dataItem = data[i]
           let fromCoord = chinaGeoCoordMap[dataItem.name]
           let toCoord = [119.858748, 30.820739]
+          if (dataItem.name === '云服务') {
+            fromCoord = chinaGeoCoordMap[dataItem.name]
+            toCoord = [119.703307, 30.657736]
+          }
+
           if (fromCoord && toCoord) {
             res.push([{
               coord: fromCoord,
@@ -188,11 +231,15 @@ export default {
             trailLength: 0.02, // 特效尾迹长度[0,1]值越大，尾迹越长重
             symbol: 'arrow', // 箭头图标
             symbolSize: 5, // 图标大小
-            color: '#00eaff'
           },
           lineStyle: {
             normal: {
-              color: '#00eaff',
+              color: val => {
+                if (val.data.value[3] === '云服务') {
+                  return 'yellow'
+                }
+                return 'green'
+              },
               width: 1, // 尾迹线条宽度
               opacity: 1, // 尾迹线条透明度
               curveness: 0.3 // 尾迹线条曲直度
@@ -254,6 +301,8 @@ export default {
               color(params) {
                 if (params.value[3] === '入驻') {
                   return 'green'
+                } if (params.value[3] === '未入驻') {
+                  return '#cccccc'
                 }
                 return 'yellow'
               }
