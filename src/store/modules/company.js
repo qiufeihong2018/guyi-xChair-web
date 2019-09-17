@@ -1,8 +1,13 @@
 /* 公司配置 */
 /* eslint-disable */
 import CompanyModel from '@/models/company'
+import tree from "element-ui/packages/table/src/store/tree";
 const state = {
-  companyList: []
+  companyList: [],
+  pipeLine: {
+    showDetail:false,
+    id:''
+  },
 }
 
 const getters = {
@@ -19,6 +24,10 @@ const mutations = {
     // })
     state.companyList = list
   },
+  SER_PIPELINE_ID:(state,pipeLine)=>{
+    state.pipeLine = pipeLine
+  }
+
 }
 
 const actions = {

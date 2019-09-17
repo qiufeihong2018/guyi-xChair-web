@@ -15,4 +15,13 @@ export default class Company {
     const data = await post('monitor/search', params)
     return data
   }
+
+  static async getCompanyInfo(id) {
+    const data = await get(`pipeline/${id}`, '', '')
+    return data
+  }
+  // static getPipeLineDetail(params) {
+  //   const data = get('pipeline/:companyId', params)
+  //   return data
+  // }
 }
