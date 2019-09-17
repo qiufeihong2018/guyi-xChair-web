@@ -53,7 +53,7 @@ import AssetBarChart from './AssetBarChart'
 import ExportBarChart from './ExportBarChart'
 import GisMap from './GisMap'
 import CompanyListTable from './CompanyListTable'
-import NotEnterCompanyListTable from './NotEnterCompany'
+import NotEnterCompanyListTable from './NotEnterCompanyListTable'
 
 export default {
   name: 'DataVisualOverview',

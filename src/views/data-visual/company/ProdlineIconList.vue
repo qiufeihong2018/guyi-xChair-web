@@ -2,9 +2,8 @@
   <div class="prodline-list-table visual">
     <div class="container">
       <div v-for="item in prodlineList" :key="item.prodlineName" @click="getProdLineId(item.prodlineId)" >
-      <ProdlineIcon
-      :num="item.exitNum" :name="item.prodlineName"
-      class="item" />
+      <ProdlineIcon :num="item.exitNum" :name="item.prodlineName"
+        class="item" />
       </div>
     </div>
   </div>
@@ -14,13 +13,13 @@
 import ProdlineIcon from 'comps/base/ProdlineIcon'
 import MonitorModel from '@/models/monitor'
 export default {
-  name: 'ProdlineListTable',
+  name: 'ProdlineIconList',
   components: {
     ProdlineIcon
   },
   props: {
     companyId: {
-      default: '5d8041e4de1685795bc379b2',
+      default: '5d80441cde1685795bc379f1',
       type: String
     }
   },

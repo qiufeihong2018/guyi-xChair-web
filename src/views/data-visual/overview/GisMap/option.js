@@ -1,8 +1,15 @@
+/**
+ * 获取坐标 http://api.map.baidu.com/lbsapi/getpoint/index.html
+ * gis坐标[经度, 纬度], 经度越大越向右，纬度越大越向上
+ * */
+
 import echarts from 'echarts'
 const anjiData = require('./anji.json')
 echarts.registerMap('zhejiang', anjiData)
+const dataCenterGis = [119.703307, 30.657736] // 数据中心经纬度
+const cloudServiceGis = [119.325287, 30.850739] // 云服务经纬度
 const chinaGeoCoordMap = {
-  '云服务': [119.475287, 30.820739],
+  '云服务': cloudServiceGis,
   '中源家居股份有限公司': [119.616093, 30.62116],
   '永艺家具股份有限公司': [119.675803, 30.607438],
   '浙江恒林椅业股份有限公司': [119.681168, 30.661117],
@@ -15,13 +22,13 @@ const chinaDatas = [
     id: '0',
     name: '杭电安吉研究院',
     alias: '数据中心',
-    value: [119.703307, 30.657736, 0, '中心']
+    value: [...dataCenterGis, 0, '中心']
   },
   {
     id: '1',
     name: '云服务',
     alias: '云服务',
-    value: [119.475287, 30.820739, 0, '云服务']
+    value: [...cloudServiceGis, 0, '云服务']
   },
   {
     id: '5d8042e7de1685795bc379ce',
@@ -89,7 +96,12 @@ const chinaDatas = [
     alias: '铭成椅业',
     value: [119.575287, 30.51134, 10, '未入驻']
   },
-
+  {
+    id: '1111',
+    name: '大康控股集团有限公司',
+    alias: '大康控股',
+    value: [119.632147, 0.649607, 10, '未入驻']
+  },
 ]
 
 let convertData = data => {
@@ -97,10 +109,10 @@ let convertData = data => {
   for (let i = 0; i < data.length; i += 1) {
     let dataItem = data[i]
     let fromCoord = chinaGeoCoordMap[dataItem.name]
-    let toCoord = [119.475287, 30.820739]
+    let toCoord = cloudServiceGis
     if (dataItem.name === '云服务') {
       fromCoord = chinaGeoCoordMap[dataItem.name]
-      toCoord = [119.703307, 30.657736]
+      toCoord = dataCenterGis
     }
 
     if (fromCoord && toCoord) {

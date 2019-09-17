@@ -13,7 +13,7 @@
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
             <ProdlineStatus />
-            <ProdlineListTable v-show="!showDetail"/>
+            <ProdlineIconList v-show="!showDetail"/>
             <ProdlineDetail  v-show="showDetail"/>
           </GraphContainer>
 
@@ -64,7 +64,7 @@ import GraphContainer from 'comps/base/GraphContainer'
 // 业务组件
 import PowerLineChart from './PowerLineChart'
 import OutputBarChart from './OutputBarChart'
-import ProdlineListTable from './ProdlineListTable'
+import ProdlineIconList from './ProdlineIconList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import MonitorModel from '@/models/monitor'
@@ -76,7 +76,7 @@ export default {
     GraphContainer,
     PowerLineChart,
     OutputBarChart,
-    ProdlineListTable,
+    ProdlineIconList,
     ProdlineStatus,
     OperatingStatusBarChart,
     ProdlineDetail
