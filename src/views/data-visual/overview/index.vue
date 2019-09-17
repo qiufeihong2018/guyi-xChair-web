@@ -13,28 +13,28 @@
       <el-row class="main" style="height: 100%">
         <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
           <GraphContainer title="工业总产值" class="graph-item xpanel-wrapper-2">
-            <output-bar-chart></output-bar-chart>
+            <OutputBarChart />
           </GraphContainer>
           <GraphContainer title="销售收入与营业总收入" class="graph-item xpanel-wrapper-2">
-            <income-bar-chart></income-bar-chart>
+            <IncomeBarChart />
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item">
           <GraphContainer title="入驻企业分布" class="graph-item xpanel-wrapper-1">
             <CompanyListTable />
             <GisMap />
-            <NotEnterCompany />
+            <NotEnterCompanyListTable />
           </GraphContainer>
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="6" class="col-item">
           <GraphContainer title="缴税总额与税后收入" class="graph-item xpanel-wrapper-3">
-            <tax-bar-chart></tax-bar-chart>
+            <TaxBarChart />
           </GraphContainer>
           <GraphContainer title="资产总额与固定资产" class="graph-item xpanel-wrapper-3">
-            <asset-bar-chart></asset-bar-chart>
+            <AssetBarChart />
           </GraphContainer>
           <GraphContainer title="出口创汇" class="graph-item xpanel-wrapper-3">
-            <export-bar-chart></export-bar-chart>
+            <ExportBarChart />
           </GraphContainer>
         </el-col>
       </el-row>
@@ -52,7 +52,7 @@ import AssetBarChart from './AssetBarChart'
 import ExportBarChart from './ExportBarChart'
 import GisMap from './GisMap'
 import CompanyListTable from './CompanyListTable'
-import NotEnterCompany from './NotEnterCompany'
+import NotEnterCompanyListTable from './NotEnterCompany'
 
 export default {
   name: 'DataVisualOverview',
@@ -66,7 +66,7 @@ export default {
     ExportBarChart,
     GisMap,
     CompanyListTable,
-    NotEnterCompany
+    NotEnterCompanyListTable
   },
   data() {
     return {}

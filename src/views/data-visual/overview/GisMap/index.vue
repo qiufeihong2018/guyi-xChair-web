@@ -16,7 +16,8 @@ export default {
     return {
       chart: null,
       series: [],
-      option
+      option,
+      intervalId: undefined
     }
   },
   mounted() {
@@ -31,13 +32,15 @@ export default {
     this.chart.on('click', 'series', data => {
       const { alias, id, name } = data.data
       if (id.length === 24) {
-        let newRouter = this.$router.resolve({
+        const routerConfig = {
           path: '/data-visual/company',
           query: {
             id
           }
-        })
-        window.open(newRouter.href, '_blank')
+        }
+        // let newRouter = this.$router.resolve(routerConfig)
+        // window.open(newRouter.href, '_blank')
+        this.$router.push(routerConfig)
       }
     })
   },
@@ -48,19 +51,19 @@ export default {
     initChart() {
       this.chart = echarts.init(document.getElementById('anjiMap'))
       this.chart.setOption(this.option)
-      let _this = this
-      let index = 0 // 播放所在下标
-      let mTime = setInterval(() => {
-        _this.chart.dispatchAction({
+      let { chart } = this
+      let index = 2 // 播放所在下标
+      this.intervalId = setInterval(() => {
+        chart.dispatchAction({
           type: 'showTip',
-          seriesIndex: 0,
+          seriesIndex: 1,
           dataIndex: index
         })
         index += 1
-        if (index > 6) {
-          index = 0
+        if (index > 8) {
+          index = 2
         }
-      }, 10000)
+      }, 2000)
     },
     destroyChart() {
       if (!this.chart) {
@@ -68,6 +71,7 @@ export default {
       }
       this.chart.dispose()
       this.chart = null
+      clearInterval(this.intervalId)
     }
   }
 }

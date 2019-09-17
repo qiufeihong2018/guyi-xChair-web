@@ -1,7 +1,10 @@
 <template>
   <el-container class="overview">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
-    <el-header class="header" height="72px">
+    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" @click="goHome">
+      <fa-icon icon-name="home" />
+    </div>
+      <el-header class="header" height="72px">
       <p>{{this.title}}·详情</p>
     </el-header>
     <el-main>
@@ -10,7 +13,8 @@
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
             <ProdlineStatus />
-            <ProdlineListTable />
+            <ProdlineListTable v-show="!showDetail"/>
+            <ProdlineDetail  v-show="showDetail"/>
           </GraphContainer>
 
           <el-row class="xpanel-wrapper-3">
@@ -38,8 +42,8 @@
 
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
-          <GraphContainer title="本日运行状态图" class="graph-item xpanel-wrapper-3">
-            <operating-status-bar-chart></operating-status-bar-chart>
+          <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
+            <OperatingStatusBarChart />
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
             <PowerLineChart :time-data="powerTimeData" :chart-data="powerData"/>
@@ -54,6 +58,7 @@
 
 <script type="text/ecmascript-6">
 import { companies } from 'assets/data/company'
+import { mapState } from 'vuex'
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 import PowerLineChart from './PowerLineChart'
@@ -62,6 +67,7 @@ import ProdlineListTable from './ProdlineListTable'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import MonitorModel from '@/models/monitor'
+import ProdlineDetail from './ProdlineDetail'
 export default {
   name: 'DataVisualOverview',
   components: {
@@ -71,12 +77,13 @@ export default {
     OutputBarChart,
     ProdlineListTable,
     ProdlineStatus,
-    OperatingStatusBarChart
+    OperatingStatusBarChart,
+    ProdlineDetail
   },
   data() {
     return {
       title: '暂无',
-      interval: null,
+      intervalId: undefined,
       powerTimeData: [],
       powerData: [],
       outputTimeData: [],
@@ -92,6 +99,14 @@ export default {
     companyId() {
       return this.$route.query.id
     },
+    ...mapState({
+      showDetail: state => state.company.pipeLine.showDetail
+    })
+  },
+  watch: {
+    showDetail() {
+      console.log(this.showDetail)
+    }
   },
   created() {
     let { id } = this.$route.query
@@ -104,15 +119,17 @@ export default {
   },
   mounted() {
     this.getMonitorData()
-    //
-    this.interval = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.getMonitorData()
     }, 30000)
   },
   beforeDestroy() {
-    clearInterval(this.interval)
+    clearInterval(this.intervalId)
   },
   methods: {
+    goHome() {
+      this.$router.push('/data-visual/overview')
+    },
     async getMonitorData() {
       let time = []
       let energy = []
@@ -180,6 +197,7 @@ export default {
       this.repeatedNum = this.repeatedCounting.reduce((prev, curr, idx, arr) => prev + curr)
       this.defectiveNum = this.defectiveNumber.reduce((prev, curr, idx, arr) => prev + curr)
       this.productionNum = this.productionQuantity.reduce((prev, curr, idx, arr) => prev + curr)
+      console.log(this.repeatedCounting)
     },
 
     formDate(dateForm) {

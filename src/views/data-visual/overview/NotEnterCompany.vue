@@ -1,10 +1,9 @@
 <template>
   <div class="company-list visual">
-    <el-table :data="companyList" style="width: 100%" height="100%" >
-      <el-table-column prop="alias" label="未入驻企业" width="130" align="center" >
+    <el-table :data="companyList" style="width: 100%" height="100%">
+      <el-table-column prop="alias" label="待入驻企业" width="130" align="center">
         <template slot-scope="scope">
-          <div> <span class="circle"></span>{{scope.row.alias}}</div>
-
+          <span class="name">{{scope.row.alias}}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -51,16 +50,16 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .company-list {
-    position absolute
-    top 20px
-    right 5px
-    z-index 10
-    >>> .el-table_1_column_1 {
-      padding 8px 0
-    }
+.company-list {
+  position absolute
+  top 20px
+  right 5px
+  z-index 10
+  >>> .el-table_1_column_1 {
+    padding 8px 0
   }
-  .circle{
+  .name:before {
+    content ''
     margin-right 10px
     display inline-block
     width 10px
@@ -68,4 +67,5 @@ export default {
     border-radius 50%
     background #cccccc
   }
+}
 </style>
