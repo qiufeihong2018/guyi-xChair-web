@@ -1,20 +1,20 @@
 <template>
   <div class="prodline-list-table visual">
-    <el-table :data="prodlineList" class="table" style="widht: 100%" height="100%" >
-      <el-table-column prop="prodlineName" label="生产线" />
-      <el-table-column prop="swith" label="运行状态" />
-      <el-table-column prop="productType" label="生产类型" />
-      <el-table-column prop="power" label="耗电量" />
-      <el-table-column prop="exitNum" label="合格数" />
-      <el-table-column prop="rejectNum" label="不合格次数" />
-    </el-table>
+    <div class="container">
+      <ProdlineIcon v-for="item in prodlineList" :key="item.prodlineName" 
+      :num="item.exitNum" :name="item.prodlineName" 
+      class="item" />
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import ProdlineIcon from 'comps/base/ProdlineIcon'
 export default {
   name: 'ProdlineListTable',
-  components: {},
+  components: {
+    ProdlineIcon
+  },
   data() {
     return {
       prodlineList: [
@@ -53,6 +53,138 @@ export default {
           exitNum: 234,
           rejectNum: 16,
           productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
+        },
+        {
+          companyName: '',
+          companyId: '',
+          prodlineName: 'ALT03',
+          prodlineId: '',
+          swith: '关',
+          power: 3100, // 当前的
+          entraNum: 250,
+          exitNum: 234,
+          rejectNum: 16,
+          productType: '电竞椅'
         }
       ]
     }
@@ -66,13 +198,15 @@ export default {
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .prodline-list-table {
-  position relative
   height 99%
   width 97%
-  .table {
-    position absolute
-    top 0
-    left 10px
+  .container {
+    display flex
+    flex-wrap: wrap
+    justify-content flex-start
+    .item {
+      margin 18px
+    }
   }
 }
 </style>
