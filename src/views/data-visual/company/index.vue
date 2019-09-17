@@ -10,7 +10,8 @@
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
             <ProdlineStatus />
-            <ProdlineListTable />
+            <ProdlineListTable v-show="!showDetail"/>
+            <ProdlineDetail  v-show="showDetail"/>
           </GraphContainer>
 
           <el-row class="xpanel-wrapper-3">
@@ -54,6 +55,7 @@
 
 <script type="text/ecmascript-6">
 import { companies } from 'assets/data/company'
+import { mapState } from 'vuex'
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 import PowerLineChart from './PowerLineChart'
@@ -62,6 +64,7 @@ import ProdlineListTable from './ProdlineListTable'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import MonitorModel from '@/models/monitor'
+import ProdlineDetail from './ProdlineDetail'
 export default {
   name: 'DataVisualOverview',
   components: {
@@ -71,7 +74,8 @@ export default {
     OutputBarChart,
     ProdlineListTable,
     ProdlineStatus,
-    OperatingStatusBarChart
+    OperatingStatusBarChart,
+    ProdlineDetail
   },
   data() {
     return {
@@ -92,6 +96,14 @@ export default {
     companyId() {
       return this.$route.query.id
     },
+    ...mapState({
+      showDetail: state => state.company.pipeLine.showDetail
+    })
+  },
+  watch: {
+    showDetail() {
+      console.log(this.showDetail)
+    }
   },
   created() {
     let { id } = this.$route.query
