@@ -60,7 +60,7 @@ export default {
     cursor pointer
     fill $color-grey
     &:hover {
-      transform rotate(90deg)
+      transform rotate(45deg)
     }
   }
   .num {
