@@ -8,7 +8,7 @@ import {
 export default class Pipeline {
   // 获取某个企业所有的pipeline
   static async getList(companyId) {
-    const data = await get(`pipeline/${companyId}`)
+    const data = await get(`company/${companyId}/pipeline/all`)
     return data
   }
 
@@ -110,6 +110,11 @@ export default class Pipeline {
    */
   static async deletePipeline(id) {
     const data = await _delete(`pipeline/${id}`)
+    return data
+  }
+
+  static async getPipelineState(id) {
+    const data = await get('pipelineState')
     return data
   }
 }

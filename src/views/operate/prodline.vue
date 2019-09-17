@@ -5,7 +5,7 @@
     </el-header>
     <el-container style="margin-top: 10px">
       <el-tabs tab-position="left" type="border-card" style="width: 100%" @tab-click="handleTabClick">
-        <el-tab-pane v-for="item in companyList" :key="item.alias" :label="item.name">
+        <el-tab-pane v-for="item in companyList" :key="item._id" :label="item.companyName">
           <el-table :data="pipelineList" style="width: 100%">
             <el-table-column label="生产线" width="180">
               <template slot-scope="scope">
@@ -106,6 +106,7 @@
 <script type="text/ecmascript-6">
 import { companies } from 'assets/data/company'
 import PipelineModel from '@/models/pipeline'
+import CompanyModel from '@/models/company'
 export default {
   name: 'OperateProdline',
   components: {},
@@ -133,12 +134,18 @@ export default {
   },
   computed: {},
   async mounted() {
-    this.companyId = this.companyList[0].id
-    this.pipelineList = await PipelineModel.getList(this.companyId)
+    this.getCompanies()
+    // this.companyId = this.companyList[0].id
+    // this.pipelineList = await PipelineModel.getList(this.companyId)
   },
   methods: {
+    async getCompanies() {
+      this.companyList = await CompanyModel.getList()
+      this.companyId = this.companyList[0]._id
+      this.probeList = await CompanyModel.getList(this.companyId)
+    },
     async handleTabClick(tab, event) {
-      this.companyId = this.companyList[tab.index].id
+      this.companyId = this.companyList[tab.index]._id
       this.pipelineList = await PipelineModel.getList(this.companyId)
       console.log('this.pipelineList', this.pipelineList)
     },

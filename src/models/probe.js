@@ -6,6 +6,21 @@ import {
 } from '@/utils/request'
 
 export default class Probe {
+  /**
+   * 根据公司获取采集器
+   *
+   * @static
+   * @param {*} id
+   * @returns
+    {
+      companyId: '', // 公司ID
+    }
+   * @memberof Probe
+   */
+  static async getList(id) {
+    const data = await get(`probe/${id}`)
+    return data
+  }
 
   /**
    * 获取某个采集器的详情
@@ -52,8 +67,8 @@ export default class Probe {
    * @returns
    * @memberof Probe
    */
-  static async modifyDetail(data) {
-    const data = await post('probe', data)
-    return data
-  }
+  // static async modifyDetail(data) {
+  //   const data = await post('probe', data)
+  //   return data
+  // }
 }

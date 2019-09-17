@@ -20,14 +20,14 @@
           <el-row class="xpanel-wrapper-3">
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
-                <p style="position: absolute;right: 40px;top: 5px;color: #60acfc;width: 150px">
-                  本日入口总数: {{repeatedNum}}
+                <p style="position: absolute;right: 40px;top: 5px;color: #60acfc;width: 200px">
+                  入口总数: {{repeatedNum}}
                 </p>
-                <p style="position: absolute;right: 40px;top: 25px;color: #45d3eb;width: 150px">
-                  本日次品总数: {{defectiveNum}}
+                <p style="position: absolute;right: 40px;top: 25px;color: #45d3eb;width: 200px">
+                  次品总数: {{defectiveNum}}
                 </p>
-                <p style="position: absolute;right: 40px;top: 45px;color: #5bc59f;width: 150px">
-                  本日出品总数: {{productionNum}}
+                <p style="position: absolute;right: 40px;top: 45px;color: #5bc59f;width: 200px">
+                  出品总数: {{productionNum}}
                 </p>
                 <OutputBarChart />
               </GraphContainer>
@@ -144,12 +144,24 @@ export default {
         end: +new Date()
       }
       const res = await MonitorModel.searchMonitor(params)
+      let isFirst = true
+      let firstData = {}
       res.forEach(item => {
         if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.positiveEnergy) {
           energy.push(item.value.positiveEnergy)
-          time.push(this.formDate(item.createdAt))
+          // time.push(this.formDate(item.createdAt))
+          const date = new Date(item.createdAt)
+          time.push(
+            `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+          )
         }
         if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.productionQuantity) {
+          if (isFirst) {
+            firstData.repeatedNum = item.value.repeatedCounting
+            firstData.defectiveNum = item.value.defectiveNumber
+            firstData.productionNum = item.value.productionQuantity
+            isFirst = false
+          }
           const hour = new Date(item.createdAt).getHours()
           if ((outputTime.find(n => `${hour}:00` === n)) === undefined) {
             outputTime.push(`${hour}:00`)
@@ -172,21 +184,22 @@ export default {
       const arr2 = Object.keys(productionQuantity).map(item => defectiveNumber[item])
       const arr3 = Object.keys(productionQuantity).map(item => productionQuantity[item])
       this.repeatedCounting = arr1.map((item, index) => {
-        if (index === 0) return 0
+        if (index === 0) return item - firstData.repeatedNum
         return item - arr1[index - 1]
       })
       this.defectiveNumber = arr2.map((item, index) => {
-        if (index === 0) return 0
+        if (index === 0) return item - firstData.defectiveNum
         return item - arr2[index - 1]
       })
       this.productionQuantity = arr3.map((item, index) => {
-        if (index === 0) return 0
+        if (index === 0) return item - firstData.productionNum
         return item - arr3[index - 1]
       })
       this.repeatedNum = this.repeatedCounting.reduce((prev, curr, idx, arr) => prev + curr)
       this.defectiveNum = this.defectiveNumber.reduce((prev, curr, idx, arr) => prev + curr)
       this.productionNum = this.productionQuantity.reduce((prev, curr, idx, arr) => prev + curr)
     },
+
     formDate(dateForm) {
       if (dateForm === '') { // 解决deteForm为空传1970-01-01 00:00:00
         return ''
