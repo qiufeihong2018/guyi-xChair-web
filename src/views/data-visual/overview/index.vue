@@ -5,6 +5,8 @@
       <p>安吉椅艺大数据平台</p>
       <div class="button-container">
         <p class="button-active">2016年</p>
+        <p class="button-inactive">2017年</p>
+        <p class="button-inactive">2018年</p>
       </div>
     </el-header>
     <el-main>
@@ -93,13 +95,29 @@ export default {
       position absolute
       left: 20px
       text-align left
-      top 40px
+      top 25px
       font-size 15px
+      height 45px
+      p {
+        display inline-block
+      }
+      p + p {
+        border-bottom 1px solid #5dc2fe
+      }
       .button-active{
-        background-color #5dc2fe
+        color #5dc2fe
+        line-height 20px
+        padding 5px
+        border-radius 2px
+        border-top 1px solid #5dc2fe
+        border-left 1px solid #5dc2fe
+        border-right 1px solid #5dc2fe
+      }
+      .button-inactive{
         color #fff
         line-height 20px
         padding 5px
+        border-radius 2px
       }
     }
   }
