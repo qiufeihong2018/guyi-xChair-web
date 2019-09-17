@@ -1,7 +1,10 @@
 <template>
   <el-container class="overview">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
-    <el-header class="header" height="72px">
+    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" @click="goHome">
+      <fa-icon icon-name="home" />
+    </div>
+      <el-header class="header" height="72px">
       <p>{{this.title}}·详情</p>
     </el-header>
     <el-main>
@@ -29,7 +32,7 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
-            
+
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
             <PowerLineChart />
@@ -77,7 +80,12 @@ export default {
     this.title = company.alias
   },
   mounted() { },
-  methods: {},
+  methods: {
+    goHome() {
+      console.log('s')
+      this.$router.push('/data-visual/overview')
+    }
+  },
 }
 </script>
 

@@ -48,19 +48,19 @@ export default {
     initChart() {
       this.chart = echarts.init(document.getElementById('anjiMap'))
       this.chart.setOption(this.option)
-      let _this = this
-      let index = 0 // 播放所在下标
+      let { chart } = this
+      let index = 2 // 播放所在下标
       let mTime = setInterval(() => {
-        _this.chart.dispatchAction({
+        chart.dispatchAction({
           type: 'showTip',
-          seriesIndex: 0,
+          seriesIndex: 1,
           dataIndex: index
         })
         index += 1
-        if (index > 6) {
-          index = 0
+        if (index > 8) {
+          index = 2
         }
-      }, 10000)
+      }, 3000)
     },
     destroyChart() {
       if (!this.chart) {
