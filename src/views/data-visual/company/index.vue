@@ -83,40 +83,40 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-.overview {
-  height 100%
-  background url('../_common/bg.png') center no-repeat
-  background-size 100% 100%
-  .header {
-    margin-bottom 10px
-    background url('../_common/header.png') center no-repeat
-    line-height 65px
-    text-align center
-    color #5dc2fe
-    font-size 28px
-    font-weight 600
-  }
-  .main {
-    .col-item {
-      height 100%
-      padding 0 5px
-      .graph-item {
-        padding-bottom 10px
-        box-sizing border-box
+  .overview {
+    height 100%
+    background url('../_common/bg.png') center no-repeat
+    background-size 100% 100%
+    .header {
+      margin-bottom 10px
+      background url('../_common/header.png') center no-repeat
+      line-height 65px
+      text-align center
+      color #5dc2fe
+      font-size 28px
+      font-weight 600
+    }
+    .main {
+      .col-item {
+        height 100%
+        padding 0 5px
+        .graph-item {
+          padding-bottom 10px
+          box-sizing border-box
+        }
       }
     }
   }
-}
-.xpanel-wrapper-1 {
-  height 100%
-}
-.xpanel-wrapper-2 {
-  height 50%
-}
-.xpanel-wrapper-3 {
-  height 33.33333%
-}
-.xpanel-wrapper-6 {
-  height 66.66666%
-}
+  .xpanel-wrapper-1 {
+    height 100%
+  }
+  .xpanel-wrapper-2 {
+    height 50%
+  }
+  .xpanel-wrapper-3 {
+    height 33.33333%
+  }
+  .xpanel-wrapper-6 {
+    height 66.66666%
+  }
 </style>

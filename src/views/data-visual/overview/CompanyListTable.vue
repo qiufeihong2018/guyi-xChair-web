@@ -1,6 +1,6 @@
 <template>
   <div class="company-list visual">
-    <el-table :data="companyList" style="widht: 100%" height="100%" @row-click="handleRowClick">
+    <el-table :data="companyList" style="width: 100%" height="100%" @row-click="handleRowClick">
       <el-table-column prop="alias" label="一期入驻企业(6)点击·详情" width="130" align="center" />
     </el-table>
   </div>
@@ -8,38 +8,38 @@
 
 <script type="text/ecmascript-6">
 export default {
-  name: ' CompanyListTable',
+  name: 'CompanyListTable',
   components: {},
   data() {
     return {
       companyList: [
         {
-          id: '5d7e63c1ba35562fe1084626',
+          id: '5d8042e7de1685795bc379ce',
           name: '中源家居股份有限公司',
           alias: '中源家居',
         },
         {
-          id: '5d7e642d201b65318803e39f',
+          id: '5d8042f7de1685795bc379d0',
           name: '永艺家具股份有限公司',
           alias: '永艺家具',
         },
         {
-          id: '5d7e6443201b65318803e3a0',
+          id: '5d804350de1685795bc379dc',
           name: '浙江恒林椅业股份有限公司',
           alias: '恒林椅业',
         },
         {
-          id: '5d7e6450201b65318803e3a1',
+          id: '5d804314de1685795bc379d4',
           name: '安吉富和家具股份有限公司',
           alias: '富和家具',
         },
         {
-          id: '5d7e6459201b65318803e3a2',
+          id: '5d8041e4de1685795bc379b2',
           name: '安吉隆博家具股份有限公司',
           alias: '隆博家具',
         },
         {
-          id: '5d7e6467201b65318803e3a3',
+          id: '5d804375de1685795bc379e0',
           name: '浙江盛信椅业股份有限公司',
           alias: '盛信椅业',
         },

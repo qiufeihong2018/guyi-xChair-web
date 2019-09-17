@@ -48,7 +48,6 @@ export default {
       return {
         tooltip: {
           formatter(params) {
-            console.log(params)
             return `${params.marker + params.name}: ${params.value[3] / 1000} s`
           }
         },
