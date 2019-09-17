@@ -60,7 +60,7 @@ export default {
         if (index > 8) {
           index = 2
         }
-      }, 3000)
+      }, 2000)
     },
     destroyChart() {
       if (!this.chart) {
