@@ -14,33 +14,45 @@ export default {
       type: String,
       default: 'OutputBarChart'
     },
+    timeData: {
+      type: Array,
+      default: () => []
+    },
+    repeatedCounting: {
+      type: Array,
+      default: () => []
+    },
+    defectiveNumber: {
+      type: Array,
+      default: () => []
+    },
+    productionQuantity: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
       chart: null,
-      interval: null,
-      timeData: [],
-      repeatedCounting: [],
-      defectiveNumber: [],
-      productionQuantity: []
+      interval: null
     }
   },
   computed: {
-    companyId() {
-      return this.$route.query.id
-    },
     option() {
       return {
         tooltip: {
           formatter: '{a}: {c}'
         },
         grid: {
-          left: '15%'
+          left: '15%',
         },
         xAxis: {
           type: 'category',
           axisTick: { show: false },
           data: this.timeData,
+          // data: ['00:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00',
+          //   '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+          //   '19:00', '20:00', '21:00', '22:00', '23:00'],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -65,6 +77,11 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            lineStyle: {
+              color: '#333'
+            }
+          }
         },
         color: color.category6,
         series: [
@@ -72,16 +89,34 @@ export default {
             name: '入口数量',
             type: 'bar',
             barGap: 0,
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
             data: this.repeatedCounting
           },
           {
             name: '次品数量',
             type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
             data: this.defectiveNumber
           },
           {
             name: '出品数量',
             type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
             data: this.productionQuantity
           }
         ]
@@ -93,52 +128,9 @@ export default {
       this.updateChart()
     },
   },
-  async mounted() {
-    this.getMonitorData()
-    //
-    this.interval = setInterval(() => {
-      this.getMonitorData()
-    }, 5000)
+  mounted() {
   },
-  beforeDestroy() {
-    this.interval = null
-  },
-  methods: {
-    async getMonitorData() {
-      let repeatedCounting = []
-      let defectiveNumber = []
-      let productionQuantity = []
-      let time = []
-      const params = {
-        companyId: this.companyId,
-        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        end: +new Date()
-      }
-      const res = await MonitorModel.searchMonitor(params)
-      res.forEach(item => {
-        if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.productionQuantity) {
-          repeatedCounting.push(item.value.repeatedCounting)
-          defectiveNumber.push(item.value.defectiveNumber)
-          productionQuantity.push(item.value.productionQuantity)
-          time.push(this.formDate(item.createdAt))
-        }
-      })
-      this.$nextTick(() => {
-        this.timeData = time
-        this.repeatedCounting = repeatedCounting.map(item => (item - repeatedCounting[0]))
-        this.defectiveNumber = defectiveNumber.map(item => (item - defectiveNumber[0]))
-        this.productionQuantity = productionQuantity.map(item => (item - productionQuantity[0]))
-      })
-    },
-    formDate(dateForm) {
-      if (dateForm === '') { // 解决deteForm为空传1970-01-01 00:00:00
-        return ''
-      }
-      let dateee = new Date(dateForm).toJSON()
-      let date = new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
-      return date
-    }
-  }
+  methods: {}
 }
 </script>
 
