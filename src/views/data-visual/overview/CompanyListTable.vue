@@ -1,7 +1,11 @@
 <template>
   <div class="company-list visual">
     <el-table :data="companyList" style="width: 100%" height="100%" @row-click="handleRowClick">
-      <el-table-column prop="alias" label="一期入驻企业(6)点击·详情" width="130" align="center" />
+      <el-table-column prop="alias" label="一期入驻企业(6)点击·详情" width="130" align="center" >
+        <template slot-scope="scope">
+          <div> <span class="circle"></span>{{scope.row.alias}}</div>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -69,6 +73,14 @@ export default {
   z-index 10
   >>> .el-table_1_column_1 {
     padding 8px 0
+  }
+  .circle{
+    margin-right 10px
+    display inline-block
+    width 10px
+    height 10px
+    border-radius 50%
+    background #3dff33
   }
 }
 </style>
