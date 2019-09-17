@@ -27,5 +27,11 @@ export default {
       name: 'OperateProbe',
       meta: { title: '采集器配置', icon: 'fa fa-wrench' },
     },
+    {
+      path: '/operate/product',
+      component: _import('operate/product'),
+      name: 'OperateProduct',
+      meta: { title: '产品配置', icon: 'fa fa-wrench' },
+    },
   ],
 }

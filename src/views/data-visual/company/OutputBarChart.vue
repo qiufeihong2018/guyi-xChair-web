@@ -4,8 +4,8 @@
 
 <script>
 import resize from '@/mixins/resize'
-import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
+import MonitorModel from '@/models/monitor'
 export default {
   name: 'OutputBarChart',
   mixins: [resize],
@@ -17,14 +17,22 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      interval: null,
+      timeData: [],
+      repeatedCounting: [],
+      defectiveNumber: [],
+      productionQuantity: []
     }
   },
   computed: {
+    companyId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          formatter: '{a}: {c}'
         },
         grid: {
           left: '15%'
@@ -32,7 +40,7 @@ export default {
         xAxis: {
           type: 'category',
           axisTick: { show: false },
-          data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
+          data: this.timeData,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -46,6 +54,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          minInterval: 1,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -60,20 +69,20 @@ export default {
         color: color.category6,
         series: [
           {
-            name: 'Forest',
+            name: '入口数量',
             type: 'bar',
             barGap: 0,
-            data: [320, 332, 301, 334, 390, 320]
+            data: this.repeatedCounting
           },
           {
-            name: 'Steppe',
+            name: '次品数量',
             type: 'bar',
-            data: [220, 182, 191, 234, 290, 332]
+            data: this.defectiveNumber
           },
           {
-            name: 'Desert',
+            name: '出品数量',
             type: 'bar',
-            data: [150, 232, 201, 154, 190, 390]
+            data: this.productionQuantity
           }
         ]
       }
@@ -84,13 +93,52 @@ export default {
       this.updateChart()
     },
   },
-  mounted() {
-    // setInterval(() => {
-    //   let now = new Date()
-    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-    //   this.chartData.push(Math.round(Math.random() * 10))
-    // }, 1000 * 60 *60)
+  async mounted() {
+    this.getMonitorData()
+    //
+    this.interval = setInterval(() => {
+      this.getMonitorData()
+    }, 5000)
   },
+  beforeDestroy() {
+    this.interval = null
+  },
+  methods: {
+    async getMonitorData() {
+      let repeatedCounting = []
+      let defectiveNumber = []
+      let productionQuantity = []
+      let time = []
+      const params = {
+        companyId: this.companyId,
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        end: +new Date()
+      }
+      const res = await MonitorModel.searchMonitor(params)
+      res.forEach(item => {
+        if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.productionQuantity) {
+          repeatedCounting.push(item.value.repeatedCounting)
+          defectiveNumber.push(item.value.defectiveNumber)
+          productionQuantity.push(item.value.productionQuantity)
+          time.push(this.formDate(item.createdAt))
+        }
+      })
+      this.$nextTick(() => {
+        this.timeData = time
+        this.repeatedCounting = repeatedCounting.map(item => (item - repeatedCounting[0]))
+        this.defectiveNumber = defectiveNumber.map(item => (item - defectiveNumber[0]))
+        this.productionQuantity = productionQuantity.map(item => (item - productionQuantity[0]))
+      })
+    },
+    formDate(dateForm) {
+      if (dateForm === '') { // 解决deteForm为空传1970-01-01 00:00:00
+        return ''
+      }
+      let dateee = new Date(dateForm).toJSON()
+      let date = new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+      return date
+    }
+  }
 }
 </script>
 

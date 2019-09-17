@@ -5,6 +5,7 @@
 <script>
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
+import MonitorModel from '@/models/monitor'
 
 export default {
   name: 'PowerLineChart',
@@ -19,10 +20,14 @@ export default {
     return {
       chart: null,
       timeData: [],
-      chartData: []
+      chartData: [],
+      interval: null,
     }
   },
   computed: {
+    companyId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
@@ -77,13 +82,46 @@ export default {
       this.updateChart()
     },
   },
-  mounted() {
-    // setInterval(() => {
-    //   let now = new Date()
-    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-    //   this.chartData.push(Math.round(Math.random() * 10))
-    // }, 1000)
+  async mounted() {
+    this.getMonitorData()
+
+    this.interval = setInterval(() => {
+      this.getMonitorData()
+    }, 5000)
   },
+  beforeDestroy() {
+    this.interval = null
+  },
+  methods: {
+    async getMonitorData() {
+      let time = []
+      let energy = []
+      const params = {
+        companyId: this.companyId,
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        end: +new Date()
+      }
+      const res = await MonitorModel.searchMonitor(params)
+      res.forEach(item => {
+        if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.positiveEnergy) {
+          energy.push(item.value.positiveEnergy)
+          time.push(this.formDate(item.createdAt))
+        }
+      })
+      this.$nextTick(() => {
+        this.timeData = time
+        this.chartData = energy.map(item => (item - energy[0]) * 2.5)
+      })
+    },
+    formDate(dateForm) {
+      if (dateForm === '') { // 解决deteForm为空传1970-01-01 00:00:00
+        return ''
+      }
+      let dateee = new Date(dateForm).toJSON()
+      let date = new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+      return date
+    }
+  }
 }
 </script>
 
