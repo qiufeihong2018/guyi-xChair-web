@@ -9,10 +9,10 @@ export default class Company {
    * 获取安吉所有的椅艺企业信息
    *
    * @static
-   * @returns 
+   * @returns
    */
   static async getList() {
-    const data = await get('company')
+    const data = await get('company/all')
     return data
   }
 

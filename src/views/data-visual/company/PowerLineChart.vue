@@ -5,6 +5,7 @@
 <script>
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
+import MonitorModel from '@/models/monitor'
 
 export default {
   name: 'PowerLineChart',
@@ -14,12 +15,19 @@ export default {
       type: String,
       default: 'PowerLineChart'
     },
+    timeData: {
+      type: Array,
+      default: () => []
+    },
+    chartData: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
       chart: null,
-      timeData: [],
-      chartData: []
+      interval: null,
     }
   },
   computed: {
@@ -59,6 +67,11 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            lineStyle: {
+              color: '#333'
+            }
+          }
         },
         series: [
           {
@@ -77,13 +90,8 @@ export default {
       this.updateChart()
     },
   },
-  mounted() {
-    // setInterval(() => {
-    //   let now = new Date()
-    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-    //   this.chartData.push(Math.round(Math.random() * 10))
-    // }, 1000)
-  },
+  mounted() {},
+  methods: {}
 }
 </script>
 

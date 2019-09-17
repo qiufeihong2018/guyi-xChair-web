@@ -3,6 +3,11 @@
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
     <el-header class="header" height="72px">
       <p>安吉椅艺大数据平台</p>
+      <div class="button-container">
+        <p class="button-active">2016年</p>
+        <p class="button-inactive">2017年</p>
+        <p class="button-inactive">2018年</p>
+      </div>
     </el-header>
     <el-main>
       <el-row class="main" style="height: 100%">
@@ -86,6 +91,35 @@ export default {
     color #5dc2fe
     font-size 28px
     font-weight 600
+    .button-container {
+      position absolute
+      left: 20px
+      text-align left
+      top 25px
+      font-size 15px
+      height 45px
+      p {
+        display inline-block
+      }
+      p + p {
+        border-bottom 1px solid #5dc2fe
+      }
+      .button-active{
+        color #5dc2fe
+        line-height 20px
+        padding 5px
+        border-radius 2px
+        border-top 1px solid #5dc2fe
+        border-left 1px solid #5dc2fe
+        border-right 1px solid #5dc2fe
+      }
+      .button-inactive{
+        color #fff
+        line-height 20px
+        padding 5px
+        border-radius 2px
+      }
+    }
   }
   .main {
     .col-item {

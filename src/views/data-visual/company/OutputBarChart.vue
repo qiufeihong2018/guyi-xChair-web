@@ -4,8 +4,8 @@
 
 <script>
 import resize from '@/mixins/resize'
-import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
+import MonitorModel from '@/models/monitor'
 export default {
   name: 'OutputBarChart',
   mixins: [resize],
@@ -14,25 +14,45 @@ export default {
       type: String,
       default: 'OutputBarChart'
     },
+    timeData: {
+      type: Array,
+      default: () => []
+    },
+    repeatedCounting: {
+      type: Array,
+      default: () => []
+    },
+    defectiveNumber: {
+      type: Array,
+      default: () => []
+    },
+    productionQuantity: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      interval: null
     }
   },
   computed: {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          formatter: '{a}: {c}'
         },
         grid: {
-          left: '15%'
+          left: '15%',
         },
         xAxis: {
           type: 'category',
           axisTick: { show: false },
-          data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00'],
+          data: this.timeData,
+          // data: ['00:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00',
+          //   '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+          //   '19:00', '20:00', '21:00', '22:00', '23:00'],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -46,6 +66,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          minInterval: 1,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -56,24 +77,47 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            lineStyle: {
+              color: '#333'
+            }
+          }
         },
         color: color.category6,
         series: [
           {
-            name: 'Forest',
+            name: '入口数量',
             type: 'bar',
             barGap: 0,
-            data: [320, 332, 301, 334, 390, 320]
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            data: this.repeatedCounting
           },
           {
-            name: 'Steppe',
+            name: '次品数量',
             type: 'bar',
-            data: [220, 182, 191, 234, 290, 332]
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            data: this.defectiveNumber
           },
           {
-            name: 'Desert',
+            name: '出品数量',
             type: 'bar',
-            data: [150, 232, 201, 154, 190, 390]
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
+            data: this.productionQuantity
           }
         ]
       }
@@ -85,12 +129,8 @@ export default {
     },
   },
   mounted() {
-    // setInterval(() => {
-    //   let now = new Date()
-    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-    //   this.chartData.push(Math.round(Math.random() * 10))
-    // }, 1000 * 60 *60)
   },
+  methods: {}
 }
 </script>
 

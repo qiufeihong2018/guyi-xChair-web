@@ -2,9 +2,15 @@ import {
   post,
   get,
   put,
+  _delete
 } from '@/utils/request'
 
 export default class Pipeline {
+  // 获取某个企业所有的pipeline
+  static async getList(companyId) {
+    const data = await get(`pipeline/${companyId}`)
+    return data
+  }
 
   /**
    * 获取某个pipeline的详情
@@ -18,12 +24,34 @@ export default class Pipeline {
     return data
   }
 
-
   /**
-   * 修改/新增 pipeline的详情
+   * 新增 pipeline的详情
    *
    * @static
-   * @param {*} data 
+   * @param {*} data
+   data = {
+      companyId: '',   // 公司ID
+      companyName: '', // 公司名
+      pipelineId:'',  // 生产线ID
+      pipelineName: '', // 生产线的别名
+      pipelineNo: '', // 生产线的编号（彭导可自定义）
+      probeList: [  // 该生产线的所有采集器的列表
+        'AA01',
+        'AA02'
+      ]
+      }
+   * @returns
+   */
+  static async createDetail(params) {
+    const data = await post('pipeline', params)
+    return data
+  }
+
+  /**
+   * 修改 pipeline的详情
+   *
+   * @static
+   * @param {*} data
     data = {
       companyId: '',   // 公司ID
       companyName: '', // 公司名
@@ -37,8 +65,8 @@ export default class Pipeline {
       }
    * @returns
    */
-  static async modifyDetail(data) {
-    const data = await post('pipeline', data)
+  static async modifyDetail(params) {
+    const data = await put('pipeline', params)
     return data
   }
 
@@ -47,7 +75,7 @@ export default class Pipeline {
    *
    * @static
    * @param {*} id
-   * @returns 
+   * @returns
     列表
     [
       {
@@ -70,6 +98,18 @@ export default class Pipeline {
    */
   static async getAllProbe(id) {
     const data = await post(`pipeline/${id}/probe`)
+    return data
+  }
+
+  /**
+   * 删除某个pipeline
+   *
+   * @static
+   * @param {*} id
+   * @returns
+   */
+  static async deletePipeline(id) {
+    const data = await _delete(`pipeline/${id}`)
     return data
   }
 }
