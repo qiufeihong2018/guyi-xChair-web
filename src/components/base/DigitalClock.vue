@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       time: '',
-      intervalID: undefined,
+      intervalId: undefined,
     }
   },
   computed: {},
@@ -17,12 +17,12 @@ export default {
     this.getTime()
   },
   mounted() {
-    this.setIntervalID = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.getTime()
     }, 1000)
   },
   beforeDestroy() {
-    clearInterval(this.intervalID)
+    clearInterval(this.intervalId)
   },
   methods: {
     getTime() {

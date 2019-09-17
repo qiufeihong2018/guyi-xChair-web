@@ -24,37 +24,37 @@ const chinaDatas = [
     value: [119.475287, 30.820739, 0, '云服务']
   },
   {
-    id: '5d7e63c1ba35562fe1084626',
+    id: '5d8042e7de1685795bc379ce',
     name: '中源家居股份有限公司',
     alias: '中源家居',
     value: [119.616093, 30.62116, 30, '入驻']
   },
   {
-    id: '5d7e642d201b65318803e39f',
+    id: '5d8042f7de1685795bc379d0',
     name: '永艺家具股份有限公司',
     alias: '永艺家具',
     value: [119.675803, 30.607438, 10, '入驻'],
   },
   {
-    id: '5d7e6443201b65318803e3a0',
+    id: '5d804350de1685795bc379dc',
     name: '浙江恒林椅业股份有限公司',
     alias: '恒林椅业',
     value: [119.681168, 30.661117, 30, '入驻'],
   },
   {
-    id: '5d7e6450201b65318803e3a1',
+    id: '5d804314de1685795bc379d4',
     name: '安吉富和家具股份有限公司',
     alias: '富和家具',
     value: [119.678959, 30.612794, 8, '入驻']
   },
   {
-    id: '5d7e6459201b65318803e3a2',
+    id: '5d8041e4de1685795bc379b2',
     name: '安吉隆博家具股份有限公司',
     alias: '隆博家具',
     value: [119.613253, 30.671319, 1, '入驻']
   },
   {
-    id: '5d7e6467201b65318803e3a3',
+    id: '5d804375de1685795bc379e0',
     name: '浙江盛信椅业股份有限公司',
     alias: '盛信椅业',
     value: [119.619262, 30.622846, 1, '入驻']
@@ -92,7 +92,7 @@ const chinaDatas = [
 
 ]
 
-let convertData = function (data) {
+let convertData = data => {
   let res = []
   for (let i = 0; i < data.length; i += 1) {
     let dataItem = data[i]
@@ -188,16 +188,17 @@ export default {
   tooltip: {
     trigger: 'item',
     formatter(params) {
-      if (params.name === '杭电安吉研究院') return '数据中心'
-      if (params.seriesType === 'lines') {
+      const { name, seriesType, value } = params
+      if (name === '杭电安吉研究院') return '数据中心'
+      if (seriesType === 'lines') {
         return
       }
-      if (params.data.value[3] === '入驻') {
-        return `${params.name} <br> 生产线: ${params.value[2]} 条`
-      } if (params.data.value[3] === '未入驻') {
-        return `${params.name} <br> 未入驻`
+      if (value[3] === '入驻') {
+        return `${name} <br> 生产线: ${value[2]} 条`
+      } if (value[3] === '未入驻') {
+        return `${name} <br> 未入驻`
       }
-      return `${params.name}`
+      return `${name}`
     }
   },
   geo: {

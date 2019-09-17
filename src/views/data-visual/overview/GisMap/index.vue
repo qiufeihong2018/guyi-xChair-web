@@ -16,7 +16,8 @@ export default {
     return {
       chart: null,
       series: [],
-      option
+      option,
+      intervalId: undefined
     }
   },
   mounted() {
@@ -31,13 +32,15 @@ export default {
     this.chart.on('click', 'series', data => {
       const { alias, id, name } = data.data
       if (id.length === 24) {
-        let newRouter = this.$router.resolve({
+        const routerConfig = {
           path: '/data-visual/company',
           query: {
             id
           }
-        })
-        window.open(newRouter.href, '_blank')
+        }
+        // let newRouter = this.$router.resolve(routerConfig)
+        // window.open(newRouter.href, '_blank')
+        this.$router.push(routerConfig)
       }
     })
   },
@@ -50,7 +53,7 @@ export default {
       this.chart.setOption(this.option)
       let { chart } = this
       let index = 2 // 播放所在下标
-      let mTime = setInterval(() => {
+      this.intervalId = setInterval(() => {
         chart.dispatchAction({
           type: 'showTip',
           seriesIndex: 1,
@@ -68,6 +71,7 @@ export default {
       }
       this.chart.dispose()
       this.chart = null
+      clearInterval(this.intervalId)
     }
   }
 }

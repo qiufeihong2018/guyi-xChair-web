@@ -6,7 +6,7 @@
     </div>
     <div class="right-menu">
       <el-tooltip effect="dark" content="数据大屏" placement="bottom">
-        <router-link target="_blank" to="/data-visual/overview">
+        <router-link to="/data-visual/overview">
           <fa-icon icon-name="area-chart" style="margin-right: 15px;" />
         </router-link>
       </el-tooltip>

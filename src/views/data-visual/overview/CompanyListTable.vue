@@ -1,9 +1,9 @@
 <template>
   <div class="company-list visual">
     <el-table :data="companyList" style="width: 100%" height="100%" @row-click="handleRowClick">
-      <el-table-column prop="alias" label="一期入驻企业(6)点击·详情" width="130" align="center" >
+      <el-table-column prop="alias" label="一期入驻企业(6)" width="130" align="center">
         <template slot-scope="scope">
-          <div> <span class="circle"></span>{{scope.row.alias}}</div>
+          <span class="name">{{scope.row.alias}}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -53,13 +53,15 @@ export default {
   methods: {
     handleRowClick(row) {
       let { id } = row
-      let newRouter = this.$router.resolve({
-        path: '/data-visual/company',
-        query: {
-          id
+      if (id.length === 24) {
+        let routerConfig = {
+          path: '/data-visual/company',
+          query: {
+            id
+          }
         }
-      })
-      window.open(newRouter.href, '_blank')
+        this.$router.push(routerConfig)
+      }
     },
   },
 }
@@ -74,7 +76,8 @@ export default {
   >>> .el-table_1_column_1 {
     padding 8px 0
   }
-  .circle{
+  .name:before {
+    content ''
     margin-right 10px
     display inline-block
     width 10px

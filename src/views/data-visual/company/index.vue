@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       title: '暂无',
-      interval: null,
+      intervalId: undefined,
       powerTimeData: [],
       powerData: [],
       outputTimeData: [],
@@ -107,17 +107,17 @@ export default {
   },
   mounted() {
     this.getMonitorData()
-    //
-    this.interval = setInterval(() => {
+    this.intervalId = setInterval(() => {
       this.getMonitorData()
     }, 30000)
   },
   beforeDestroy() {
-    clearInterval(this.interval)
+    clearInterval(this.intervalId)
   },
   methods: {
     goHome() {
       this.$router.push('/data-visual/overview')
+    },
     async getMonitorData() {
       let time = []
       let energy = []
