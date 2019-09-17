@@ -6,8 +6,9 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "start": "pm2 start app.js --name='xChair-web'",
-    "restart": "pm2 delete xChair-web && npm run start",
-    "delete": "pm2 delete xChair-web",
+    "stop": "pm2 delete xChair-web",
+    "restart": "npm run stop && npm run start",
+    "buildart": "npm run build && npm run restart",
     "lint": "vue-cli-service lint",
     "commit": "git-cz"
   },

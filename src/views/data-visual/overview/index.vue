@@ -45,6 +45,7 @@
 <script type="text/ecmascript-6">
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+// 业务组件
 import OutputBarChart from './OutputBarChart'
 import IncomeBarChart from './IncomeBarChart'
 import TaxBarChart from './TaxBarChart'

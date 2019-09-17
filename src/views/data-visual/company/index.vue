@@ -1,7 +1,7 @@
 <template>
   <el-container class="overview">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
-    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" @click="goHome">
+    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" @click="goOverviewPage">
       <fa-icon icon-name="home" />
     </div>
       <el-header class="header" height="72px">
@@ -59,6 +59,7 @@
 import { companies } from 'assets/data/company'
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+// 业务组件
 import PowerLineChart from './PowerLineChart'
 import OutputBarChart from './OutputBarChart'
 import ProdlineListTable from './ProdlineListTable'
@@ -115,7 +116,7 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
-    goHome() {
+    goOverviewPage() {
       this.$router.push('/data-visual/overview')
     },
     async getMonitorData() {
@@ -173,7 +174,6 @@ export default {
       this.repeatedNum = this.repeatedCounting.reduce((prev, curr, idx, arr) => prev + curr)
       this.defectiveNum = this.defectiveNumber.reduce((prev, curr, idx, arr) => prev + curr)
       this.productionNum = this.productionQuantity.reduce((prev, curr, idx, arr) => prev + curr)
-      console.log(this.repeatedCounting)
     },
     formDate(dateForm) {
       if (dateForm === '') { // 解决deteForm为空传1970-01-01 00:00:00
