@@ -1,6 +1,6 @@
 <template>
   <div class="prodline-list-table visual">
-    <el-table :data="prodlineList" class="table" style="widht: 100%" height="100%" @row-click="handleRowClick">
+    <el-table :data="prodlineList" class="table" style="widht: 100%" height="100%" >
       <el-table-column prop="prodlineName" label="生产线" />
       <el-table-column prop="swith" label="运行状态" />
       <el-table-column prop="productType" label="生产类型" />

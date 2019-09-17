@@ -1,4 +1,5 @@
 /* modules目录和其他同级的js文件，颗粒度级别不同 */
+/* eslint-disable */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import state from './state'
@@ -9,6 +10,7 @@ import app from './modules/app'
 import user from './modules/user'
 import router from './modules/router'
 import visual from './modules/visual'
+import company from './modules/company'
 
 Vue.use(Vuex)
 
@@ -22,5 +24,6 @@ export default new Vuex.Store({
     user,
     router,
     visual,
+    company
   },
 })
