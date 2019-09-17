@@ -13,7 +13,7 @@ let interceptorList = [
 const _axios = axios.create({
   // baseURL: 'http://192.168.1.246:5001/api/v1/',
   baseURL: 'http://121.40.107.95:5001/api/v1/',
-  timeout: 5 * 1000 // 请求超时时间设置
+  // timeout: 5 * 1000 // 请求超时时间设置
 })
 
 // request 拦截
