@@ -2,7 +2,7 @@ import echarts from 'echarts'
 const anjiData = require('./anji.json')
 echarts.registerMap('zhejiang', anjiData)
 const chinaGeoCoordMap = {
-  '云服务': [119.858748, 30.820739],
+  '云服务': [119.475287, 30.820739],
   '中源家居股份有限公司': [119.616093, 30.62116],
   '永艺家具股份有限公司': [119.675803, 30.607438],
   '浙江恒林椅业股份有限公司': [119.681168, 30.661117],
@@ -20,8 +20,8 @@ const chinaDatas = [
   {
     id: '1',
     name: '云服务',
-    alias: '云服务中心',
-    value: [119.858748, 30.820739, 0, '云服务']
+    alias: '云服务',
+    value: [119.475287, 30.820739, 0, '云服务']
   },
   {
     id: '5d7e63c1ba35562fe1084626',
@@ -73,8 +73,8 @@ const chinaDatas = [
   },
   {
     id: '1111',
-    name: '安吉联胜家具有限公司',
-    alias: '联胜家具',
+    name: '浙江中义家具有限公司',
+    alias: '中义家具',
     value: [119.475287, 30.61134, 10, '未入驻']
   },
   {
@@ -97,7 +97,7 @@ let convertData = function (data) {
   for (let i = 0; i < data.length; i += 1) {
     let dataItem = data[i]
     let fromCoord = chinaGeoCoordMap[dataItem.name]
-    let toCoord = [119.858748, 30.820739]
+    let toCoord = [119.475287, 30.820739]
     if (dataItem.name === '云服务') {
       fromCoord = chinaGeoCoordMap[dataItem.name]
       toCoord = [119.703307, 30.657736]
