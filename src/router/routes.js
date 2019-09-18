@@ -56,14 +56,10 @@ const viewRouters = [
 const routes = [
   ...viewRouters,
   // 数据大屏页面
-  { path: '/data-graph/overview', component: _import('data-graph/overview/index'), meta: { title: '全国高等院校分布' }, hidden: true },
-  { path: '/data-graph/college-list', component: _import('data-graph/college-list/index'), meta: { title: '高等高校详情介绍' }, hidden: true },
-  { path: '/data-graph/college-detail', component: _import('data-graph/college-detail/index'), meta: { title: '高等高校详情介绍' }, hidden: true },
-  // 安吉椅艺
   { path: '/data-visual/overview', component: _import('data-visual/overview/index'), meta: { title: '安吉椅艺大数据平台' }, hidden: true },
   { path: '/data-visual/company', component: _import('data-visual/company/index'), meta: { title: '企业详情' }, hidden: true },
   { path: '/data-visual/prodline', component: _import('data-visual/prodline/index'), meta: { title: '生产线详情' }, hidden: true },
-  // 以下非「业务页面」
+  //「非业务」页面
   { path: '/login', component: _import('login/index'), hidden: true },
   { path: '/404', component: _import('error-page/404'), hidden: true },
   { path: '*', redirect: '/404', hidden: true },

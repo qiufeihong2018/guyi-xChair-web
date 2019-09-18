@@ -17,12 +17,12 @@ export default {
         {
           type: '关机',
           color: 'red',
-          num: 1
+          num: 0
         },
         {
           type: '空转', // 不生产(没有入口数据)
           color: 'yellow',
-          num: 1
+          num: 0
         },
         {
           type: '运行',

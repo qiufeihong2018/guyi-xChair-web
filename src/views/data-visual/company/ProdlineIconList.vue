@@ -2,7 +2,7 @@
   <div class="prodline-list-table visual">
     <div class="container">
       <div v-for="item in prodlineList" :key="item.prodlineName" @click="getProdLineId(item.prodlineId)" >
-      <ProdlineIcon :num="item.exitNum" :name="item.prodlineName"
+      <ProdlineIcon :num="item.exitNum" :name="item.prodlineName" :state="item.state"
         class="item" />
       </div>
     </div>
@@ -19,7 +19,7 @@ export default {
   },
   props: {
     companyId: {
-      default: '5d80441cde1685795bc379f1',
+      default: '5d8041e4de1685795bc379b2',
       type: String
     }
   },
@@ -31,7 +31,7 @@ export default {
           companyId: '',
           prodlineName: 'ALT01',
           prodlineId: '',
-          swith: '开',
+          state: 'on', // 三种状态[off, on, pending]
           power: 1000, // 当前的
           entraNum: 120,
           exitNum: 100,
