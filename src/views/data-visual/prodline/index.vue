@@ -1,11 +1,13 @@
 <template>
   <el-container class="prodline">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
+
     <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99">
       <fa-icon icon-name="home" />
     </div>
     <el-header class="header" height="72px">
       <p>生产线·详情</p>
+      <DigitalClock/>
     </el-header>
     <el-main>
       <el-row class="main" style="height: 100%">

@@ -46,8 +46,10 @@ export default {
     font-style normal
     src url("../../assets/fonts/LcdD.ttf")
   .clock
-    position relative
+    position absolute
     margin-top -3px
+    right 20px
+    top 25px
     .time
       font-family LcdD
       color #52a3e5

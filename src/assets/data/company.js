@@ -29,10 +29,30 @@ export const companies = [
         debtRatio: 65, // 资产负债率
       },
       {
-        year: 2017,
+        year: 2017, // 2016的数据
+        output: 63105, // 工业总产数值(万)
+        operatingIncome: 62133, // 营业总收入
+        sale: 62133, // 销售收入
+        export: 8532, // 出口创汇(万·美元)
+        tax: 2359, // 缴税总额
+        profitAfterTax: 7689, // 税后收入
+        averageSale: 43, // 人均销售收入
+        totalAsset: 38928, // 资产总额
+        fixedAsset: 9941, // 固定资产
+        debtRatio: 65, // 资产负债率
       },
       {
-        year: 2018,
+        year: 2018, // 2016的数据
+        output: 66261, // 工业总产数值(万)
+        operatingIncome: 65240, // 营业总收入
+        sale: 65240, // 销售收入
+        export: 8959, // 出口创汇(万·美元)
+        tax: 2477, // 缴税总额
+        profitAfterTax: 8074, // 税后收入
+        averageSale: 46, // 人均销售收入
+        totalAsset: 40875, // 资产总额
+        fixedAsset: 10439, // 固定资产
+        debtRatio: 65, // 资产负债率
       }
     ]
   },
@@ -66,10 +86,30 @@ export const companies = [
         debtRatio: 35, // 资产负债率
       },
       {
-        year: 2017,
+        year: 2017, // 2016的数据
+        output: 129146, // 工业总产数值(万)
+        operatingIncome: 112554, // 营业总收入
+        sale: 112554, // 销售收入
+        export: 16814, // 出口创汇(万·美元)
+        tax: 2367, // 缴税总额
+        profitAfterTax: 9953, // 税后收入
+        averageSale: 44, // 人均销售收入
+        totalAsset: 77674, // 资产总额
+        fixedAsset: 7461, // 固定资产
+        debtRatio: 35, // 资产负债率
       },
       {
-        year: 2018,
+        year: 2018, // 2016的数据
+        output: 135604, // 工业总产数值(万)
+        operatingIncome: 118182, // 营业总收入
+        sale: 118182, // 销售收入
+        export: 17655, // 出口创汇(万·美元)
+        tax: 2486, // 缴税总额
+        profitAfterTax: 10451, // 税后收入
+        averageSale: 47, // 人均销售收入
+        totalAsset: 81558, // 资产总额
+        fixedAsset: 7835, // 固定资产
+        debtRatio: 35, // 资产负债率
       }
     ]
   },
@@ -104,9 +144,29 @@ export const companies = [
       },
       {
         year: 2017,
+        output: 36750, // 工业总产数值(万)
+        operatingIncome: 34656, // 营业总收入
+        sale: 34656, // 销售收入
+        export: 4893, // 出口创汇(万·美元)
+        tax: 3962, // 缴税总额
+        profitAfterTax: 2655, // 税后收入
+        averageSale: 65, // 人均销售收入
+        totalAsset: 29159, // 资产总额
+        fixedAsset: 5173, // 固定资产
+        debtRatio: 58.8, // 资产负债率
       },
       {
         year: 2018,
+        output: 38588, // 工业总产数值(万)
+        operatingIncome: 36389, // 营业总收入
+        sale: 36389, // 销售收入
+        export: 5138, // 出口创汇(万·美元)
+        tax: 4161, // 缴税总额
+        profitAfterTax: 2788, // 税后收入
+        averageSale: 69, // 人均销售收入
+        totalAsset: 30617, // 资产总额
+        fixedAsset: 5432, // 固定资产
+        debtRatio: 58.8, // 资产负债率
       }
     ]
   },
@@ -140,10 +200,30 @@ export const companies = [
         debtRatio: 43.66, // 资产负债率(%)
       },
       {
-        year: 2017,
+        year: 2017, // 2016的数据
+        output: 148963, // 工业总产数值(万)
+        operatingIncome: 150393, // 营业总收入
+        sale: 150393, // 销售收入
+        export: 21321, // 出口创汇(万·美元)
+        tax: 13076, // 缴税总额
+        profitAfterTax: 23051, // 税后收入
+        averageSale: 66, // 人均销售收入
+        totalAsset: 89283, // 资产总额
+        fixedAsset: 12061, // 固定资产
+        debtRatio: 43.66, // 资产负债率(%)
       },
       {
-        year: 2018,
+        year: 2018, // 2016的数据
+        output: 156412, // 工业总产数值(万)
+        operatingIncome: 157913, // 营业总收入
+        sale: 157913, // 销售收入
+        export: 22388, // 出口创汇(万·美元)
+        tax: 13730, // 缴税总额
+        profitAfterTax: 24204, // 税后收入
+        averageSale: 70, // 人均销售收入
+        totalAsset: 93748, // 资产总额
+        fixedAsset: 12665, // 固定资产
+        debtRatio: 43.66, // 资产负债率(%)
       }
     ]
   },
@@ -178,9 +258,29 @@ export const companies = [
       },
       {
         year: 2017,
+        output: 0, // 工业总产数值(万)
+        operatingIncome: 0, // 营业总收入
+        sale: 0, // 销售收入
+        export: 0, // 出口创汇(万·美元)
+        tax: 0, // 缴税总额
+        profitAfterTax: 0, // 税后收入
+        averageSale: 0, // 人均销售收入
+        totalAsset: 0, // 资产总额
+        fixedAsset: 0, // 固定资产
+        debtRatio: 0, // 资产负债率(%)
       },
       {
         year: 2018,
+        output: 0, // 工业总产数值(万)
+        operatingIncome: 0, // 营业总收入
+        sale: 0, // 销售收入
+        export: 0, // 出口创汇(万·美元)
+        tax: 0, // 缴税总额
+        profitAfterTax: 0, // 税后收入
+        averageSale: 0, // 人均销售收入
+        totalAsset: 0, // 资产总额
+        fixedAsset: 0, // 固定资产
+        debtRatio: 0, // 资产负债率(%)
       }
     ]
   },
@@ -215,9 +315,30 @@ export const companies = [
       },
       {
         year: 2017,
+        output: 0, // 工业总产数值(万)
+        operatingIncome: 0, // 营业总收入
+        sale: 0, // 销售收入
+        export: 0, // 出口创汇(万·美元)
+        tax: 0, // 缴税总额
+        profitAfterTax: 0, // 税后收入
+        averageSale: 0, // 人均销售收入
+        totalAsset: 0, // 资产总额
+        fixedAsset: 0, // 固定资产
+        debtRatio: 0, // 资产负债率(%)
+
       },
       {
         year: 2018,
+        output: 0, // 工业总产数值(万)
+        operatingIncome: 0, // 营业总收入
+        sale: 0, // 销售收入
+        export: 0, // 出口创汇(万·美元)
+        tax: 0, // 缴税总额
+        profitAfterTax: 0, // 税后收入
+        averageSale: 0, // 人均销售收入
+        totalAsset: 0, // 资产总额
+        fixedAsset: 0, // 固定资产
+        debtRatio: 0, // 资产负债率(%)
       }
     ]
   }
