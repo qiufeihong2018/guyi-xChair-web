@@ -169,7 +169,7 @@ let series = [];
       normal: {
         show: true,
         position: 'right', // 显示位置
-        offset: [5, 0], // 偏移设置
+        offset: [5, -10], // 偏移设置
         formatter(params) { // 圆环显示文字
           if (params.data.id === '1' || params.data.id === '0') {
             return params.data.alias
@@ -214,7 +214,7 @@ export default {
     }
   },
   geo: {
-    roam: true,
+    roam: false,
     map: 'zhejiang',
     geoIndex: 0,
     aspectScale: 0.75,

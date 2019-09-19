@@ -43,6 +43,12 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: false,
+            lineStyle: {
+              type: 'dotted'
+            }
+          }
         },
         yAxis: {
           type: 'value',
@@ -57,17 +63,31 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              type: 'dotted'
+            }
+          }
         },
         series: [
           {
             name: '缴税总额',
             data: companies.map(item => item.kpi[0].tax),
             type: 'bar',
+            label: {
+              show: true,
+              position: 'top',
+            }
           },
           {
             name: '税后收入',
             data: companies.map(item => item.kpi[0].profitAfterTax),
             type: 'bar',
+            label: {
+              show: true,
+              position: 'top'
+            }
           }]
       }
     }

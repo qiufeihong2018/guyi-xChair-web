@@ -13,8 +13,7 @@
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
             <ProdlineStatus />
-            <ProdlineIconList v-show="!showDetail"/>
-            <ProdlineDetail  v-show="showDetail"/>
+            <ProdlineIconList/>
           </GraphContainer>
 
           <el-row class="xpanel-wrapper-3">

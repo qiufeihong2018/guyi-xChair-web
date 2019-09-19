@@ -5,6 +5,7 @@ import tree from "element-ui/packages/table/src/store/tree";
 const state = {
   companyList: [],
   pipeLine: {
+    companyId:'',
     showDetail:false,
     id:''
   },

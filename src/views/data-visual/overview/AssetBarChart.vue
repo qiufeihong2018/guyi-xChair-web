@@ -57,17 +57,31 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              type: 'dotted'
+            }
+          }
         },
         series: [
           {
             name: '资产总额',
             data: companies.map(item => item.kpi[0].totalAsset),
             type: 'bar',
+            label: {
+              show: true,
+              position: 'top',
+            }
           },
           {
             name: '固定资产',
             data: companies.map(item => item.kpi[0].fixedAsset),
             type: 'bar',
+            label: {
+              show: true,
+              position: 'top',
+            }
           }]
       }
     }
