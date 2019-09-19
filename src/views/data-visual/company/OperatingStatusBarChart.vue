@@ -106,7 +106,7 @@ export default {
         },
         yAxis: {
           type: 'category',
-          data: ['ALT01'],
+          data: ['ALT01', '', '', ''],
           axisLabel: {
             textStyle: {
               color: '#fff'

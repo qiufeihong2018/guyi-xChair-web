@@ -29,13 +29,13 @@
                 <p style="position: absolute;right: 40px;top: 45px;color: #5bc59f;width: 200px">
                   出品总数: {{productionNum}}
                 </p>
-                <OutputBarChart />
+                <OutputBarChart :time-data="outputTimeData" :repeated-counting="repeatedCounting"
+                                :defective-number="defectiveNumber" :production-quantity="productionQuantity"/>
               </GraphContainer>
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
               <GraphContainer title="昨日单位能耗系数" class="graph-item xpanel-wrapper-1">
-                <OutputBarChart :time-data="outputTimeData" :repeated-counting="repeatedCounting"
-                :defective-number="defectiveNumber" :production-quantity="productionQuantity"/>
+                <EnergyConsumptionBarChart/>
               </GraphContainer>
             </el-col>
           </el-row>
@@ -55,6 +55,7 @@
             <PowerLineChart :time-data="powerTimeData" :chart-data="powerData"/>
           </GraphContainer>
           <GraphContainer title="本月设备有效利用率" class="graph-item xpanel-wrapper-3">
+            <UtilizationBarChart></UtilizationBarChart>
           </GraphContainer>
         </el-col>
       </el-row>
@@ -73,6 +74,8 @@ import OutputBarChart from './OutputBarChart'
 import ProdlineIconList from './ProdlineIconList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
+import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
+import UtilizationBarChart from './UtilizationBarChart'
 import MonitorModel from '@/models/monitor'
 import ProdlineDetail from './ProdlineDetail'
 import PipelineModel from '@/models/pipeline'
@@ -93,7 +96,9 @@ export default {
     ProdlineIconList,
     ProdlineStatus,
     OperatingStatusBarChart,
-    ProdlineDetail
+    ProdlineDetail,
+    EnergyConsumptionBarChart,
+    UtilizationBarChart
   },
   data() {
     return {
@@ -108,11 +113,6 @@ export default {
       repeatedNum: 0,
       defectiveNum: 0,
       productionNum: 0,
-      stateTime: {
-        offTime: 0,
-        onTime: 0,
-        pendingTime: 0
-      },
       statusList: [
         {
           type: '关机',
