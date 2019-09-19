@@ -45,21 +45,21 @@ export default {
             })),
             labelLine: {
               normal: {
-                show: false
+                show: true
               }
             },
             center: ['50%', '40%'],
-            radius: ['50%', '70%'],
-            avoidLabelOverlap: false,
+            radius: ['40%', '60%'],
+            avoidLabelOverlap: true,
             label: {
-              normal: {
-                show: false,
-                position: 'center'
+              fontSize: 14,
+              formatter(params) {
+                return `${params.name}\n${params.value}万美元`
               },
               emphasis: {
                 show: true,
                 textStyle: {
-                  fontSize: '30',
+                  fontSize: 16,
                   fontWeight: 'bold'
                 }
               }

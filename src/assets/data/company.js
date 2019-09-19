@@ -5,6 +5,7 @@ export const companies = [
     alias: '中源家居',
     abbreviation: '中源',
     address: '安吉县递铺街道塘浦工业园区2-5幢',
+    entered: 1, // 是否入驻
     gis: [], // 地图坐标
     zipCode: '313300',
     totalStaff: 1453,
@@ -26,6 +27,12 @@ export const companies = [
         totalAsset: 37074, // 资产总额
         fixedAsset: 9467, // 固定资产
         debtRatio: 65, // 资产负债率
+      },
+      {
+        year: 2017,
+      },
+      {
+        year: 2018,
       }
     ]
   },
@@ -35,6 +42,7 @@ export const companies = [
     alias: '永艺家具',
     abbreviation: '永艺',
     address: '浙江省湖州市安吉县递铺镇永艺西路1号',
+    entered: 1, // 是否入驻
     gis: [], // 地图坐标
     zipCode: '313300',
     totalStaff: 2608,
@@ -56,6 +64,12 @@ export const companies = [
         totalAsset: 73975, // 资产总额
         fixedAsset: 7105, // 固定资产
         debtRatio: 35, // 资产负债率
+      },
+      {
+        year: 2017,
+      },
+      {
+        year: 2018,
       }
     ]
   },
@@ -65,6 +79,7 @@ export const companies = [
     alias: '富和家具',
     abbreviation: '富和',
     address: '安吉递铺范潭工业园区',
+    entered: 1, // 是否入驻
     gis: [], // 地图坐标
     zipCode: '313300',
     totalStaff: 540,
@@ -86,6 +101,12 @@ export const companies = [
         totalAsset: 27770, // 资产总额
         fixedAsset: 4926, // 固定资产
         debtRatio: 58.8, // 资产负债率
+      },
+      {
+        year: 2017,
+      },
+      {
+        year: 2018,
       }
     ]
   },
@@ -95,6 +116,7 @@ export const companies = [
     alias: '恒林椅业',
     abbreviation: '恒林',
     address: '浙江省湖州市安吉县递铺镇阳光工业园区',
+    entered: 1, // 是否入驻
     gis: [], // 地图坐标
     zipCode: '313300',
     totalStaff: 2300,
@@ -116,6 +138,12 @@ export const companies = [
         totalAsset: 89283, // 资产总额
         fixedAsset: 11486, // 固定资产
         debtRatio: 43.66, // 资产负债率(%)
+      },
+      {
+        year: 2017,
+      },
+      {
+        year: 2018,
       }
     ]
   },
@@ -125,6 +153,7 @@ export const companies = [
     alias: '隆博家具',
     abbreviation: '隆博',
     address: '',
+    entered: 1, // 是否入驻
     gis: [], // 地图坐标
     zipCode: '313300',
     totalStaff: 0,
@@ -146,6 +175,12 @@ export const companies = [
         totalAsset: 0, // 资产总额
         fixedAsset: 0, // 固定资产
         debtRatio: 0, // 资产负债率(%)
+      },
+      {
+        year: 2017,
+      },
+      {
+        year: 2018,
       }
     ]
   },
@@ -154,6 +189,7 @@ export const companies = [
     id: '5d804375de1685795bc379e0',
     alias: '盛信椅业',
     abbreviation: '盛信',
+    entered: 1, // 是否入驻
     address: '',
     gis: [], // 地图坐标
     zipCode: '313300',
@@ -176,6 +212,12 @@ export const companies = [
         totalAsset: 0, // 资产总额
         fixedAsset: 0, // 固定资产
         debtRatio: 0, // 资产负债率(%)
+      },
+      {
+        year: 2017,
+      },
+      {
+        year: 2018,
       }
     ]
   }

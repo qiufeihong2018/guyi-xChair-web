@@ -4,7 +4,7 @@
     <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" @click="goOverviewPage">
       <fa-icon icon-name="home" />
     </div>
-      <el-header class="header" height="72px">
+    <el-header class="header" height="72px">
       <p>{{this.title}}·详情</p>
     </el-header>
     <el-main>
@@ -13,12 +13,13 @@
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
             <ProdlineStatus />
-            <ProdlineIconList v-show="!showDetail"/>
-            <ProdlineDetail  v-show="showDetail"/>
+            <ProdlineIconList v-show="!showDetail" />
+            <ProdlineDetail v-show="showDetail" />
           </GraphContainer>
 
           <el-row class="xpanel-wrapper-3">
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
+
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
                 <p style="position: absolute;right: 40px;top: 5px;color: #60acfc;width: 200px">
                   入口总数: {{repeatedNum}}
@@ -29,14 +30,17 @@
                 <p style="position: absolute;right: 40px;top: 45px;color: #5bc59f;width: 200px">
                   出品总数: {{productionNum}}
                 </p>
-                <OutputBarChart :time-data="outputTimeData" :repeated-counting="repeatedCounting"
-                                :defective-number="defectiveNumber" :production-quantity="productionQuantity"/>
+                <OutputInBarChart :time-data="outputTimeData" :repeated-counting="repeatedCounting"
+                  :defective-number="defectiveNumber" :production-quantity="productionQuantity"/>
               </GraphContainer>
+
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
+
               <GraphContainer title="昨日单位能耗系数" class="graph-item xpanel-wrapper-1">
                 <EnergyConsumptionBarChart/>
               </GraphContainer>
+
             </el-col>
           </el-row>
 
@@ -52,7 +56,7 @@
             <OperatingStatusBarChart />
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
-            <PowerLineChart :time-data="powerTimeData" :chart-data="powerData"/>
+            <PowerLineChart :time-data="powerTimeData" :chart-data="powerData" />
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
             <TimeSwitch v-on:getTimeRange="getConsumption"></TimeSwitch>
@@ -72,7 +76,7 @@ import GraphContainer from 'comps/base/GraphContainer'
 import TimeSwitch from 'comps/base/TimeSwitch'
 // 业务组件
 import PowerLineChart from './PowerLineChart'
-import OutputBarChart from './OutputBarChart'
+import OutputInBarChart from './OutputInBarChart'
 import ProdlineIconList from './ProdlineIconList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
@@ -96,7 +100,7 @@ export default {
     GraphContainer,
     TimeSwitch,
     PowerLineChart,
-    OutputBarChart,
+    OutputInBarChart,
     ProdlineIconList,
     ProdlineStatus,
     OperatingStatusBarChart,
@@ -252,9 +256,6 @@ export default {
         if (index === 0) return item - firstData.productionNum
         return item - arr3[index - 1]
       })
-      this.repeatedNum = this.repeatedCounting.reduce((prev, curr, idx, arr) => prev + curr)
-      this.defectiveNum = this.defectiveNumber.reduce((prev, curr, idx, arr) => prev + curr)
-      this.productionNum = this.productionQuantity.reduce((prev, curr, idx, arr) => prev + curr)
     },
 
     async getPipelineStateTime() {
@@ -287,59 +288,60 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .overview {
-    height 100%
-    background url('../_common/bg.png') center no-repeat
-    background-size 100% 100%
-    .header {
-      margin-bottom 10px
-      background url('../_common/header.png') center no-repeat
-      line-height 65px
-      text-align center
-      color #5dc2fe
-      font-size 28px
-      font-weight 600
-    }
-    .main {
-      .col-item {
-        height 100%
-        padding 0 5px
-        .graph-item {
-          padding-bottom 10px
-          box-sizing border-box
-          .state-time {
-            display flex
-            justify-content center
-            position absolute
-            top: 40px
-            right: 50px
-            .item {
-              margin 0 20px
-              font-size 18px
-              .num {
-                margin-right 5px
-                border-radius 3px
-                display inline-block
-                padding 2px 5px
-                text-align center
-                color black
-              }
+.overview {
+  height 100%
+  background url('../_common/bg.png') center no-repeat
+  background-size 100% 100%
+  .header {
+    margin-bottom 10px
+    background url('../_common/header.png') center no-repeat
+    line-height 65px
+    text-align center
+    color #5dc2fe
+    font-size 28px
+    font-weight 600
+  }
+  .main {
+    .col-item {
+      height 100%
+      padding 0 5px
+      .graph-item {
+        padding-bottom 10px
+        box-sizing border-box
+        .state-time {
+          display flex
+          justify-content center
+          position absolute
+          top: 40px
+          right: 50px
+          .item {
+            margin 0 20px
+            font-size 18px
+            .num {
+              margin-right 5px
+              border-radius 3px
+              display inline-block
+              padding 2px 5px
+              text-align center
+              color black
             }
           }
         }
       }
     }
   }
-  .xpanel-wrapper-1 {
-    height 100%
-  }
-  .xpanel-wrapper-2 {
-    height 50%
-  }
-  .xpanel-wrapper-3 {
-    height 33.33333%
-  }
-  .xpanel-wrapper-6 {
-    height 66.66666%
-  }
+}
+
+.xpanel-wrapper-1 {
+  height 100%
+}
+.xpanel-wrapper-2 {
+  height 50%
+}
+.xpanel-wrapper-3 {
+  height 33.33333%
+}
+.xpanel-wrapper-6 {
+  height 66.66666%
+}
 </style>

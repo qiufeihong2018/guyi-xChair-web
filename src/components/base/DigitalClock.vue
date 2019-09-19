@@ -1,5 +1,6 @@
 <template>
-  <div>{{ time }}</div>
+  <div class="clock">
+    <div class="time">{{ time }}</div></div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -26,7 +27,7 @@ export default {
   },
   methods: {
     getTime() {
-      let date = new Date()// 时间戳为10位需*1000，时间戳为13位的话不需乘1000
+      let date = new Date()// 时间戳为10位需*1000
       let Y = `${date.getFullYear()}`
       let M = `${date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1}`
       let D = `${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
@@ -39,4 +40,17 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus" rel="stylesheet/stylus"></style>
+<style scoped lang="stylus">
+  @font-face
+    font-family: LcdD
+    font-style normal
+    src url("../../assets/fonts/LcdD.ttf")
+  .clock
+    position relative
+    margin-top -3px
+    .time
+      font-family LcdD
+      color #52a3e5
+      letter-spacing 2px
+      font-size 20px
+</style>
