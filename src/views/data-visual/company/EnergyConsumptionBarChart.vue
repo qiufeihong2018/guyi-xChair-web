@@ -13,31 +13,20 @@ export default {
     id: {
       type: String,
       default: 'EnergyConsumptionBarChart'
-    },
-    timeData: {
-      type: Array,
-      default: () => []
-    },
-    repeatedCounting: {
-      type: Array,
-      default: () => []
-    },
-    defectiveNumber: {
-      type: Array,
-      default: () => []
-    },
-    productionQuantity: {
-      type: Array,
-      default: () => []
     }
   },
   data() {
     return {
       chart: null,
-      interval: null
+      interval: null,
+      productionQuantity: [],
+      EnergyConsumption: [],
     }
   },
   computed: {
+    companyId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
@@ -49,10 +38,7 @@ export default {
         xAxis: {
           type: 'category',
           axisTick: { show: false },
-          data: this.timeData,
-          // data: ['00:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00',
-          //   '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
-          //   '19:00', '20:00', '21:00', '22:00', '23:00'],
+          data: ['ALT01', '', '', '', '', '', '', '', ''],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -66,7 +52,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          minInterval: 1,
+          name: '单位: 千瓦时/千件',
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -86,16 +72,15 @@ export default {
         color: color.category6,
         series: [
           {
-            name: '入口数量',
+            name: '能耗系数',
             type: 'bar',
-            barGap: 0,
             label: {
               normal: {
                 show: true,
                 position: 'top'
               }
             },
-            data: this.repeatedCounting
+            data: this.EnergyConsumption
           }
         ]
       }
@@ -107,8 +92,38 @@ export default {
     },
   },
   mounted() {
+    this.getYesterdayData()
   },
-  methods: {}
+  methods: {
+    async getYesterdayData() {
+      const params = {
+        companyId: this.companyId,
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()) - 1000 * 60 * 60 * 24,
+        end: +new Date(new Date(new Date().toLocaleDateString()).getTime())
+      }
+      const res = await MonitorModel.searchMonitor(params)
+      console.log(res)
+      const productionData = []
+      const energyData = []
+      res.forEach(item => {
+        if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.productionQuantity) {
+          productionData.push(item.value.productionQuantity)
+        }
+        if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.positiveEnergy) {
+          energyData.push(item.value.positiveEnergy)
+        }
+      })
+      console.log(energyData[energyData.length - 1])
+      console.log((productionData[productionData.length - 1] - productionData[0]))
+      this.EnergyConsumption.push(
+        ((energyData[energyData.length - 1] - energyData[0]) / ((productionData[productionData.length - 1] - productionData[0]) / 1000))
+          .toFixed(3)
+      )
+      // this.EnergyConsumption[3] = ((energyData[energyData.length - 1] - energyData[0]) / ((productionData[productionData.length - 1] - productionData[0]) / 1000))
+      //   .toFixed(3)
+      // console.log(this.EnergyConsumption)
+    }
+  }
 }
 </script>
 
