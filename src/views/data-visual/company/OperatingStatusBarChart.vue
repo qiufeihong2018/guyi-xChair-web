@@ -183,7 +183,7 @@ export default {
         start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
         end: +new Date()
       }
-      const res = await PipelineModel.searchPipeline(params)
+      const res = await PipelineModel.searchPipelineState(params)
       this.startTime = +new Date(res[0].startTime)
       this.chartData = res.map(item => ({
         name: this.state[item.state],
