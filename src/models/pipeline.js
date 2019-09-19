@@ -120,12 +120,8 @@ export default class Pipeline {
 
   /**
    * 根据时间段查找生产线状态
-   *
-   * @static
-   * @param {*} id
-   * @returns
    */
-  static async searchPipeline(params) {
+  static async searchPipelineState(params) {
     const data = await post('pipelineState/search', params)
     return data
   }
@@ -133,12 +129,38 @@ export default class Pipeline {
   /**
    * 查找生产线各状态时长
    *
-   * @static
-   * @param {*} id
-   * @returns
    */
   static async getStateTime(params) {
     const data = await post('pipelineState/time', params)
     return data
+  }
+
+  /**
+   * 根据时间查询生产线数据(产量,能耗等)
+   *
+   * @static
+   * @returns
+   */
+  static async searchPipeline(pipeLineID) {
+    const params = {
+      companyId: pipeLineID,
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    }
+    const data = await post('monitor/search', params)
+    let energyData = []
+    let outputData = []
+    data.forEach(item => {
+      if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.positiveEnergy) {
+        energyData.push(item)
+      }
+      if (Object.prototype.toString.call(item.value) === '[object Object]' && item.value.productionQuantity) {
+        outputData.push(item)
+      }
+    })
+    return {
+      energyData,
+      outputData
+    }
   }
 }

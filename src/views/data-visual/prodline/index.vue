@@ -19,7 +19,7 @@
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
-
+                <ProdlineOutputBarChart :output-data="prodlineOutput"></ProdlineOutputBarChart>
               </GraphContainer>
 
             </el-col>
@@ -38,7 +38,7 @@
 
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
-
+            <ProdlineEnergyLineChart :energy-data="prodlineEnergy"></ProdlineEnergyLineChart>
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
 
@@ -52,15 +52,25 @@
 <script type="text/ecmascript-6">
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+// 图表组件
+import ProdlineOutputBarChart from './ProdlineOutputBarChart'
+import ProdlineEnergyLineChart from './ProdlineEnergyLineChart'
+// models
+import PipelineModel from '@/models/pipeline'
 export default {
   name: 'ProdlineIndex',
   components: {
     Screenfull,
     GraphContainer,
+    ProdlineOutputBarChart,
+    ProdlineEnergyLineChart
   },
   data() {
     return {
       pipelineId: '',
+      prodlineOutput: [],
+      prodlineEnergy: [],
+      intervalId: undefined,
     }
   },
   computed: {},
@@ -70,10 +80,24 @@ export default {
     this.pipelineId = id
     this.$store.commit('company/SET_PIPELINE_ID', id) // 设置全局的当前的pipelineID
   },
-  mounted() { },
+  mounted() {
+    this.getPipelineData()
+    this.getPipelineData()
+    this.intervalId = setInterval(() => {
+      this.getPipelineData()
+    }, 30000)
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalId)
+  },
   methods: {
     goOverviewPage() {
       this.$router.push({ path: '/data-visual/overview' })
+    },
+    async getPipelineData() {
+      const { outputData, energyData } = await PipelineModel.searchPipeline('5d8041e4de1685795bc379b2')
+      this.prodlineOutput = outputData
+      this.prodlineEnergy = energyData
     }
   },
 }
