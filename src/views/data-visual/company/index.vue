@@ -43,6 +43,12 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
+            <div class="state-time">
+              <div v-for="item in statusList" :key="item.type" class='item'>
+                <span class="num" :style="{'background-color': item.color}">{{formatSeconds(item.time)}}</span>
+                <span class="type">{{item.type}}</span>
+              </div>
+            </div>
             <OperatingStatusBarChart />
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
@@ -69,6 +75,14 @@ import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import MonitorModel from '@/models/monitor'
 import ProdlineDetail from './ProdlineDetail'
+import PipelineModel from '@/models/pipeline'
+
+// 补0
+function formatBit(val) {
+  val = +val
+  return val > 9 ? val : `0${val}`
+}
+
 export default {
   name: 'DataVisualOverview',
   components: {
@@ -93,7 +107,29 @@ export default {
       productionQuantity: [],
       repeatedNum: 0,
       defectiveNum: 0,
-      productionNum: 0
+      productionNum: 0,
+      stateTime: {
+        offTime: 0,
+        onTime: 0,
+        pendingTime: 0
+      },
+      statusList: [
+        {
+          type: '关机',
+          color: 'red',
+          time: 0
+        },
+        {
+          type: '空转', // 不生产(没有入口数据)
+          color: 'yellow',
+          time: 0
+        },
+        {
+          type: '运行',
+          color: 'green',
+          time: 0
+        },
+      ]
     }
   },
   computed: {
@@ -106,7 +142,6 @@ export default {
   },
   watch: {
     showDetail() {
-      console.log(this.showDetail)
     }
   },
   created() {
@@ -120,8 +155,10 @@ export default {
   },
   mounted() {
     this.getMonitorData()
+    this.getPipelineStateTime()
     this.intervalId = setInterval(() => {
       this.getMonitorData()
+      this.getPipelineStateTime()
     }, 30000)
   },
   beforeDestroy() {
@@ -200,6 +237,17 @@ export default {
       this.productionNum = this.productionQuantity.reduce((prev, curr, idx, arr) => prev + curr)
     },
 
+    async getPipelineStateTime() {
+      const params = {
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        end: +new Date()
+      }
+      const res = await PipelineModel.getStateTime(params)
+      this.statusList[0].time = res.offTime / 1000
+      this.statusList[1].time = res.pendingTime / 1000
+      this.statusList[2].time = res.onTime / 1000
+    },
+
     formDate(dateForm) {
       if (dateForm === '') { // 解决deteForm为空传1970-01-01 00:00:00
         return ''
@@ -207,6 +255,12 @@ export default {
       let dateee = new Date(dateForm).toJSON()
       let date = new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
       return date
+    },
+    // 秒转时分秒，求模很重要，数字的下舍入
+    formatSeconds(time) {
+      let min = Math.floor(time % 3600)
+      let val = `${formatBit(Math.floor(time / 3600))}时${formatBit(Math.floor(min / 60))}分`
+      return val
     }
   },
 }
@@ -233,6 +287,25 @@ export default {
         .graph-item {
           padding-bottom 10px
           box-sizing border-box
+          .state-time {
+            display flex
+            justify-content center
+            position absolute
+            top: 40px
+            right: 50px
+            .item {
+              margin 0 20px
+              font-size 18px
+              .num {
+                margin-right 5px
+                border-radius 3px
+                display inline-block
+                padding 2px 5px
+                text-align center
+                color black
+              }
+            }
+          }
         }
       }
     }
