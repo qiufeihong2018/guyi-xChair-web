@@ -12,7 +12,7 @@
 
 <script type="text/ecmascript-6">
 export default {
-  name: ' NotEnterCompany',
+  name: ' NotEnterCompanyListTable',
   components: {},
   data() {
     return {
