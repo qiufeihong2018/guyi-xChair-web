@@ -1,7 +1,8 @@
 <template>
   <el-container class="overview">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
-    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" @click="goOverviewPage">
+    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99" 
+      @click="goOverviewPage">
       <fa-icon icon-name="home" />
     </div>
     <el-header class="header" height="72px">
@@ -13,8 +14,7 @@
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
             <ProdlineStatus />
-            <ProdlineIconList v-show="!showDetail" />
-            <ProdlineDetail v-show="showDetail" />
+            <CompanyProdlineStateList />
           </GraphContainer>
 
           <el-row class="xpanel-wrapper-3">
@@ -30,8 +30,8 @@
                 <p style="position: absolute;right: 40px;top: 45px;color: #5bc59f;width: 200px">
                   出品总数: {{productionNum}}
                 </p>
-                <OutputInBarChart :time-data="outputTimeData" :repeated-counting="repeatedCounting"
-                  :defective-number="defectiveNumber" :production-quantity="productionQuantity"/>
+                <!-- <OutputInBarChart :time-data="outputTimeData" :repeated-counting="repeatedCounting"
+                  :defective-number="defectiveNumber" :production-quantity="productionQuantity"/> -->
               </GraphContainer>
 
             </el-col>
@@ -77,12 +77,11 @@ import TimeSwitch from 'comps/base/TimeSwitch'
 // 业务组件
 import PowerLineChart from './PowerLineChart'
 import OutputInBarChart from './OutputInBarChart'
-import ProdlineIconList from './ProdlineIconList'
+import CompanyProdlineStateList from './CompanyProdlineStateList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import UtilizationBarChart from './UtilizationBarChart'
-import ProdlineDetail from './ProdlineDetail'
 // models
 import MonitorModel from '@/models/monitor'
 import PipelineModel from '@/models/pipeline'
@@ -101,10 +100,9 @@ export default {
     TimeSwitch,
     PowerLineChart,
     OutputInBarChart,
-    ProdlineIconList,
+    CompanyProdlineStateList,
     ProdlineStatus,
     OperatingStatusBarChart,
-    ProdlineDetail,
     EnergyConsumptionBarChart,
     UtilizationBarChart
   },
@@ -151,8 +149,7 @@ export default {
     })
   },
   watch: {
-    showDetail() {
-    }
+    showDetail() {}
   },
   created() {
     let { id } = this.$route.query

@@ -25,7 +25,7 @@ const mutations = {
     // })
     state.companyList = list
   },
-  SER_PIPELINE_ID:(state,pipeLine)=>{
+  SET_PIPELINE_ID:(state,pipeLine)=>{
     state.pipeLine = pipeLine
   }
 

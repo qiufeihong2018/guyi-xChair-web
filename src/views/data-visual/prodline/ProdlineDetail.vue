@@ -19,7 +19,7 @@
 import { mapState } from 'vuex'
 import pipelineModel from '@/models/pipeline'
 export default {
-  name: ' ProdLineDetail',
+  name: 'ProdlineDetail',
   components: {},
   data() {
     return {

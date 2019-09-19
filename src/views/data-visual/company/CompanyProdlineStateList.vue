@@ -1,9 +1,8 @@
 <template>
   <div class="prodline-list-table visual">
     <div class="container">
-      <div v-for="item in prodlineList" :key="item.prodlineName" @click="getProdLineId(item.prodlineId)" >
-      <ProdlineIcon :num="item.exitNum" :name="item.prodlineName" :state="item.state"
-        class="item" />
+      <div v-for="item in prodlineList" :key="item.prodlineName" @click="getProdLine(item.prodlineId)">
+        <ProdlineIcon :num="item.exitNum" :name="item.prodlineName" :state="item.state" class="item" />
       </div>
     </div>
   </div>
@@ -11,7 +10,6 @@
 
 <script type="text/ecmascript-6">
 import ProdlineIcon from 'comps/base/ProdlineIcon'
-import pipelineModel from '@/models/pipeline'
 export default {
   name: 'ProdlineIconList',
   components: {
@@ -44,19 +42,22 @@ export default {
   computed: {},
   created() { },
   mounted() {
-    this.getProdLineList()
   },
   methods: {
-    async getProdLineList() {
-      let res = await pipelineModel.getList(this.companyId)
-      console.log(res)
-    },
-    getProdLineId(id) {
+    getProdLine(id) {
       let data = { companyId: this.companyId, id, showDetail: true }
-      this.$store.commit('company/SER_PIPELINE_ID', data)
-      this.$router.push('/data-visual/prodline')
-    }
-  },
+      // 生产线ID长度默认为24
+      if (id.length === 24) {
+        const routerConfig = {
+          path: '/data-visual/prodline',
+          query: {
+            id
+          }
+        }
+        this.$router.push(routerConfig)
+      }
+    },
+  }
 }
 </script>
 
@@ -66,7 +67,7 @@ export default {
   width 97%
   .container {
     display flex
-    flex-wrap: wrap
+    flex-wrap wrap
     justify-content flex-start
     .item {
       margin 18px
