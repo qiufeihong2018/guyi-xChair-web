@@ -4,27 +4,37 @@
 
 <script>
 import resize from '@/mixins/resize'
-import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
+import MonitorModel from '@/models/monitor'
+
 export default {
-  name: 'AssetBarChart',
+  name: 'UtilizationBarChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'AssetBarChart'
+      default: 'UtilizationBarChart'
     },
+    timeData: {
+      type: Array,
+      default: () => []
+    },
+    chartData: {
+      type: Array,
+      default: () => []
+    }
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      interval: null,
     }
   },
   computed: {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          trigger: 'axis',
         },
         grid: {
           left: '15%'
@@ -32,7 +42,7 @@ export default {
         color: color.category6,
         xAxis: {
           type: 'category',
-          data: companies.map(item => item.abbreviation),
+          data: this.timeData,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -46,7 +56,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: '单位：万元',
+          name: '利用率: %',
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -58,34 +68,30 @@ export default {
             }
           },
           splitLine: {
-            show: true,
             lineStyle: {
-              type: 'dotted'
+              color: '#333'
             }
           }
         },
         series: [
           {
-            name: '资产总额',
-            data: companies.map(item => item.kpi[0].totalAsset),
+            name: '耗电量',
+            data: this.chartData,
             type: 'bar',
-            label: {
-              show: true,
-              position: 'top',
-            }
-          },
-          {
-            name: '固定资产',
-            data: companies.map(item => item.kpi[0].fixedAsset),
-            type: 'bar',
-            label: {
-              show: true,
-              position: 'top',
-            }
+            showSymbol: false,
+            hoverAnimation: false,
+            smooth: true
           }]
       }
     }
-  }
+  },
+  watch: {
+    option(prev, next) {
+      this.updateChart()
+    },
+  },
+  mounted() {},
+  methods: {}
 }
 </script>
 

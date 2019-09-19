@@ -91,7 +91,7 @@ export default {
             formatter(value, index) {
               // 格式化成月/日，只在第一个刻度显示年份
               let date = new Date(value)
-              let texts = [date.getHours(), formatBit(date.getMinutes()), formatBit(date.getSeconds())]
+              let texts = [formatBit(date.getHours()), formatBit(date.getMinutes()), formatBit(date.getSeconds())]
               return texts.join(':')
             }
           },
@@ -100,9 +100,13 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: false
+          }
         },
         yAxis: {
           type: 'category',
+          data: ['ALT01', '', '', ''],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -165,11 +169,6 @@ export default {
     },
   },
   mounted() {
-    // setInterval(() => {
-    //   let now = new Date()
-    //   this.timeData.push(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`)
-    //   this.chartData.push(Math.round(Math.random() * 10))
-    // }, 1000 * 60 *60)
     this.getPipelineState()
     this.interval = setInterval(() => {
       this.getPipelineState()
@@ -180,11 +179,15 @@ export default {
   },
   methods: {
     async getPipelineState() {
-      const res = await PipelineModel.getPipelineState()
+      const params = {
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        end: +new Date()
+      }
+      const res = await PipelineModel.searchPipeline(params)
       this.startTime = +new Date(res[0].startTime)
       this.chartData = res.map(item => ({
         name: this.state[item.state],
-        value: [0, +new Date(item.startTime), +new Date(item.endTime), +new Date(item.endTime) - +new Date(item.startTime)],
+        value: [0, +new Date(item.startTime), +new Date(item.endTime), item.difTime],
         itemStyle: {
           normal: {
             color: this.color[item.state]

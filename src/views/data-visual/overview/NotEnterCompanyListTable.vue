@@ -1,12 +1,11 @@
 <template>
   <div class="company-list visual">
-    <el-table :data="companyList" style="width: 100%" height="100%">
-      <el-table-column prop="alias" label="待入驻企业" width="130" align="center">
-        <template slot-scope="scope">
-          <span class="name">{{scope.row.alias}}</span>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="title item">未入驻规上企业</div>
+    <div class="scroll-box">
+      <div class="item-list">
+        <div v-for="(item,index) in companyList" :key="index" class="item"><span class="name" >{{item.alias}}</span></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,6 +49,10 @@ export default {
       ]
     }
   },
+  created() {
+    let list = [...this.companyList, ...this.companyList]
+    this.companyList = list
+  },
   methods: {},
 }
 </script>
@@ -57,7 +60,7 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .company-list {
   position absolute
-  top 20px
+  top 40px
   right 5px
   z-index 10
   >>> .el-table_1_column_1 {
@@ -73,4 +76,36 @@ export default {
     background #cccccc
   }
 }
+  .title{
+    height 40px
+    line-height 40px
+    text-align center
+    font-size 14px
+    font-weight bold
+  }
+  .scroll-box{
+    width 130px
+    position relative
+    height 200px
+    overflow hidden
+    .item-list{
+      width 100%
+      text-align center
+      position absolute
+      animation scrollTop 12s linear infinite
+      .item{
+        line-height 40px
+        height 40px
+        font-size 14px
+      }
+    }
+  }
+  @keyframes scrollTop{
+    from {
+      transform: translate3d(0,0,0);
+    }
+    to{
+      transform: translate3d(0,-200px,0);
+    }
+  }
 </style>

@@ -43,6 +43,9 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: false
+          }
         },
         yAxis: {
           type: 'value',
@@ -57,16 +60,32 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              type: 'dotted'
+            }
+          }
         },
         series: [{
           name: '营业总收入',
           data: companies.map(item => item.kpi[0].operatingIncome),
           type: 'bar',
+          label: {
+            show: true,
+            position: 'top',
+            fontWeight: 'bold'
+          }
         },
         {
           name: '销售收入',
           data: companies.map(item => item.kpi[0].sale),
           type: 'bar',
+          label: {
+            show: true,
+            position: 'inside'
+
+          }
         }]
       }
     }
