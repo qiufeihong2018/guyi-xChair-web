@@ -102,7 +102,6 @@ export default {
         end: +new Date(new Date(new Date().toLocaleDateString()).getTime())
       }
       const res = await MonitorModel.searchMonitor(params)
-      console.log(res)
       const productionData = []
       const energyData = []
       res.forEach(item => {
@@ -113,15 +112,10 @@ export default {
           energyData.push(item.value.positiveEnergy)
         }
       })
-      console.log(energyData[energyData.length - 1])
-      console.log((productionData[productionData.length - 1] - productionData[0]))
       this.EnergyConsumption.push(
         ((energyData[energyData.length - 1] - energyData[0]) / ((productionData[productionData.length - 1] - productionData[0]) / 1000))
           .toFixed(3)
       )
-      // this.EnergyConsumption[3] = ((energyData[energyData.length - 1] - energyData[0]) / ((productionData[productionData.length - 1] - productionData[0]) / 1000))
-      //   .toFixed(3)
-      // console.log(this.EnergyConsumption)
     }
   }
 }
