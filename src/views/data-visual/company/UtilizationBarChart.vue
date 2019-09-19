@@ -34,7 +34,6 @@ export default {
     option() {
       return {
         tooltip: {
-          trigger: 'axis',
         },
         grid: {
           left: '15%'
@@ -42,7 +41,7 @@ export default {
         color: color.category6,
         xAxis: {
           type: 'category',
-          data: this.timeData,
+          data: ['ALT01', '', '', ''],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -75,12 +74,15 @@ export default {
         },
         series: [
           {
-            name: '耗电量',
+            name: '利用率',
             data: this.chartData,
             type: 'bar',
-            showSymbol: false,
-            hoverAnimation: false,
-            smooth: true
+            label: {
+              normal: {
+                show: true,
+                position: 'top'
+              }
+            },
           }]
       }
     }

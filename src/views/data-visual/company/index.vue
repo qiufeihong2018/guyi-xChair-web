@@ -58,8 +58,9 @@
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
             <PowerLineChart :time-data="powerTimeData" :chart-data="powerData" />
           </GraphContainer>
-          <GraphContainer title="本月设备有效利用率" class="graph-item xpanel-wrapper-3">
-            <UtilizationBarChart></UtilizationBarChart>
+          <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
+            <TimeSwitch v-on:getTimeRange="getConsumption"></TimeSwitch>
+            <UtilizationBarChart :chart-data="utilizationData"></UtilizationBarChart>
           </GraphContainer>
         </el-col>
       </el-row>
@@ -72,6 +73,7 @@ import { companies } from 'assets/data/company'
 import { mapState } from 'vuex'
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+import TimeSwitch from 'comps/base/TimeSwitch'
 // 业务组件
 import PowerLineChart from './PowerLineChart'
 import OutputInBarChart from './OutputInBarChart'
@@ -80,8 +82,9 @@ import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import UtilizationBarChart from './UtilizationBarChart'
-import MonitorModel from '@/models/monitor'
 import ProdlineDetail from './ProdlineDetail'
+// models
+import MonitorModel from '@/models/monitor'
 import PipelineModel from '@/models/pipeline'
 
 // 补0
@@ -95,6 +98,7 @@ export default {
   components: {
     Screenfull,
     GraphContainer,
+    TimeSwitch,
     PowerLineChart,
     OutputInBarChart,
     ProdlineIconList,
@@ -133,7 +137,9 @@ export default {
           color: 'green',
           time: 0
         },
-      ]
+      ],
+      timeRange: {},
+      utilizationData: []
     }
   },
   computed: {
@@ -171,6 +177,20 @@ export default {
   methods: {
     goOverviewPage() {
       this.$router.push('/data-visual/overview')
+    },
+    async getConsumption(range) {
+      const res = await PipelineModel.getStateTime(range)
+      const utilization = []
+      if (res.onTime && res.pendingTime) {
+        utilization.push(
+          ((res.onTime / (res.onTime + res.pendingTime)) * 100).toFixed(2)
+        )
+        // this.utilizationData[0] = ((res.onTime / (res.onTime + res.pendingTime)) * 100).toFixed(2)
+      } else {
+        // this.utilizationData[0] = 0
+        utilization.push(0)
+      }
+      this.utilizationData = utilization
     },
     async getMonitorData() {
       let time = []

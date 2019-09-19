@@ -80,7 +80,13 @@ export default {
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
-            smooth: true
+            smooth: true,
+            markPoint: {
+              symbolSize: 60,
+              data: [
+                { type: 'max', name: '最大值' },
+              ]
+            },
           }]
       }
     }
