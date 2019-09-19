@@ -11,7 +11,7 @@
 
 <script type="text/ecmascript-6">
 import ProdlineIcon from 'comps/base/ProdlineIcon'
-import MonitorModel from '@/models/monitor'
+import pipelineModel from '@/models/pipeline'
 export default {
   name: 'ProdlineIconList',
   components: {
@@ -30,7 +30,7 @@ export default {
           companyName: '',
           companyId: '',
           prodlineName: 'ALT01',
-          prodlineId: '',
+          prodlineId: '5d80706697d0ba7c7177fd9b',
           state: 'on', // 三种状态[off, on, pending]
           power: 1000, // 当前的
           entraNum: 120,
@@ -48,12 +48,13 @@ export default {
   },
   methods: {
     async getProdLineList() {
-      let res = await MonitorModel.getCompanyInfo(this.companyId)
+      let res = await pipelineModel.getList(this.companyId)
+      console.log(res)
     },
     getProdLineId(id) {
-      let data = { id, showDetail: true }
-      console.log('gengxin')
+      let data = { companyId: this.companyId, id, showDetail: true }
       this.$store.commit('company/SER_PIPELINE_ID', data)
+      this.$router.push('/data-visual/prodline')
     }
   },
 }

@@ -70,7 +70,7 @@ export default {
 <style scoped lang="stylus" rel="stylesheet/stylus">
 .company-list {
   position absolute
-  top 20px
+  top 40px
   left 5px
   z-index 10
   >>> .el-table_1_column_1 {

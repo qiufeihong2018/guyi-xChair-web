@@ -39,6 +39,22 @@ export default {
         series: [{
           name: '工业总产值',
           type: 'pie',
+          radius: '60%',
+          label: { // 标签的位置
+            normal: {
+              show: true,
+              formatter(params) {
+                return `${params.name}\n${params.value}万元`
+              },
+            },
+            emphasis: {
+              show: true,
+              textStyle: {
+                fontWeight: 'bold',
+                fontSize: 20
+              }
+            }
+          },
           data: companies.map(item => ({
             value: item.kpi[0].output,
             name: item.abbreviation

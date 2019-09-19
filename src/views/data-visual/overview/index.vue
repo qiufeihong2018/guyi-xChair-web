@@ -8,6 +8,7 @@
         <p class="button-inactive">2017年</p>
         <p class="button-inactive">2018年</p>
       </div>
+      <DigitalClock class="block-postion"/>
     </el-header>
     <el-main>
       <el-row class="main" style="height: 100%">
@@ -45,6 +46,7 @@
 <script type="text/ecmascript-6">
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
+import DigitalClock from 'comps/base/DigitalClock'
 // 业务组件
 import OutputBarChart from './OutputBarChart'
 import IncomeBarChart from './IncomeBarChart'
@@ -58,6 +60,7 @@ import NotEnterCompanyListTable from './NotEnterCompanyListTable'
 export default {
   name: 'DataVisualOverview',
   components: {
+    DigitalClock,
     Screenfull,
     GraphContainer,
     OutputBarChart,
@@ -92,6 +95,11 @@ export default {
     color #5dc2fe
     font-size 28px
     font-weight 600
+    .block-postion{
+      position absolute
+      right 20px
+      top 25px
+    }
     .button-container {
       position absolute
       left: 20px

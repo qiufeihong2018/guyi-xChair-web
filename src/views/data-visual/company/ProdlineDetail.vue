@@ -1,7 +1,7 @@
 <template>
   <div class="prodline-detail visual">
     <div class="container">
-      <el-button type="info" size="mini" style="float: right;margin-right: 40px" @click="backList">返回</el-button>
+
       <el-table :data="detail" style="width: 100%" height="100%" >
         <el-table-column prop="lineName" label="生产线"  align="center" />
         <el-table-column prop="prodId" label="产品型号"  align="center" />
@@ -17,8 +17,9 @@
 
 <script type="text/ecmascript-6">
 import { mapState } from 'vuex'
+import pipelineModel from '@/models/pipeline'
 export default {
-  name: ' ProdlineDetail',
+  name: ' ProdLineDetail',
   components: {},
   data() {
     return {
@@ -85,18 +86,22 @@ export default {
   },
   computed: {
     ...mapState({
-      pipeLineId: state => state.company.pipeLine.id
+      pipeLine: state => state.company.pipeLine
+
     })
   },
-  created() { },
+  watch: {
+    pipeLine() {
+      this.getData()
+    }
+  },
+  created() { this.getData() },
   mounted() { },
   methods: {
-    backList() {
-      let data = { id: this.pipeLineId, showDetail: false }
-      this.$store.commit('company/SER_PIPELINE_ID', data)
-    },
-    getData() {
-
+    async getData() {
+      let { id, companyId } = this.pipeLine
+      let res = await pipelineModel.getDetail(id, companyId)
+      console.log('detail', res)
     },
   },
 }
