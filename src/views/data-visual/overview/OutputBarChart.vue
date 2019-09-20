@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import resize from '@/mixins/resize'
+import resize from '@/mixins/yearResize'
 import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
 export default {
