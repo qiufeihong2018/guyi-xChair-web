@@ -8,14 +8,18 @@ import color from 'assets/data/color'
 import MonitorModel from '@/models/monitor'
 
 export default {
-  name: 'ProdlineEnergyLineChart',
+  name: 'ProdlineCoefficientLineChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'ProdlineEnergyLineChart'
+      default: 'ProdlineCoefficientLineChart'
     },
     energyData: {
+      type: Array,
+      default: () => []
+    },
+    outputData: {
       type: Array,
       default: () => []
     }
@@ -54,7 +58,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: '单位: 千瓦时',
+          name: '单位: 千瓦时/千把',
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -94,24 +98,12 @@ export default {
       this.updateChart()
     },
     energyData(prev, next) {
-      this.handleEnergyData(prev)
+      this.handleCoefficientData(prev)
     },
   },
   mounted() {},
   methods: {
-    handleEnergyData(data) {
-      let energy = []
-      let time = []
-      data.forEach(item => {
-        energy.push(item.value.positiveEnergy)
-        // time.push(this.formDate(item.createdAt))
-        const date = new Date(item.createdAt)
-        time.push(
-          `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-        )
-      })
-      this.timeData = time
-      this.chartData = energy.map(item => ((item - energy[0]) * 2.5).toFixed(3))
+    handleCoefficientData(data) {
     }
   }
 }

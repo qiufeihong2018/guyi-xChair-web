@@ -8,7 +8,7 @@ import {
 export default class Pipeline {
   // 获取某个企业所有的pipeline
   static async getList(companyId) {
-    const data = await get(`company/${companyId}/pipeline/all`)
+    const data = await get(`pipeline/company/${companyId}`)
     return data
   }
 
@@ -141,12 +141,7 @@ export default class Pipeline {
    * @static
    * @returns
    */
-  static async searchPipeline(pipeLineID) {
-    const params = {
-      companyId: pipeLineID,
-      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-      end: +new Date()
-    }
+  static async searchPipeline(params) {
     const data = await post('monitor/search', params)
     let energyData = []
     let outputData = []

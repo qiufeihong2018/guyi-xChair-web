@@ -27,8 +27,10 @@
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
-              <GraphContainer title="昨日单位能耗系数" class="graph-item xpanel-wrapper-1">
-
+              <GraphContainer title="单位能耗系数" class="graph-item xpanel-wrapper-1">
+                <ProdlineCoefficientLineChart
+                  :energy-data="prodlineEnergy" :output-data="prodlineOutput">
+                </ProdlineCoefficientLineChart>
               </GraphContainer>
 
             </el-col>
@@ -37,12 +39,12 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
-
+            <ProdlineStatePieChart></ProdlineStatePieChart>
           </GraphContainer>
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
             <ProdlineEnergyLineChart :energy-data="prodlineEnergy"></ProdlineEnergyLineChart>
           </GraphContainer>
-          <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="产量趋势图" class="graph-item xpanel-wrapper-3">
 
           </GraphContainer>
         </el-col>
@@ -57,6 +59,8 @@ import GraphContainer from 'comps/base/GraphContainer'
 // 图表组件
 import ProdlineOutputBarChart from './ProdlineOutputBarChart'
 import ProdlineEnergyLineChart from './ProdlineEnergyLineChart'
+import ProdlineStatePieChart from './ProdlineStatePieChart'
+import ProdlineCoefficientLineChart from './ProdlineCoefficientLineChart'
 // models
 import PipelineModel from '@/models/pipeline'
 export default {
@@ -65,7 +69,9 @@ export default {
     Screenfull,
     GraphContainer,
     ProdlineOutputBarChart,
-    ProdlineEnergyLineChart
+    ProdlineEnergyLineChart,
+    ProdlineStatePieChart,
+    ProdlineCoefficientLineChart
   },
   data() {
     return {
@@ -84,7 +90,6 @@ export default {
   },
   mounted() {
     this.getPipelineData()
-    this.getPipelineData()
     this.intervalId = setInterval(() => {
       this.getPipelineData()
     }, 30000)
@@ -97,7 +102,12 @@ export default {
       this.$router.push({ path: '/data-visual/overview' })
     },
     async getPipelineData() {
-      const { outputData, energyData } = await PipelineModel.searchPipeline('5d8041e4de1685795bc379b2')
+      const params = {
+        companyId: '5d8041e4de1685795bc379b2',
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        end: +new Date()
+      }
+      const { outputData, energyData } = await PipelineModel.searchPipeline(params)
       this.prodlineOutput = outputData
       this.prodlineEnergy = energyData
     }
