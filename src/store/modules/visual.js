@@ -5,7 +5,8 @@ const state = {
     province: '',
     city: ''
   },
-  collegeList: []
+  collegeList: [],
+  year: 0
 }
 
 const getters = {
@@ -21,11 +22,14 @@ const mutations = {
   },
   SET_COLLEGE_LIST: (state, collegeList) => {
     state.collegeList = collegeList
-  }
+  },
+  SET_YEAR:(state,year)=>{
+  state.year = year
+}
 }
 
 const actions = {
-  
+
 }
 
 export default {

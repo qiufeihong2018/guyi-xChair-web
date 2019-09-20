@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import resize from '@/mixins/resize'
+import resize from '@/mixins/yearResize'
 import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
 export default {
@@ -67,7 +67,7 @@ export default {
         series: [
           {
             name: '资产总额',
-            data: companies.map(item => item.kpi[0].totalAsset),
+            data: companies.map(item => item.kpi[this.year].totalAsset),
             type: 'bar',
             label: {
               show: true,
@@ -76,7 +76,7 @@ export default {
           },
           {
             name: '固定资产',
-            data: companies.map(item => item.kpi[0].fixedAsset),
+            data: companies.map(item => item.kpi[this.year].fixedAsset),
             type: 'bar',
             label: {
               show: true,
