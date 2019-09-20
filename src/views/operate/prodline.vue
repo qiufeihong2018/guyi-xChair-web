@@ -125,6 +125,12 @@ export default {
       inputVisible: false,
       inputValue: '',
       companyId: '',
+      currentProbe: { // 当前的采集器
+        companyId: '',
+        companyAlias: '', 
+        pipelineId: '', // 采集器所属生产线的ID
+        probeNo: '', // 采集器的编号 AA01
+      },
       newPipeline: {
         pipelineName: '',
         companyId: '',
@@ -147,7 +153,6 @@ export default {
     async handleTabClick(tab, event) {
       this.companyId = this.companyList[tab.index]._id
       this.pipelineList = await PipelineModel.getList(this.companyId)
-      console.log('this.pipelineList', this.pipelineList)
     },
     handleEdit(index, row) {
       this.dialogModifyVisible = true
@@ -174,6 +179,9 @@ export default {
       this.inputValue = ''
     },
     showInput() {
+      // 新增采集器
+      
+      //
       this.inputVisible = true
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus()
