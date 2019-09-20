@@ -3,6 +3,7 @@ import axios from 'axios'
 import store from '@/store'
 import { Notification } from 'element-ui'
 import { getToken } from './cookie'
+import config from '../config/index'
 
 // 拦截器，使用mock数据代替
 let interceptorList = [
@@ -11,8 +12,7 @@ let interceptorList = [
 
 // 创建请求实例
 const _axios = axios.create({
-  // baseURL: 'http://192.168.1.246:5001/api/v1/',
-  baseURL: 'http://121.40.107.95:5010/api/v1/',
+  baseURL: config.baseURL,
   // timeout: 5 * 1000 // 请求超时时间设置
 })
 

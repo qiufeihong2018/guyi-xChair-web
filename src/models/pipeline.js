@@ -29,17 +29,17 @@ export default class Pipeline {
    *
    * @static
    * @param {*} data
-   data = {
-      companyId: '',   // 公司ID
-      companyName: '', // 公司名
-      pipelineId:'',  // 生产线ID
-      pipelineName: '', // 生产线的别名
-      pipelineNo: '', // 生产线的编号（彭导可自定义）
-      probeList: [  // 该生产线的所有采集器的列表
-        'AA01',
-        'AA02'
-      ]
-      }
+  data = {
+    companyId: '',   // 公司ID
+    companyName: '', // 公司名
+    pipelineId:'',  // 生产线ID
+    pipelineName: '', // 生产线的别名
+    pipelineNo: '', // 生产线的编号（彭导可自定义）
+    probeList: [  // 该生产线的所有采集器的列表
+      'AA01',
+      'AA02'
+    ]
+  }
    * @returns
    */
   static async createDetail(params) {
