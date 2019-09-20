@@ -8,7 +8,7 @@ import {
 export default class Pipeline {
   // 获取某个企业所有的pipeline
   static async getList(companyId) {
-    const data = await get(`pipeline/company/${companyId}`)
+    const data = await get(`company/${companyId}/pipeline/all`)
     return data
   }
 
