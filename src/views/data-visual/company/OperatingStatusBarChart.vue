@@ -181,7 +181,8 @@ export default {
     async getPipelineState() {
       const params = {
         start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        end: +new Date()
+        end: +new Date(),
+        pipelineId: '5d80706697d0ba7c7177fd9b'
       }
       const res = await PipelineModel.searchPipelineState(params)
       this.startTime = +new Date(res[0].startTime)

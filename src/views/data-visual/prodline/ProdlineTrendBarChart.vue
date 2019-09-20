@@ -19,12 +19,12 @@
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
 export default {
-  name: 'ProdlineOutputBarChart',
+  name: 'ProdlineTrendBarChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'ProdlineOutputBarChart'
+      default: 'ProdlineTrendBarChart'
     },
     outputData: {
       type: Array,
@@ -164,7 +164,7 @@ export default {
 
       this.timeData = outputTime
       const arr1 = Object.keys(repeatedCounting).map(item => repeatedCounting[item])
-      const arr2 = Object.keys(defectiveNumber).map(item => defectiveNumber[item])
+      const arr2 = Object.keys(productionQuantity).map(item => defectiveNumber[item])
       const arr3 = Object.keys(productionQuantity).map(item => productionQuantity[item])
 
       this.repeatedCounting = arr1.map((item, index) => {
