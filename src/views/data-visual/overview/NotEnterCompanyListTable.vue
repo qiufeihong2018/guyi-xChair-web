@@ -18,33 +18,81 @@ export default {
       companyList: [
         {
           id: '1111',
-          name: '安吉联胜家具有限公司',
-          alias: '联胜家具',
-        },
-        {
-          id: '1111',
           name: '浙江五星家具有限公司',
           alias: '五星家具',
+          value: [119.684128, 30.693911, 10, '未入驻']
         },
         {
           id: '1111',
           name: '浙江中义家具有限公司',
           alias: '中义家具',
+          value: [119.475287, 30.61134, 10, '未入驻']
         },
         {
           id: '1111',
           name: '浙江强盛家具有限公司',
           alias: '强盛家具',
+          value: [119.617488, 30.703658, 10, '未入驻']
         },
         {
           id: '1111',
           name: '浙江安吉铭成椅业有限责任公司',
-          alias: '铭成椅业'
+          alias: '铭成椅业',
+          value: [119.575287, 30.51134, 10, '未入驻']
         },
         {
           id: '1111',
           name: '大康控股集团有限公司',
-          alias: '大康控股'
+          alias: '大康控股',
+          value: [119.632147, 30.649607, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '浙江环辰椅业有限公司',
+          alias: '环辰椅业',
+          value: [119.612225, 30.61461, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '浙江大东方椅业股份有限公司',
+          alias: '大东方',
+          value: [119.68004, 30.626159, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '浙江万昌家具股份有限公司',
+          alias: '万昌家具',
+          value: [119.753518, 30.753862, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '安吉科瑞椅业科技有限公司',
+          alias: '科瑞椅业',
+          value: [119.70004, 30.526159, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '强龙家具股份有限公司',
+          alias: '强龙家具',
+          value: [119.68004, 30.626159, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '浙江博泰家具有限公司',
+          alias: '博泰家具',
+          value: [119.68004, 30.626159, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '浙江泰丰家具有限公司',
+          alias: '泰丰家具',
+          value: [119.68004, 30.626159, 10, '未入驻']
+        },
+        {
+          id: '1111',
+          name: '浙江大唐家具有限公司',
+          alias: '大唐家具',
+          value: [119.68004, 30.626159, 10, '未入驻']
         }
       ]
     }
@@ -92,7 +140,7 @@ export default {
       width 100%
       text-align center
       position absolute
-      animation scrollTop 12s linear infinite
+      animation scrollTop 26s linear infinite
       .item{
         line-height 40px
         height 40px
@@ -105,7 +153,7 @@ export default {
       transform: translate3d(0,0,0);
     }
     to{
-      transform: translate3d(0,-200px,0);
+      transform: translate3d(0,-520px,0);
     }
   }
 </style>

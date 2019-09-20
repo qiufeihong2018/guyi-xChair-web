@@ -40,7 +40,7 @@ export default {
             name: '出口创汇',
             type: 'pie',
             data: companies.map(item => ({
-              value: item.kpi[0].export,
+              value: item.kpi[this.year].export,
               name: item.abbreviation
             })),
             labelLine: {

@@ -56,7 +56,7 @@ export default {
             }
           },
           data: companies.map(item => ({
-            value: item.kpi[0].output,
+            value: item.kpi[this.year].output,
             name: item.abbreviation
           })),
         }]

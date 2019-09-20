@@ -69,7 +69,7 @@ export default {
         },
         series: [{
           name: '营业总收入',
-          data: companies.map(item => item.kpi[0].operatingIncome),
+          data: companies.map(item => item.kpi[this.year].operatingIncome),
           type: 'bar',
           label: {
             show: true,
@@ -79,7 +79,7 @@ export default {
         },
         {
           name: '销售收入',
-          data: companies.map(item => item.kpi[0].sale),
+          data: companies.map(item => item.kpi[this.year].sale),
           type: 'bar',
           label: {
             show: true,

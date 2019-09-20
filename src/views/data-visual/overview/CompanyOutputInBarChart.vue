@@ -40,7 +40,7 @@ export default {
           name: '工业总产值',
           type: 'pie',
           data: companies.map(item => ({
-            value: item.kpi[0].output,
+            value: item.kpi[this.year].output,
             name: item.abbreviation
           })),
         }]

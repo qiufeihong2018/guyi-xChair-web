@@ -4,9 +4,13 @@
     <el-header class="header" height="72px">
       <p>安吉椅艺大数据平台</p>
       <div class="button-container">
-        <p class="button-active">2016年</p>
-        <p class="button-inactive">2017年</p>
-        <p class="button-inactive">2018年</p>
+        <p v-for="item in years"
+           :key="item.value"
+           class="button-inactive"
+           :class="{'button-active':year===item.value}"
+           @click="changeYear(item.value)"
+        >{{item.name}}</p>
+
       </div>
       <DigitalClock/>
     </el-header>
@@ -47,6 +51,7 @@
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 // 业务组件
+import { mapState } from 'vuex'
 import OutputBarChart from './OutputBarChart'
 import IncomeBarChart from './IncomeBarChart'
 import TaxBarChart from './TaxBarChart'
@@ -55,7 +60,6 @@ import ExportBarChart from './ExportBarChart'
 import GisMap from './GisMap'
 import CompanyListTable from './CompanyListTable'
 import NotEnterCompanyListTable from './NotEnterCompanyListTable'
-
 export default {
   name: 'DataVisualOverview',
   components: {
@@ -71,12 +75,26 @@ export default {
     NotEnterCompanyListTable
   },
   data() {
-    return {}
+    return {
+      years: [
+        { name: '2016', value: 0 },
+        { name: '2017', value: 1 },
+        { name: '2018', value: 2 }
+      ]
+    }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      year: state => state.visual.year
+    })
+  },
   created() { },
   mounted() { },
-  methods: {},
+  methods: {
+    changeYear(year) {
+      this.$store.commit('visual/SET_YEAR', year)
+    }
+  },
 }
 </script>
 
@@ -103,10 +121,7 @@ export default {
       p {
         display inline-block
       }
-      p + p {
-        border-bottom 1px solid #5dc2fe
-      }
-      .button-active{
+      .button-inactive.button-active{
         color #5dc2fe
         line-height 20px
         padding 5px
@@ -114,12 +129,14 @@ export default {
         border-top 1px solid #5dc2fe
         border-left 1px solid #5dc2fe
         border-right 1px solid #5dc2fe
+        border-bottom none
       }
       .button-inactive{
         color #fff
         line-height 20px
         padding 5px
         border-radius 2px
+        border-bottom 1px solid #5dc2fe
       }
     }
   }

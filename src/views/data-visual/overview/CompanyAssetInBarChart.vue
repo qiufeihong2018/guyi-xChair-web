@@ -61,12 +61,12 @@ export default {
         series: [
           {
             name: '资产总额',
-            data: companies.map(item => item.kpi[0].totalAsset),
+            data: companies.map(item => item.kpi[this.year].totalAsset),
             type: 'bar',
           },
           {
             name: '固定资产',
-            data: companies.map(item => item.kpi[0].fixedAsset),
+            data: companies.map(item => item.kpi[this.year].fixedAsset),
             type: 'bar',
           }]
       }
