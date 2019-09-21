@@ -59,7 +59,13 @@ export default {
             data: this.chartData,
             type: 'pie',
             center: ['50%', '40%'],
-            radius: [0, '60%']
+            radius: [0, '60%'],
+            label: {
+              formatter(params) {
+                return `${params.name}: ${formatSeconds(params.value / 1000)}`
+              },
+              fontSize: 15
+            }
           }]
       }
     }
