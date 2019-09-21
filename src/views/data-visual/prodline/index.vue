@@ -103,7 +103,7 @@ export default {
     },
     async getPipelineData() {
       const params = {
-        companyId: '5d8041e4de1685795bc379b2',
+        pipelineId: '5d834e6c0c8e9f276745ded0',
         start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
         end: +new Date()
       }

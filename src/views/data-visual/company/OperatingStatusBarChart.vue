@@ -149,14 +149,6 @@ export default {
             //   //       第三个参数: 状态的结束时间;
             //   //       第四个参数: 状态的持续时间;
             //   { name: '运行', value: [0, 1525835791000, 1525835791000 + 600000, 600000], itemStyle: { normal: { color: 'green' } } },
-            //   { name: '空转', value: [0, 1525836391000, 1525836391000 + 600000, 600000], itemStyle: { normal: { color: 'yellow' } } },
-            //   { name: '运行', value: [0, 1525836991000, 1525836991000 + 600000, 600000], itemStyle: { normal: { color: 'green' } } },
-            //   { name: '关机', value: [0, 1525837591000, 1525837591000 + 600000, 600000], itemStyle: { normal: { color: 'red' } } },
-            //
-            //   { name: '运行', value: [1, 1525835791000, 1525835791000 + 600000, 600000], itemStyle: { normal: { color: 'green' } } },
-            //   { name: '运行', value: [1, 1525836391000, 1525836391000 + 600000, 600000], itemStyle: { normal: { color: 'green' } } },
-            //   { name: '关机', value: [1, 1525836991000, 1525836991000 + 600000, 600000], itemStyle: { normal: { color: 'red' } } },
-            //   { name: '运行', value: [1, 1525837591000, 1525837591000 + 600000, 600000], itemStyle: { normal: { color: 'green' } } },
             // ]
           }
         ]
@@ -182,7 +174,7 @@ export default {
       const params = {
         start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
         end: +new Date(),
-        pipelineId: '5d80706697d0ba7c7177fd9b'
+        pipelineId: '5d834e6c0c8e9f276745ded0'
       }
       const res = await PipelineModel.searchPipelineState(params)
       this.startTime = +new Date(res[0].startTime)

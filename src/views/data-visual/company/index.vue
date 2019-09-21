@@ -21,6 +21,7 @@
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
+                <CompanyOutputBarChart></CompanyOutputBarChart>
               </GraphContainer>
 
             </el-col>
@@ -68,6 +69,7 @@ import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import UtilizationBarChart from './UtilizationBarChart'
+import CompanyOutputBarChart from './CompanyOutputBarChart'
 // models
 import MonitorModel from '@/models/monitor'
 import PipelineModel from '@/models/pipeline'
@@ -88,7 +90,8 @@ export default {
     ProdlineStatus,
     OperatingStatusBarChart,
     EnergyConsumptionBarChart,
-    UtilizationBarChart
+    UtilizationBarChart,
+    CompanyOutputBarChart
   },
   data() {
     return {
@@ -121,7 +124,8 @@ export default {
         },
       ],
       timeRange: {},
-      utilizationData: []
+      utilizationData: [],
+      pipelineList: []
     }
   },
   computed: {
@@ -145,7 +149,8 @@ export default {
     this.title = company.alias
   },
   mounted() {
-    this.getPipelineStateTime()
+    this.getPipeLineList()
+
     this.intervalId = setInterval(() => {
       this.getPipelineStateTime()
     }, 30000)
@@ -156,6 +161,10 @@ export default {
   methods: {
     goOverviewPage() {
       this.$router.push('/data-visual/overview')
+    },
+    async getPipeLineList() {
+      this.pipelineList = await PipelineModel.getList(this.$route.query.id)
+      this.getPipelineStateTime()
     },
     async getConsumption(range) {
       const res = await PipelineModel.getStateTime(range)
@@ -173,7 +182,8 @@ export default {
     async getPipelineStateTime() {
       const params = {
         start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        end: +new Date()
+        end: +new Date(),
+        pipelineId: this.pipelineList[0]._id
       }
       const res = await PipelineModel.getStateTime(params)
       this.statusList[0].time = res.offTime / 1000

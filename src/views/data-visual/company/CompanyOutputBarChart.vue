@@ -19,12 +19,12 @@
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
 export default {
-  name: 'ProdlineOutputBarChart',
+  name: 'CompanyOutputBarChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'ProdlineOutputBarChart'
+      default: 'CompanyOutputBarChart'
     },
     outputData: {
       type: Array,
