@@ -27,7 +27,7 @@ import {
   Tabs,
   TabPane,
   Dialog,
-  Tag
+  Tag,
 } from 'element-ui'
 import { loadPlugins } from '../utils/index'
 
@@ -60,5 +60,5 @@ loadPlugins([
   Tabs,
   TabPane,
   Dialog,
-  Tag
+  Tag,
 ])
