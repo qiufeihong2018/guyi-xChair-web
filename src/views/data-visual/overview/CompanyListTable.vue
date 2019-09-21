@@ -1,9 +1,9 @@
 <template>
   <div class="company-list visual">
-    <el-table :data="companyList" style="width: 100%" height="100%" @row-click="handleRowClick">
+    <el-table :data="companyList" style="width: 100%" height="100%">
       <el-table-column prop="alias" label="一期入驻企业(6)" width="130" align="center">
         <template slot-scope="scope">
-          <span class="name">{{scope.row.alias}}</span>
+          <router-link :to="`/data-visual/company?id=${scope.row.id}`" class="name">{{scope.row.alias}}</router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -49,20 +49,6 @@ export default {
         },
       ]
     }
-  },
-  methods: {
-    handleRowClick(row) {
-      let { id } = row
-      if (id.length === 24) {
-        const routerConfig = {
-          path: '/data-visual/company',
-          query: {
-            id
-          }
-        }
-        this.$router.push(routerConfig)
-      }
-    },
   },
 }
 </script>

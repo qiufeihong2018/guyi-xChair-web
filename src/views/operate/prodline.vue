@@ -117,7 +117,7 @@ export default {
       dialogModifyVisible: false,
       dialogCreateVisible: false,
       pipeline: {
-        _id: '',
+        id: '',
         pipelineName: '',
         companyId: '',
         probeList: []
@@ -157,10 +157,10 @@ export default {
     handleEdit(index, row) {
       this.dialogModifyVisible = true
       this.pipeline = row
-      this.pipeline.id = row._id
+      this.pipeline.id = row.id
     },
     async handleDelete(index, row) {
-      const res = await PipelineModel.deletePipeline(row._id)
+      const res = await PipelineModel.deletePipeline(row.id)
       if (res.status && res.status === 200) {
         this.pipelineList = await PipelineModel.getList(this.companyId)
       } else {

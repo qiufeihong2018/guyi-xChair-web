@@ -21,7 +21,6 @@
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
-                <CompanyOutputBarChart></CompanyOutputBarChart>
               </GraphContainer>
 
             </el-col>
@@ -69,10 +68,10 @@ import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import UtilizationBarChart from './UtilizationBarChart'
-import CompanyOutputBarChart from './CompanyOutputBarChart'
 // models
 import MonitorModel from '@/models/monitor'
 import PipelineModel from '@/models/pipeline'
+import CompanyModel from '@/models/company'
 
 // 补0
 function formatBit(val) {
@@ -90,13 +89,13 @@ export default {
     ProdlineStatus,
     OperatingStatusBarChart,
     EnergyConsumptionBarChart,
-    UtilizationBarChart,
-    CompanyOutputBarChart
+    UtilizationBarChart
   },
   data() {
     return {
       title: '暂无',
       intervalId: undefined,
+      intervalIdOfgetPipelineList: undefined,
       powerTimeData: [],
       powerData: [],
       outputTimeData: [],
@@ -124,8 +123,7 @@ export default {
         },
       ],
       timeRange: {},
-      utilizationData: [],
-      pipelineList: []
+      utilizationData: []
     }
   },
   computed: {
@@ -134,7 +132,7 @@ export default {
     },
     ...mapState({
       showDetail: state => state.company.pipeLine.showDetail
-    })
+    }),
   },
   watch: {
     showDetail() {}
@@ -149,22 +147,27 @@ export default {
     this.title = company.alias
   },
   mounted() {
-    this.getPipeLineList()
-
+    this.getPipelineStateTime()
     this.intervalId = setInterval(() => {
       this.getPipelineStateTime()
     }, 30000)
+    this.intervalRefreshPipelineList()
   },
   beforeDestroy() {
     clearInterval(this.intervalId)
+    clearInterval(this.intervalIdOfgetPipelineList)
   },
   methods: {
     goOverviewPage() {
       this.$router.push('/data-visual/overview')
     },
-    async getPipeLineList() {
-      this.pipelineList = await PipelineModel.getList(this.$route.query.id)
-      this.getPipelineStateTime()
+    intervalRefreshPipelineList() {
+      this.$store.dispatch('company/getProdlineList', this.companyId)
+      // 30秒刷新一次企业的所有生产线的状态
+      console.log('12312313')
+      this.intervalIdOfgetPipelineList = setInterval(() => {
+        this.$store.dispatch('company/getProdlineList', this.companyId)
+      }, 30000)
     },
     async getConsumption(range) {
       const res = await PipelineModel.getStateTime(range)
@@ -182,8 +185,7 @@ export default {
     async getPipelineStateTime() {
       const params = {
         start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        end: +new Date(),
-        pipelineId: this.pipelineList[0]._id
+        end: +new Date()
       }
       const res = await PipelineModel.getStateTime(params)
       this.statusList[0].time = res.offTime / 1000
