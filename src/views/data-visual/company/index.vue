@@ -71,6 +71,7 @@ import UtilizationBarChart from './UtilizationBarChart'
 // models
 import MonitorModel from '@/models/monitor'
 import PipelineModel from '@/models/pipeline'
+import CompanyModel from '@/models/company'
 
 // 补0
 function formatBit(val) {
@@ -94,6 +95,7 @@ export default {
     return {
       title: '暂无',
       intervalId: undefined,
+      intervalIdOfgetPipelineList: undefined,
       powerTimeData: [],
       powerData: [],
       outputTimeData: [],
@@ -130,7 +132,7 @@ export default {
     },
     ...mapState({
       showDetail: state => state.company.pipeLine.showDetail
-    })
+    }),
   },
   watch: {
     showDetail() {}
@@ -149,13 +151,23 @@ export default {
     this.intervalId = setInterval(() => {
       this.getPipelineStateTime()
     }, 30000)
+    this.intervalRefreshPipelineList()
   },
   beforeDestroy() {
     clearInterval(this.intervalId)
+    clearInterval(this.intervalIdOfgetPipelineList)
   },
   methods: {
     goOverviewPage() {
       this.$router.push('/data-visual/overview')
+    },
+    intervalRefreshPipelineList() {
+      this.$store.dispatch('company/getProdlineList', this.companyId)
+      // 30秒刷新一次企业的所有生产线的状态
+      console.log('12312313')
+      this.intervalIdOfgetPipelineList = setInterval(() => {
+        this.$store.dispatch('company/getProdlineList', this.companyId)
+      }, 30000)
     },
     async getConsumption(range) {
       const res = await PipelineModel.getStateTime(range)

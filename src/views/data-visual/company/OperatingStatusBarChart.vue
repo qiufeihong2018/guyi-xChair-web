@@ -185,6 +185,7 @@ export default {
         pipelineId: '5d80706697d0ba7c7177fd9b'
       }
       const res = await PipelineModel.searchPipelineState(params)
+      // 报错
       this.startTime = +new Date(res[0].startTime)
       this.chartData = res.map(item => ({
         name: this.state[item.state],

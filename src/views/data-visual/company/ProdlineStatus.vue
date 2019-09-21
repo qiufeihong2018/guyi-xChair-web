@@ -1,5 +1,6 @@
 <template>
   <div class="proline-status">
+    <div>生产线:</div>
     <div v-for="item in statusList" :key="item.type" class='item'>
       <span class="num" :style="{'background-color': item.color}">{{item.num}}</span>
       <span class="type">{{item.type}}</span>
@@ -8,31 +9,37 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapState } from 'vuex'
 export default {
   name: 'ProdlineStatus',
   components: {},
   data() {
-    return {
-      statusList: [
-        {
-          type: '关机',
-          color: 'red',
-          num: 0
-        },
-        {
-          type: '空转', // 不生产(没有入口数据)
-          color: 'yellow',
-          num: 0
-        },
-        {
-          type: '运行',
-          color: 'green',
-          num: 1
-        },
-      ]
-    }
+    return {}
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      statusList: state => {
+        const obj = state.company.prodlineListStateStat
+        return [
+          {
+            type: '关机',
+            color: 'red',
+            num: obj.off
+          },
+          {
+            type: '空转', // 不生产(没有入口数据)
+            color: 'yellow',
+            num: obj.pending
+          },
+          {
+            type: '运行',
+            color: 'green',
+            num: obj.on
+          },
+        ]
+      }
+    })
+  },
   created() { },
   mounted() { },
   methods: {},
@@ -43,9 +50,9 @@ export default {
 .proline-status {
   display flex
   justify-content center
+  font-size 18px
   .item {
     margin 0 20px
-    font-size 18px
     .num {
       margin-right 5px
       border-radius 3px

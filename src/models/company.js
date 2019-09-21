@@ -36,7 +36,7 @@ export default class Company {
       ]
    */
   static async getPipelineList(id) {
-    const data = await get(`company/${id}/pipeline`)
+    const data = await get(`company/${id}/pipeline/all`)
     return data
   }
 }

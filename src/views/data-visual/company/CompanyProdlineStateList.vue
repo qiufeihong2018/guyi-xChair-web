@@ -1,14 +1,15 @@
 <template>
   <div class="prodline-list-table visual">
     <div class="container">
-      <div v-for="item in prodlineList" :key="item.prodlineName" @click="getProdLine(item.prodlineId)">
-        <ProdlineIcon :num="item.exitNum" :name="item.prodlineName" :state="item.state" class="item" />
+      <div v-for="item in prodlineList" :key="item.prodlineName" @click="getProdLine(item.id)">
+        <ProdlineIcon :num="item.count" :name="item.pipelineName" :state="item.state" class="item" />
       </div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import { mapState } from 'vuex'
 import ProdlineIcon from 'comps/base/ProdlineIcon'
 export default {
   name: 'ProdlineIconList',
@@ -22,24 +23,14 @@ export default {
     }
   },
   data() {
-    return {
-      prodlineList: [
-        {
-          companyName: '',
-          companyId: '',
-          prodlineName: 'ALT01',
-          prodlineId: '5d80706697d0ba7c7177fd9b',
-          state: 'on', // 三种状态[off, on, pending]
-          power: 1000, // 当前的
-          entraNum: 120,
-          exitNum: 100,
-          rejectNum: 20,
-          productType: '酒吧椅'
-        }
-      ]
-    }
+    return { }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      showDetail: state => state.company.pipeLine.showDetail,
+      prodlineList: state => state.company.prodlineList,
+    }),
+  },
   created() { },
   mounted() {
   },
