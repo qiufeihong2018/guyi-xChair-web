@@ -1,11 +1,14 @@
 <template>
-  <div :id="id" style="height: 95%"></div>
+  <div style="height: 95%">
+    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleEnergyData"></time-switch>
+    <div :id="id" style="height: 100%"></div>
+  </div>
 </template>
 
 <script>
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
-import MonitorModel from '@/models/monitor'
+import PipelineModel from '@/models/pipeline'
 
 export default {
   name: 'ProdlineEnergyLineChart',
@@ -25,7 +28,16 @@ export default {
       chart: null,
       interval: null,
       timeData: [],
-      chartData: []
+      chartData: [],
+      switchOptions: [
+        {
+          label: '本日',
+          value: 'day'
+        }, {
+          label: '昨日',
+          value: 'yester'
+        }
+      ]
     }
   },
   computed: {
@@ -94,24 +106,48 @@ export default {
       this.updateChart()
     },
     energyData(prev, next) {
-      this.handleEnergyData(prev)
+      // this.handleEnergyData(prev)
     },
   },
-  mounted() {},
+  mounted() {
+    this.openLoading()
+    // this.handleEnergyData({
+    //   start: range.start,
+    //   end: range.end
+    // })
+  },
   methods: {
-    handleEnergyData(data) {
+    async handleEnergyData(range) {
       let energy = []
       let time = []
-      data.forEach(item => {
-        energy.push(item.value.positiveEnergy)
+      const params = {
+        id: '5d834e6c0c8e9f276745ded0',
+        dataType: 'power',
+        start: range.start,
+        end: range.end
+      }
+      const res = await PipelineModel.getPipelineData(params)
+      res.data.forEach(item => {
+        energy.push(item.positive)
         // time.push(this.formDate(item.createdAt))
-        const date = new Date(item.createdAt)
+        const date = new Date(item.time)
         time.push(
           `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         )
       })
+      // let energy = []
+      // let time = []
+      // data.forEach(item => {
+      //   energy.push(item.value.positiveEnergy)
+      //   // time.push(this.formDate(item.createdAt))
+      //   const date = new Date(item.createdAt)
+      //   time.push(
+      //     `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+      //   )
+      // })
       this.timeData = time
       this.chartData = energy.map(item => ((item - energy[0]) * 2.5).toFixed(3))
+      this.closeLoading()
     }
   }
 }

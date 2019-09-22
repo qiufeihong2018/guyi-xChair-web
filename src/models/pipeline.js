@@ -131,7 +131,7 @@ export default class Pipeline {
    *
    */
   static async getStateTime(params) {
-    const data = await post('pipelineState/time', params)
+    const data = await post('pipeline/state/time', params)
     return data
   }
 
@@ -164,7 +164,7 @@ export default class Pipeline {
    *
    */
   static async getPipelineData(params) {
-    const data = await post('pipeline/state', params)
+    const data = await post('pipeline/stateDetail', params)
     return data
   }
 }

@@ -172,8 +172,10 @@ export default {
   methods: {
     async getPipelineState() {
       const params = {
-        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        end: +new Date(),
+        // start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        // end: +new Date(),
+        start: 1568995200000,
+        end: 1569081600000,
         pipelineId: '5d834e6c0c8e9f276745ded0'
       }
       const res = await PipelineModel.searchPipelineState(params)
@@ -188,6 +190,16 @@ export default {
           }
         }
       }))
+      const aa = res.map(item => ({
+        name: this.state[item.state],
+        value: [1, +new Date(item.startTime), +new Date(item.endTime), item.difTime],
+        itemStyle: {
+          normal: {
+            color: this.color[item.state]
+          }
+        }
+      }))
+      this.chartData = this.chartData.concat(aa)
     }
   }
 }

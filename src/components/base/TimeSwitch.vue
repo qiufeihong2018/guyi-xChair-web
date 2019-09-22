@@ -14,19 +14,27 @@
 <script>
 export default {
   name: 'TimeSwitch',
+  props: {
+    timeOptions: {
+      type: Array,
+      default: () => [
+        {
+          label: '周',
+          value: 'week'
+        }, {
+          label: '月',
+          value: 'month'
+        }
+      ]
+    }
+  },
   data() {
     return {
-      checkedTime: 'week',
-      timeOptions: [{
-        label: '周',
-        value: 'week'
-      }, {
-        label: '月',
-        value: 'month'
-      }]
+      checkedTime: '',
     }
   },
   mounted() {
+    this.checkedTime = this.timeOptions[0].value
     this.getTimeRange()
   },
   methods: {
@@ -35,15 +43,21 @@ export default {
       this.getTimeRange()
     },
     getTimeRange() {
-      let today = new Date(new Date(new Date().toLocaleDateString()).getTime()) // 今天零点
-      const end = +new Date()
-      let start = ''
+      let today = +new Date(new Date(new Date().toLocaleDateString()).getTime()) // 今天零点
+      let end = +new Date()
+      let start = 0
       if (this.checkedTime === 'month') {
-        start = +new Date(today.setDate(1))
-      } else {
-        const day = today.setDate(today.getDate() - today.getDay() + 1)
-        start = +new Date(day)
+        start = today - 1000 * 60 * 60 * 24 * 30
+      } else if (this.checkedTime === 'week') {
+        const day = today - 1000 * 60 * 60 * 24 * 7
+        start = today - 1000 * 60 * 60 * 24 * 7
+      } else if (this.checkedTime === 'yester') {
+        start = today - 1000 * 60 * 60 * 24
+        end = today
+      } else if (this.checkedTime === 'day') {
+        start = today
       }
+
       this.$emit('getTimeRange', {
         start,
         end
