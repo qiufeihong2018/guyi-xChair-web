@@ -1,5 +1,8 @@
 <template>
-  <div :id="id" style="height: 95%"></div>
+  <div style="height: 95%">
+    <time-switch :time-options="switchOptions" v-on:getTimeRange="getProdlineState"></time-switch>
+    <div :id="id" style="height: 100%"></div>
+  </div>
 </template>
 
 <script>
@@ -38,7 +41,16 @@ export default {
         onTime: '运行',
         offTime: '关机',
         pendingTime: '空转'
-      }
+      },
+      switchOptions: [
+        {
+          label: '本日',
+          value: 'day'
+        }, {
+          label: '昨日',
+          value: 'yester'
+        }
+      ]
     }
   },
   computed: {
@@ -76,19 +88,22 @@ export default {
     }
   },
   mounted() {
-    this.getProdlineState()
+    this.openLoading()
   },
   methods: {
-    async getProdlineState() {
+    async getProdlineState(range) {
       const params = {
-        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        end: +new Date()
+        id: '5d834e6c0c8e9f276745ded0',
+        dataType: 'counter',
+        start: range.start,
+        end: range.end
       }
       const res = await PipelineModel.getStateTime(params)
-      this.chartData = Object.keys(res).map(item => ({
+      this.chartData = Object.keys(res.data).map(item => ({
         name: this.states[item],
-        value: res[item]
+        value: res.data[item]
       }))
+      this.closeLoading()
     }
   }
 }

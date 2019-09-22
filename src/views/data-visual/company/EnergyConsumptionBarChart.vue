@@ -92,6 +92,7 @@ export default {
     },
   },
   mounted() {
+    this.openLoading()
     this.getYesterdayData()
   },
   methods: {
@@ -116,6 +117,7 @@ export default {
         ((energyData[energyData.length - 1] - energyData[0]) / ((productionData[productionData.length - 1] - productionData[0]) / 1000))
           .toFixed(3)
       )
+      this.closeLoading()
     }
   }
 }

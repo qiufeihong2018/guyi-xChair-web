@@ -41,7 +41,7 @@
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
             <ProdlineStatePieChart></ProdlineStatePieChart>
           </GraphContainer>
-          <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="设备能耗" class="graph-item xpanel-wrapper-3">
             <ProdlineEnergyLineChart :energy-data="prodlineEnergy"></ProdlineEnergyLineChart>
           </GraphContainer>
           <GraphContainer title="产量趋势图" class="graph-item xpanel-wrapper-3">
@@ -89,10 +89,10 @@ export default {
     this.$store.commit('company/SET_PIPELINE_ID', id) // 设置全局的当前的pipelineID
   },
   mounted() {
-    this.getPipelineData()
-    this.intervalId = setInterval(() => {
-      this.getPipelineData()
-    }, 30000)
+    // this.getPipelineData()
+    // this.intervalId = setInterval(() => {
+    //   this.getPipelineData()
+    // }, 30000)
   },
   beforeDestroy() {
     clearInterval(this.intervalId)
