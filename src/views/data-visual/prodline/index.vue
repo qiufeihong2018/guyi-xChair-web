@@ -45,7 +45,7 @@
             <ProdlineEnergyLineChart :energy-data="prodlineEnergy"></ProdlineEnergyLineChart>
           </GraphContainer>
           <GraphContainer title="产量趋势图" class="graph-item xpanel-wrapper-3">
-
+            <ProdlineTrendLineChart></ProdlineTrendLineChart>
           </GraphContainer>
         </el-col>
       </el-row>
@@ -61,6 +61,7 @@ import ProdlineOutputBarChart from './ProdlineOutputBarChart'
 import ProdlineEnergyLineChart from './ProdlineEnergyLineChart'
 import ProdlineStatePieChart from './ProdlineStatePieChart'
 import ProdlineCoefficientLineChart from './ProdlineCoefficientLineChart'
+import ProdlineTrendLineChart from './ProdlineTrendLineChart'
 // models
 import PipelineModel from '@/models/pipeline'
 export default {
@@ -71,7 +72,8 @@ export default {
     ProdlineOutputBarChart,
     ProdlineEnergyLineChart,
     ProdlineStatePieChart,
-    ProdlineCoefficientLineChart
+    ProdlineCoefficientLineChart,
+    ProdlineTrendLineChart
   },
   data() {
     return {

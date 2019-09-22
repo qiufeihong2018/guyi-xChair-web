@@ -1,8 +1,5 @@
 <template>
-  <div style="height: 95%">
-    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleEnergyData"></time-switch>
-    <div :id="id" style="height: 100%"></div>
-  </div>
+  <div :id="id" style="height: 95%"></div>
 </template>
 
 <script>
@@ -11,14 +8,18 @@ import color from 'assets/data/color'
 import PipelineModel from '@/models/pipeline'
 
 export default {
-  name: 'ProdlineEnergyLineChart',
+  name: 'ProdlineTrendLineChart',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'ProdlineEnergyLineChart'
+      default: 'ProdlineTrendLineChart'
     },
     energyData: {
+      type: Array,
+      default: () => []
+    },
+    outputData: {
       type: Array,
       default: () => []
     }
@@ -29,15 +30,7 @@ export default {
       interval: null,
       timeData: [],
       chartData: [],
-      switchOptions: [
-        {
-          label: '本日',
-          value: 'day'
-        }, {
-          label: '昨日',
-          value: 'yester'
-        }
-      ]
+      intervalId: undefined,
     }
   },
   computed: {
@@ -53,6 +46,9 @@ export default {
         xAxis: {
           type: 'category',
           data: this.timeData,
+          // data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00',
+          //   '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+          //   '19:00', '20:00', '21:00', '22:00', '23:00'],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -66,7 +62,7 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: '单位: 千瓦时',
+          name: '单位: 把',
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -85,18 +81,17 @@ export default {
         },
         series: [
           {
-            name: '耗电量',
+            name: '产量',
             data: this.chartData,
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
-            smooth: true,
-            markPoint: {
-              symbolSize: 60,
-              data: [
-                { type: 'max', name: '最大值' },
-              ]
-            },
+            // markPoint: {
+            //   symbolSize: 60,
+            //   data: [
+            //     { type: 'max', name: '最大值' },
+            //   ]
+            // },
           }]
       }
     }
@@ -106,47 +101,40 @@ export default {
       this.updateChart()
     },
     energyData(prev, next) {
-      // this.handleEnergyData(prev)
+      this.handleCoefficientData(prev)
     },
   },
   mounted() {
     this.openLoading()
-    // this.handleEnergyData({
-    //   start: range.start,
-    //   end: range.end
-    // })
+    this.handleCoefficientData()
+    // this.getPipelineData()
+    this.intervalId = setInterval(() => {
+      this.handleCoefficientData()
+    }, 30000)
   },
   methods: {
-    async handleEnergyData(range) {
-      let energy = []
+    async handleCoefficientData(data) {
+      let productionQuantity = []
       let time = []
-      const params = {
+      const counter = {
         id: '5d834e6c0c8e9f276745ded0',
-        dataType: 'power',
-        start: range.start,
-        end: range.end
+        dataType: 'counter',
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()) - 1000 * 60 * 60 * 24,
+        end: +new Date()
       }
-      const res = await PipelineModel.getPipelineData(params)
-      res.data.forEach(item => {
-        energy.push(item.positive)
-        // time.push(this.formDate(item.createdAt))
-        const date = new Date(item.time)
-        time.push(
-          `${this.formatBit(date.getHours())}:${this.formatBit(date.getMinutes())}:${this.formatBit(date.getSeconds())}`
-        )
+      const counterData = await PipelineModel.getPipelineData(counter)
+      console.log(counterData.data)
+      counterData.data.forEach((item, index) => {
+        if (index > 0) {
+          productionQuantity.push(item.out - counterData.data[0].out)
+          const date = new Date(item.time)
+          time.push(
+            `${this.formatBit(date.getHours())}:${this.formatBit(date.getMinutes())}:${this.formatBit(date.getSeconds())}`
+          )
+        }
       })
-      // let energy = []
-      // let time = []
-      // data.forEach(item => {
-      //   energy.push(item.value.positiveEnergy)
-      //   // time.push(this.formDate(item.createdAt))
-      //   const date = new Date(item.createdAt)
-      //   time.push(
-      //     `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-      //   )
-      // })
       this.timeData = time
-      this.chartData = energy.map(item => ((item - energy[0]) * 2.5).toFixed(3))
+      this.chartData = productionQuantity
       this.closeLoading()
     },
     // 补0

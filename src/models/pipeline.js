@@ -113,10 +113,10 @@ export default class Pipeline {
     return data
   }
 
-  static async getPipelineState(id) {
-    const data = await get('pipelineState')
-    return data
-  }
+  // static async getPipelineState(id) {
+  //   const data = await get('pipelineState')
+  //   return data
+  // }
 
   /**
    * 根据时间段查找生产线状态
@@ -165,6 +165,11 @@ export default class Pipeline {
    */
   static async getPipelineData(params) {
     const data = await post('pipeline/stateDetail', params)
+    return data
+  }
+
+  static async getPipelineState(params) {
+    const data = await post('pipeline/state/stats', params)
     return data
   }
 }
