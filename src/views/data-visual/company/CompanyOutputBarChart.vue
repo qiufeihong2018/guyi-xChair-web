@@ -18,6 +18,7 @@
 <script>
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
+import PipelineModel from '@/models/pipeline'
 export default {
   name: 'CompanyOutputBarChart',
   mixins: [resize],
@@ -139,50 +140,71 @@ export default {
     },
   },
   mounted() {
+    this.getPipelineState()
   },
   methods: {
-    handleOutputData(data) {
-      let repeatedCounting = {}
-      let defectiveNumber = {}
-      let productionQuantity = {}
-      let outputTime = []
-      data.forEach(item => {
-        const hour = new Date(item.createdAt).getHours()
-        if ((outputTime.find(n => `${hour}:00` === n)) === undefined) {
-          outputTime.push(`${hour}:00`)
-          repeatedCounting[hour] = repeatedCounting[hour] || 0
-          defectiveNumber[hour] = defectiveNumber[hour] || 0
-          productionQuantity[hour] = productionQuantity[hour] || 0
-        }
-        repeatedCounting[hour] = item.value.repeatedCounting > repeatedCounting[hour]
-          ? item.value.repeatedCounting : repeatedCounting[hour]
-        defectiveNumber[hour] = item.value.defectiveNumber > defectiveNumber[hour]
-          ? item.value.defectiveNumber : defectiveNumber[hour]
-        productionQuantity[hour] = item.value.productionQuantity > productionQuantity[hour]
-          ? item.value.productionQuantity : productionQuantity[hour]
-      })
-
-      this.timeData = outputTime
-      const arr1 = Object.keys(repeatedCounting).map(item => repeatedCounting[item])
-      const arr2 = Object.keys(defectiveNumber).map(item => defectiveNumber[item])
-      const arr3 = Object.keys(productionQuantity).map(item => productionQuantity[item])
-
-      this.repeatedCounting = arr1.map((item, index) => {
-        if (index === 0) return item - data[0].value.repeatedCounting
-        return item - arr1[index - 1]
-      })
-      this.defectiveNumber = arr2.map((item, index) => {
-        if (index === 0) return item - data[0].value.defectiveNumber
-        return item - arr2[index - 1]
-      })
-      this.productionQuantity = arr3.map((item, index) => {
-        if (index === 0) return item - data[0].value.productionQuantity
-        return item - arr3[index - 1]
-      })
-
-      this.repeatedNum = this.repeatedCounting.reduce((prev, curr, idx, arr) => prev + curr, 0)
-      this.defectiveNum = this.defectiveNumber.reduce((prev, curr, idx, arr) => prev + curr, 0)
-      this.productionNum = this.productionQuantity.reduce((prev, curr, idx, arr) => prev + curr, 0)
+    async getPipelineState(data) {
+      // const params = {
+      //   id: '', // 生产线的ID
+      //   dataType: 'counter', // 请求的数据类型（power 电量和counter 计数器）
+      //   durationType: '' // 时间区间的类型(day, yester, week, month) 4类
+      // }
+      // const res = await PipelineModel.getPipelineData(params)
+      let res = {
+        value: [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          5049,
+          5094,
+          5264,
+          5386,
+          null,
+          null,
+          null,
+          null,
+          null,
+          5992,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ],
+        time: [
+          '00:00-01:00',
+          '01:00-02:00',
+          '02:00-03:00',
+          '03:00-04:00',
+          '04:00-05:00',
+          '05:00-06:00',
+          '06:00-07:00',
+          '07:00-08:00',
+          '08:00-09:00',
+          '09:00-10:00',
+          '10:00-11:00',
+          '11:00-12:00',
+          '12:00-13:00',
+          '13:00-14:00',
+          '14:00-15:00',
+          '15:00-16:00',
+          '16:00-17:00',
+          '17:00-18:00',
+          '18:00-19:00',
+          '19:00-20:00',
+          '20:00-21:00',
+          '21:00-22:00',
+          '22:00-23:00',
+          '23:00-24:00'
+        ]
+      }
     }
   }
 }

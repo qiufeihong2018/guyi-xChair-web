@@ -127,7 +127,7 @@ export default {
       companyId: '',
       currentProbe: { // 当前的采集器
         companyId: '',
-        companyAlias: '', 
+        companyAlias: '',
         pipelineId: '', // 采集器所属生产线的ID
         probeNo: '', // 采集器的编号 AA01
       },
@@ -148,7 +148,7 @@ export default {
     async getCompanies() {
       this.companyList = await CompanyModel.getList()
       this.companyId = this.companyList[0]._id
-      this.probeList = await CompanyModel.getList(this.companyId)
+      this.pipelineList = await PipelineModel.getList(this.companyId)
     },
     async handleTabClick(tab, event) {
       this.companyId = this.companyList[tab.index]._id
@@ -180,7 +180,7 @@ export default {
     },
     showInput() {
       // 新增采集器
-      
+
       //
       this.inputVisible = true
       this.$nextTick(_ => {

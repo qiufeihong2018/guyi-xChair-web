@@ -21,6 +21,7 @@
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
+                <CompanyOutputBarChart></CompanyOutputBarChart>
               </GraphContainer>
 
             </el-col>
@@ -68,6 +69,7 @@ import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
 import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import UtilizationBarChart from './UtilizationBarChart'
+import CompanyOutputBarChart from './CompanyOutputBarChart'
 // models
 import MonitorModel from '@/models/monitor'
 import PipelineModel from '@/models/pipeline'
@@ -89,7 +91,8 @@ export default {
     ProdlineStatus,
     OperatingStatusBarChart,
     EnergyConsumptionBarChart,
-    UtilizationBarChart
+    UtilizationBarChart,
+    CompanyOutputBarChart
   },
   data() {
     return {

@@ -158,4 +158,13 @@ export default class Pipeline {
       outputData
     }
   }
+
+  /**
+   * 查找生产线数据
+   *
+   */
+  static async getPipelineData(params) {
+    const data = await post('pipeline/state', params)
+    return data
+  }
 }
