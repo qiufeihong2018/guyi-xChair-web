@@ -3,8 +3,8 @@
 </template>
 
 <script>
-import resize from '@/mixins/yearResize'
-import { companies } from 'assets/data/company'
+import resize from '@/mixins/resize'
+import { mapState } from 'vuex'
 import color from 'assets/data/color'
 export default {
   name: 'BarChartOfEnergyCostFacter',
@@ -21,10 +21,39 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      companyAllPipelinePowerStat: state => state.company.companyAllPipelinePowerStat,
+      companyAllPipelineCounterStat: state => state.company.companyAllPipelineCounterStat
+    }),
+    nameList() {
+      let list = this.companyAllPipelinePowerStat.map(item => item.pipelineName)
+      const len = 8 - list.length
+      Array.from({ length: len }).forEach(_ => list.push(''))
+      return list
+    },
+    seriesData() {
+      let list = []
+      this.companyAllPipelineCounterStat.forEach((item, index) => {
+        let value = (this.companyAllPipelinePowerStat[index].power * 1000) / (item.out)
+        if (!value) value = 0
+        list.push({ value, name: item.pipelineName })
+      })
+      return list
+    },
+    dataList() {
+      return this.seriesData.map(item => item.value)
+    },
+    yAxisMax() {
+      // Y轴的高度
+      console.log('dataList', this.dataList)
+      let max = Math.max(...(this.dataList)) * 1.7
+      if (max <= 20) return 20
+      return max
+    },
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          formatter: '{a}: {c}'
         },
         grid: {
           left: '15%'
@@ -32,7 +61,7 @@ export default {
         color: color.category6,
         xAxis: {
           type: 'category',
-          data: companies.map(item => item.abbreviation),
+          data: this.nameList,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -46,7 +75,9 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: '单位：万元',
+          name: '单位: 千瓦·时/千把',
+          max: this.yAxisMax,
+          min: 0,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -57,16 +88,18 @@ export default {
               color: '#fff'
             }
           },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: 'white',
+              type: 'dashed',
+            }
+          },
         },
         series: [
           {
-            name: '资产总额',
-            data: companies.map(item => item.kpi[this.year].totalAsset),
-            type: 'bar',
-          },
-          {
-            name: '固定资产',
-            data: companies.map(item => item.kpi[this.year].fixedAsset),
+            name: '能耗系数',
+            data: this.dataList,
             type: 'bar',
           }]
       }
@@ -75,6 +108,4 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>

@@ -3,9 +3,26 @@
 import CompanyModel from '@/models/company'
 import tree from "element-ui/packages/table/src/store/tree";
 const state = {
+  companyId: '5d8041e4de1685795bc379b2',
   companyList: [],
-  companyAllPipelineCounterStat: undefined, // 所有生产线的计数器
-  companyAllPipelinePowerStat: undefined, // 所有生产线的耗电量
+  companyAllPipelineCounterStat: [
+    // {
+    //   dataType: "counter",
+    //   pipelineId: "",
+    //   pipelineName: "",
+    //   in: 0,
+    //   out: 0,
+    //   failed: 0
+    // }
+  ], // 所有生产线的计数器
+  companyAllPipelinePowerStat: [ // 所有生产线的耗电量
+    {
+      dataType: "power",
+      pipelineId: "",
+      pipelineName: "",
+      power: 0
+    }
+  ], 
   prodlineList: [], // 该公司的生产线列表
   prodlineListStateStat: { // 生产线列表状态统计
     off: 0,
@@ -53,9 +70,11 @@ const mutations = {
   SET_PIPELINE_ID: (state, pipeLine) => {
     state.pipeLine = pipeLine
   },
-  SET_COMPANY_ALL_PIPELINE_STATE: (state, counterList, powerList) => {
-    state.companyAllPipelineCounterStat = counterList, // 所有生产线的计数器
-    state.companyAllPipelinePowerStat = powerList // 所有生产线的耗电量
+  SET_COMPANY_ALL_PIPELINE_STATE: (state, { counterList, powerList} ) => {
+    // 所有生产线的耗电量
+    state.companyAllPipelinePowerStat = powerList 
+    // 所有生产线的计数器
+    state.companyAllPipelineCounterStat = counterList 
   },
 }
 
@@ -72,7 +91,7 @@ const actions = {
   async getCompanyAllPipelineStateStat({ commit }, companyId) {
     let counterList = await CompanyModel.getAllPipelineCounterStats(companyId)
     let powerList = await CompanyModel.getAllPipelinePowerStats(companyId)
-    commit('SET_COMPANY_ALL_PIPELINE_STATE', counterList, powerList)
+    commit('SET_COMPANY_ALL_PIPELINE_STATE', { counterList, powerList })
   }
 
 }
