@@ -119,12 +119,12 @@ export default {
       const counter = {
         id: '5d834e6c0c8e9f276745ded0',
         dataType: 'counter',
-        durationType: 'yesterday'
+        durationType: 'today'
       }
       const power = {
         id: '5d834e6c0c8e9f276745ded0',
         dataType: 'power',
-        durationType: 'yesterday'
+        durationType: 'today'
       }
       const counterData = await PipelineModel.getPipelineState(counter)
       const powerData = await PipelineModel.getPipelineState(power)

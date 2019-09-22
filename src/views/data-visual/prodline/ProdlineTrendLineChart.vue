@@ -116,14 +116,15 @@ export default {
     async handleCoefficientData(data) {
       let productionQuantity = []
       let time = []
+      const todayStart = +new Date(new Date(new Date().toLocaleDateString()).getTime())
+      const now = +new Date()
       const counter = {
         id: '5d834e6c0c8e9f276745ded0',
         dataType: 'counter',
-        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()) - 1000 * 60 * 60 * 24,
-        end: +new Date()
+        start: todayStart,
+        end: now
       }
       const counterData = await PipelineModel.getPipelineData(counter)
-      console.log(counterData.data)
       counterData.data.forEach((item, index) => {
         if (index > 0) {
           productionQuantity.push(item.out - counterData.data[0].out)
