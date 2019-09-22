@@ -204,12 +204,13 @@ export default {
       this.companyList = await CompanyModel.getList()
       this.companyId = this.companyList[0]._id
       this.probeList = await CompanyModel.getList(this.companyId)
-      this.getList()
-      this.getPipeLineList()
+      await this.getList()
+      await this.getPipeLineList()
     },
     async handleTabClick(tab, event) {
       this.companyId = this.companyList[tab.index]._id
-      this.getList()
+      await this.getPipeLineList()
+      await this.getList()
     },
     handleEdit(index, row) {
       this.dialogModifyVisible = true
