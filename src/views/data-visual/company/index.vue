@@ -21,14 +21,14 @@
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
               <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
-                <CompanyOutputBarChart></CompanyOutputBarChart>
+                <CompanyOutputBarChart />
               </GraphContainer>
 
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
-              <GraphContainer title="昨日单位能耗系数" class="graph-item xpanel-wrapper-1">
-                <EnergyConsumptionBarChart/>
+              <GraphContainer title="本日单位能耗系数" class="graph-item xpanel-wrapper-1">
+                <BarChartOfEnergyCostFacter />
               </GraphContainer>
 
             </el-col>
@@ -67,7 +67,8 @@ import TimeSwitch from 'comps/base/TimeSwitch'
 import CompanyProdlineStateList from './CompanyProdlineStateList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
-import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
+// import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
+import BarChartOfEnergyCostFacter from './BarChartOfEnergyCostFacter'
 import UtilizationBarChart from './UtilizationBarChart'
 import CompanyOutputBarChart from './CompanyOutputBarChart'
 // models
@@ -90,7 +91,8 @@ export default {
     CompanyProdlineStateList,
     ProdlineStatus,
     OperatingStatusBarChart,
-    EnergyConsumptionBarChart,
+    // EnergyConsumptionBarChart,
+    BarChartOfEnergyCostFacter,
     UtilizationBarChart,
     CompanyOutputBarChart
   },
@@ -140,7 +142,7 @@ export default {
   watch: {
     showDetail() {}
   },
-  created() {
+  async created() {
     let { id } = this.$route.query
     let company = companies.find(item => item.id === id)
     if ((id && id.length !== 24) || !company) {
@@ -148,6 +150,8 @@ export default {
       this.$router.push({ path: '/data-visual/overview' })
     }
     this.title = company.alias
+
+    this.$store.dispatch('company/getCompanyAllPipelineStateStat', id)
   },
   mounted() {
     this.getPipelineStateTime()

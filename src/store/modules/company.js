@@ -4,6 +4,8 @@ import CompanyModel from '@/models/company'
 import tree from "element-ui/packages/table/src/store/tree";
 const state = {
   companyList: [],
+  companyAllPipelineCounterStat: undefined, // 所有生产线的计数器
+  companyAllPipelinePowerStat: undefined, // 所有生产线的耗电量
   prodlineList: [], // 该公司的生产线列表
   prodlineListStateStat: { // 生产线列表状态统计
     off: 0,
@@ -50,8 +52,11 @@ const mutations = {
   },
   SET_PIPELINE_ID: (state, pipeLine) => {
     state.pipeLine = pipeLine
-  }
-
+  },
+  SET_COMPANY_ALL_PIPELINE_STATE: (state, counterList, powerList) => {
+    state.companyAllPipelineCounterStat = counterList, // 所有生产线的计数器
+    state.companyAllPipelinePowerStat = powerList // 所有生产线的耗电量
+  },
 }
 
 const actions = {
@@ -64,6 +69,11 @@ const actions = {
     commit('CLEAR_PRODLINE_LIST_STATE_STAT')
     commit('SET_PRODLINE_LIST', prodlineList)
   },
+  async getCompanyAllPipelineStateStat({ commit }, companyId) {
+    let counterList = await CompanyModel.getAllPipelineCounterStats(companyId)
+    let powerList = await CompanyModel.getAllPipelinePowerStats(companyId)
+    commit('SET_COMPANY_ALL_PIPELINE_STATE', counterList, powerList)
+  }
 
 }
 

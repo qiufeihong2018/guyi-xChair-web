@@ -39,4 +39,49 @@ export default class Company {
     const data = await get(`company/${id}/pipeline/all`)
     return data
   }
+  // 获取今天公司所有生产线的生产量
+  static async getAllPipelineCounterStats() {
+    const data = await post('/company/pipeline/stats', {
+      id: '5d8041e4de1685795bc379b2', //companyId,
+      dataType: "counter",
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
+    const processedData = [...data].map(item => {
+      if (item.value) {
+        item.in = item.value.repeatedCounting
+        item.failed = item.value.defectiveNumber
+        item.out = item.value.productionQuantity
+      } else {
+        item.in = 0
+        item.failed = 0
+        item.out = 0
+      }
+      return item
+    })
+    // console.log('processedData', processedData)
+    return processedData
+  }
+
+  // 获取今天公司所有生产线的用电量
+  static async getAllPipelinePowerStats() {
+    const data = await post('/company/pipeline/stats', {
+      id: '5d8041e4de1685795bc379b2',
+      dataType: "power",
+      // start: 1566981600000,
+      // end: 1569168000000
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
+    const processedData = [...data].map(item => {
+      if (item.value) {
+        item.power = item.value.positiveEnergy * 2.5
+      } else {
+        item.power = 0
+      }
+      return item
+    })
+    // console.log('processedData', processedData)
+    return processedData
+  }
 }

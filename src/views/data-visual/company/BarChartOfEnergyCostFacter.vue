@@ -7,12 +7,12 @@ import resize from '@/mixins/yearResize'
 import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
 export default {
-  name: 'CompanyOutputBarChart',
+  name: 'BarChartOfEnergyCostFacter',
   mixins: [resize],
   props: {
     id: {
       type: String,
-      default: 'CompanyOutputBarChart'
+      default: 'BarChartOfEnergyCostFacter'
     },
   },
   data() {
