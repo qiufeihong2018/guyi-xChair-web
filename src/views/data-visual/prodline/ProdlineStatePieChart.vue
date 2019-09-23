@@ -57,8 +57,9 @@ export default {
     option() {
       return {
         tooltip: {
+          trigger: 'item',
           formatter(params) {
-            return `${params.marker + params.name}: ${formatSeconds(params.value / 1000)}`
+            return `${params.marker + params.name}: <br /> ${formatSeconds(params.value / 1000)}`
           }
         },
         grid: {
@@ -74,7 +75,7 @@ export default {
             radius: [0, '60%'],
             label: {
               formatter(params) {
-                return `${params.name}: ${formatSeconds(params.value / 1000)}`
+                return `${params.name} \n ${formatSeconds(params.value / 1000)}`
               },
               fontSize: 15
             }
@@ -109,6 +110,4 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>

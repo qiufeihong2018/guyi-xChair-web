@@ -3,13 +3,13 @@
     <div :id="id" style="height: 95%"></div>
     <div>
       <p class="legend" style="top: 5px;color: #60acfc;">
-        入口总数: {{repeatedNum}}
+        入口数量: {{repeatedNum}}
       </p>
       <p class="legend" style="top: 25px;color: #45d3eb;">
-        次品总数: {{defectiveNum}}
+        不合格数: {{defectiveNum}}
       </p>
       <p class="legend" style="top: 45px;color: #5bc59f;">
-        出品总数: {{productionNum}}
+        成品数量: {{productionNum}}
       </p>
     </div>
   </div>
@@ -50,8 +50,12 @@ export default {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}'
+          trigger: 'axis',
+          // formatter: '{a}: {c}' // 与 冲突
         },
+        // legend: {
+        //   data: ['入口数量', '出口数量', '不合格数']
+        // },
         grid: {
           left: '15%',
         },
@@ -69,9 +73,12 @@ export default {
           type: 'category',
           axisTick: { show: false },
           // data: this.timeData,
-          data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00',
-            '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
-            '19:00', '20:00', '21:00', '22:00', '23:00'],
+          data: [
+            '0~1时', '1~2时', '2~3时', '3~4时', '4~5时', '5~6时',
+            '6~7时', '7~8时', '8~9时', '9~10时', '10~11时', '11~12时',
+            '12~13时', '13~14时', '14~15时', '15~16时', '16~17时', '17~18时',
+            '18~19时', '19~20时', '20~21时', '21~22时', '22~23时', '23~24时'
+          ],
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -107,17 +114,17 @@ export default {
           {
             name: '入口数量',
             type: 'bar',
-            barGap: 0,
+            // barGap: 0,
             label: {
               normal: {
                 show: true,
                 position: 'top'
               }
             },
-            data: this.repeatedCounting
+            data: this.repeatedCounting,
           },
           {
-            name: '次品数量',
+            name: '不合格数',
             type: 'bar',
             label: {
               normal: {
@@ -128,7 +135,7 @@ export default {
             data: this.defectiveNumber
           },
           {
-            name: '出品数量',
+            name: '成品数量',
             type: 'bar',
             label: {
               normal: {
@@ -136,9 +143,14 @@ export default {
                 position: 'top'
               }
             },
-            data: this.productionQuantity
+            data: this.productionQuantity,
+            markLine: {
+              data: [
+                { type: 'average', name: '生产平均值' }
+              ]
+            }
           }
-        ]
+        ],
       }
     }
   },
@@ -235,9 +247,9 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .legend {
-    position absolute
-    right 40px
-    width 200px
-  }
+.legend {
+  position absolute
+  right 40px
+  width 200px
+}
 </style>
