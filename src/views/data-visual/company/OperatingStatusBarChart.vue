@@ -199,7 +199,7 @@ export default {
           }
         }
       }))
-      this.chartData = this.chartData.concat(aa)
+      // this.chartData = this.chartData.concat(aa)
     }
   }
 }

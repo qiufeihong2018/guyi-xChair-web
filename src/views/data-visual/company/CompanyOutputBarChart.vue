@@ -36,9 +36,9 @@ export default {
     },
     yAxisMax() {
       // Y轴的高度
-      let max = Math.max(...(this.dataList)) * 1.6
+      let max = Math.max(...(this.dataList)) * 1.2
       if (max <= 1000) return 1000
-      return max
+      return Math.ceil(max / 1000) * 1000
     },
     option() {
       return {
@@ -90,6 +90,21 @@ export default {
           {
             name: '产量',
             data: this.seriesData.map(item => item.out),
+            type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'top',
+                formatter(params) { // 圆环显示文字
+                  const value = Math.ceil(params.value * 100) / 100
+                  return value
+                },
+              }
+            },
+          },
+          {
+            name: '失误次数',
+            data: this.seriesData.map(item => item.failed),
             type: 'bar',
           }
         ]

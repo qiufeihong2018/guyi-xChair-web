@@ -46,9 +46,9 @@ export default {
     yAxisMax() {
       // Y轴的高度
       console.log('dataList', this.dataList)
-      let max = Math.max(...(this.dataList)) * 1.7
+      let max = Math.max(...(this.dataList)) * 1.2
       if (max <= 20) return 20
-      return max
+      return Math.ceil(max / 10) * 10
     },
     option() {
       return {
@@ -101,6 +101,16 @@ export default {
             name: '能耗系数',
             data: this.dataList,
             type: 'bar',
+            label: {
+              normal: {
+                show: true,
+                position: 'top',
+                formatter(params) { // 圆环显示文字
+                  const value = Math.ceil(params.value * 100) / 100
+                  return value 
+                },
+              }
+            },
           }]
       }
     }

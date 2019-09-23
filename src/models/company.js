@@ -44,12 +44,12 @@ export default class Company {
     const data = await post('/company/pipeline/stats', {
       id: companyId, //companyId,
       dataType: "counter",
-      start: 1566981600000,
-      end: 1569168000000,
-      // start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-      // end: +new Date()
+      // start: 1566981600000,
+      // end: 1569168000000,
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
     })
-    console.log('CounterStats', data)
+    // console.log('CounterStats', data)
     const processedData = data.map(item => {
       if (item.value) {
         item.in = item.value.repeatedCounting
@@ -62,6 +62,8 @@ export default class Company {
       }
       return item
     })
+    
+    console.log('processedData', processedData)
     return processedData
   }
 
@@ -70,12 +72,12 @@ export default class Company {
     const data = await post('/company/pipeline/stats', {
       id: companyId,
       dataType: "power",
-      start: 1566981600000,
-      end: 1569168000000,
-      // start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-      // end: +new Date()
+      // start: 1566981600000,
+      // end: 1569168000000,
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
     })
-    console.log('PowerStats', data)
+    // console.log('PowerStats', data)
     const processedData = data.map(item => {
       if (item.value) {
         item.power = item.value.positiveEnergy * 2.5
@@ -84,6 +86,7 @@ export default class Company {
       }
       return item
     })
+    processedData.sort((prev, next) => prev.pipelineId < next.pipelineId)
     return processedData
   }
 }
