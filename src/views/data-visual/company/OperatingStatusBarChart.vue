@@ -65,8 +65,12 @@ export default {
         pending: 'yellow',
         off: 'red'
       },
-      startTime: 0,
-      interval: null
+      startTime: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      endTime: +new Date(),
+      interval: null,
+      prodlineList: [],
+      yAxis: [],
+      timeData: []
     }
   },
   computed: {
@@ -83,6 +87,11 @@ export default {
         xAxis: {
           type: 'time',
           min: this.startTime,
+          max: this.endTime,
+          // data: this.timeData,
+          // data: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00',
+          //   '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00',
+          //   '19:00', '20:00', '21:00', '22:00', '23:00'],
           scale: true,
           axisLabel: {
             textStyle: {
@@ -106,7 +115,7 @@ export default {
         },
         yAxis: {
           type: 'category',
-          data: ['ALT01', '', '', ''],
+          data: this.yAxis,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -160,46 +169,78 @@ export default {
       this.updateChart()
     },
   },
-  mounted() {
-    this.getPipelineState()
+  async mounted() {
+    this.prodlineList = await PipelineModel.getList(this.$route.query.id)
+    this.yAxis = this.prodlineList.map(item => item.pipelineName)
+    this.handleList()
+    // this.getPipelineState()
     this.interval = setInterval(() => {
-      this.getPipelineState()
+      this.handleList()
     }, 30000)
   },
   beforeDestroy() {
     clearInterval(this.interval)
   },
   methods: {
-    async getPipelineState() {
+    async handleList() {
+      this.prodlineList.forEach((line, index) => {
+        if (line.state === 'on' || line.state === 'pending') {
+          this.getPipelineState(line.id, index)
+        } else {
+          this.chartData.push(
+            {
+              name: '关机',
+              value: [index, this.startTime, this.endTime, this.endTime - this.startTime],
+              itemStyle: {
+                normal: {
+                  color: 'red'
+                }
+              }
+            }
+          )
+        }
+      })
+    },
+    async getPipelineState(pipelineId, pipelineIndex) {
       const params = {
-        // start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
-        // end: +new Date(),
-        start: 1568995200000,
-        end: 1569081600000,
-        pipelineId: '5d834e6c0c8e9f276745ded0'
+        start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+        end: +new Date(),
+        // start: 1568995200000,
+        // end: 1569081600000,
+        pipelineId
       }
       const res = await PipelineModel.searchPipelineState(params)
       // 报错
-      this.startTime = +new Date(res[0].startTime)
-      this.chartData = res.map(item => ({
-        name: this.state[item.state],
-        value: [0, +new Date(item.startTime), +new Date(item.endTime), item.difTime],
-        itemStyle: {
-          normal: {
-            color: this.color[item.state]
+      let result = []
+      if (res.length > 0) {
+        this.startTime = +new Date(res[0].startTime)
+        this.endTime = +new Date()
+        this.timeData = res.map(item => item.createdAt)
+        result = res.map(item => ({
+          name: this.state[item.state],
+          value: [pipelineIndex, +new Date(item.startTime), +new Date(item.endTime), item.difTime],
+          itemStyle: {
+            normal: {
+              color: this.color[item.state]
+            }
           }
-        }
-      }))
-      const aa = res.map(item => ({
-        name: this.state[item.state],
-        value: [1, +new Date(item.startTime), +new Date(item.endTime), item.difTime],
-        itemStyle: {
-          normal: {
-            color: this.color[item.state]
-          }
-        }
-      }))
-      this.chartData = this.chartData.concat(aa)
+        }))
+      }
+      // else if (res.length === 0) {
+      //   console.log(0)
+      //   result = [
+      //     {
+      //       name: '关机',
+      //       value: [pipelineIndex, 1568995200000, 1569081600000, 1568995200000 - 1569081600000],
+      //       itemStyle: {
+      //         normal: {
+      //           color: 'red'
+      //         }
+      //       }
+      //     }
+      //   ]
+      // }
+      this.chartData = this.chartData.concat(result)
     }
   }
 }
