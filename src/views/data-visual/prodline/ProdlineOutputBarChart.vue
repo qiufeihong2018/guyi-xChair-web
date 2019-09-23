@@ -171,7 +171,6 @@ export default {
         dataType: 'counter',
         durationType: 'today'
       }
-
       const res = await PipelineModel.getPipelineState(params)
       res.data.forEach((item, index) => {
         if (index > 0) {

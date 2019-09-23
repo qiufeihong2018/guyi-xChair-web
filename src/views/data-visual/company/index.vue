@@ -42,7 +42,6 @@
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
-            <TimeSwitch v-on:getTimeRange="getConsumption"></TimeSwitch>
             <UtilizationBarChart :chart-data="utilizationData"></UtilizationBarChart>
           </GraphContainer>
         </el-col>
@@ -56,7 +55,7 @@ import { companies } from 'assets/data/company'
 import { mapState } from 'vuex'
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
-import TimeSwitch from 'comps/base/TimeSwitch'
+// import TimeSwitch from 'comps/base/TimeSwitch'
 // 业务组件
 import CompanyProdlineStateList from './CompanyProdlineStateList'
 import ProdlineStatus from './ProdlineStatus'
@@ -81,7 +80,7 @@ export default {
   components: {
     Screenfull,
     GraphContainer,
-    TimeSwitch,
+    // TimeSwitch,
     CompanyProdlineStateList,
     ProdlineStatus,
     OperatingStatusBarChart,
