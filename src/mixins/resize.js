@@ -11,6 +11,11 @@ export default {
       }
     }
   },
+  watch: {
+    option(prev, next) {
+      this.updateChart()
+    }
+  },
   mounted() {
     this.drawChart()
     // 监听窗口的变化

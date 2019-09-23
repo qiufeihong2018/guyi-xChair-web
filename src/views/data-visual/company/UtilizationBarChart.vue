@@ -1,12 +1,15 @@
 <template>
-  <div :id="id" style="height: 95%"></div>
+  <div style="height: 95%">
+    <time-switch v-on:getTimeRange="getStateTime"></time-switch>
+    <div :id="id" style="height: 95%"></div>
+  </div>
 </template>
 
 <script>
 import resize from '@/mixins/resize'
 import color from 'assets/data/color'
-import MonitorModel from '@/models/monitor'
-
+import PipelineModel from '@/models/pipeline'
+import { mapState } from 'vuex'
 export default {
   name: 'UtilizationBarChart',
   mixins: [resize],
@@ -19,18 +22,22 @@ export default {
       type: Array,
       default: () => []
     },
-    chartData: {
-      type: Array,
-      default: () => []
-    }
+    // chartData: {
+    //   type: Array,
+    //   default: () => []
+    // }
   },
   data() {
     return {
       chart: null,
       interval: null,
+      chartData: []
     }
   },
   computed: {
+    ...mapState({
+      prodlineList: state => state.company.prodlineList,
+    }),
     option() {
       return {
         tooltip: {
@@ -41,7 +48,7 @@ export default {
         color: color.category6,
         xAxis: {
           type: 'category',
-          data: ['ALT01', '', '', ''],
+          data: this.prodlineList.map(item => item.pipelineName),
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -91,9 +98,34 @@ export default {
     option(prev, next) {
       this.updateChart()
     },
+    prodlineList(prev, next) {
+      if (prev.length > 0) {
+        this.getStateTime(
+          {
+            start: +new Date(new Date(new Date().toLocaleDateString()).getTime()) - 1000 * 60 * 60 * 24 * 7,
+            end: +new Date()
+          }
+        )
+      }
+    }
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+  },
+  methods: {
+    getStateTime(range) {
+      this.prodlineList.forEach(async (item, index) => {
+        const params = {
+          id: item.id,
+          dataType: 'counter',
+          start: range.start,
+          end: range.end
+        }
+        const res = await PipelineModel.getStateTime(params)
+        if (res.data.onTime === 0) this.$set(this.chartData, index, 0)
+        else this.$set(this.chartData, index, ((res.data.onTime / (res.data.onTime + res.data.pendingTime)) * 100).toFixed(2))
+      })
+    }
+  }
 }
 </script>
 

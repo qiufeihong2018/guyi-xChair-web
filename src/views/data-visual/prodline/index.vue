@@ -2,7 +2,7 @@
   <el-container class="prodline">
     <Screenfull style="position: fixed; top: 10px; right: 10px;" />
 
-    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99">
+    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99"  @click="goOverviewPage">
       <fa-icon icon-name="home" />
     </div>
     <el-header class="header" height="72px">
@@ -14,7 +14,7 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="16" class="col-item">
 
           <GraphContainer title="当日生产详情" class="graph-item xpanel-wrapper-6">
-
+            <ProdlineTableOfProductList />
           </GraphContainer>
 
           <el-row class="xpanel-wrapper-3">
@@ -57,6 +57,7 @@
 import Screenfull from 'comps/base/Screenfull'
 import GraphContainer from 'comps/base/GraphContainer'
 // 图表组件
+import ProdlineTableOfProductList from './ProdlineTableOfProductList'
 import ProdlineOutputBarChart from './ProdlineOutputBarChart'
 import ProdlineEnergyLineChart from './ProdlineEnergyLineChart'
 import ProdlineStatePieChart from './ProdlineStatePieChart'
@@ -69,6 +70,7 @@ export default {
   components: {
     Screenfull,
     GraphContainer,
+    ProdlineTableOfProductList,
     ProdlineOutputBarChart,
     ProdlineEnergyLineChart,
     ProdlineStatePieChart,

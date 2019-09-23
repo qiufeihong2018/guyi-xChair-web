@@ -40,14 +40,17 @@ export default class Company {
     return data
   }
   // 获取今天公司所有生产线的生产量
-  static async getAllPipelineCounterStats() {
+  static async getAllPipelineCounterStats(companyId) {
     const data = await post('/company/pipeline/stats', {
-      id: '5d8041e4de1685795bc379b2', //companyId,
+      id: companyId, //companyId,
       dataType: "counter",
+      // start: 1566981600000,
+      // end: 1569168000000,
       start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
       end: +new Date()
     })
-    const processedData = [...data].map(item => {
+    // console.log('CounterStats', data)
+    const processedData = data.map(item => {
       if (item.value) {
         item.in = item.value.repeatedCounting
         item.failed = item.value.defectiveNumber
@@ -59,21 +62,23 @@ export default class Company {
       }
       return item
     })
-    // console.log('processedData', processedData)
+    
+    console.log('processedData', processedData)
     return processedData
   }
 
   // 获取今天公司所有生产线的用电量
-  static async getAllPipelinePowerStats() {
+  static async getAllPipelinePowerStats(companyId) {
     const data = await post('/company/pipeline/stats', {
-      id: '5d8041e4de1685795bc379b2',
+      id: companyId,
       dataType: "power",
       // start: 1566981600000,
-      // end: 1569168000000
+      // end: 1569168000000,
       start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
       end: +new Date()
     })
-    const processedData = [...data].map(item => {
+    // console.log('PowerStats', data)
+    const processedData = data.map(item => {
       if (item.value) {
         item.power = item.value.positiveEnergy * 2.5
       } else {
@@ -81,7 +86,7 @@ export default class Company {
       }
       return item
     })
-    // console.log('processedData', processedData)
+    processedData.sort((prev, next) => prev.pipelineId < next.pipelineId)
     return processedData
   }
 }

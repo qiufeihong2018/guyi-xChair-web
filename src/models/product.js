@@ -16,6 +16,17 @@ export default class product {
     const data = await get(`company/${companyId}/product`)
     return data
   }
+
+  /**
+   * 根据生产线查列表
+   *
+   * @static
+   * @returns
+   */
+  static async getListByPipeline(pipelineId) {
+    const data = await get(`pipeline/${pipelineId}/productState`)
+    return data
+  }
   /**
    * 修改产品
    *

@@ -67,7 +67,7 @@ export default {
       },
       startTime: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
       endTime: +new Date(),
-      interval: null,
+      interval: undefined,
       prodlineList: [],
       yAxis: [],
       timeData: []
