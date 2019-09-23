@@ -28,7 +28,7 @@ export default {
     nameList() {
       let list = this.seriesData.map(item => item.pipelineName)
       const len = 8 - list.length
-      Array.from({ length: len }).forEach(_ => list.push(''))
+      if (len > 0) Array.from({ length: len }).forEach(_ => list.push(''))
       return list
     },
     dataList() {

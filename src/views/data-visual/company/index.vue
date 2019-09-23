@@ -42,7 +42,7 @@
           <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
-            <UtilizationBarChart :chart-data="utilizationData"></UtilizationBarChart>
+            <UtilizationBarChart :chart-data="utilizationData" />
           </GraphContainer>
         </el-col>
       </el-row>

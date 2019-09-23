@@ -38,6 +38,12 @@ export default {
     ...mapState({
       prodlineList: state => state.company.prodlineList,
     }),
+    nameList() {
+      let list = this.prodlineList.map(item => item.pipelineName)
+      const len = 8 - list.length
+      if (len > 0) Array.from({ length: len }).forEach(_ => list.push(''))
+      return list
+    },
     option() {
       return {
         tooltip: {
@@ -48,7 +54,7 @@ export default {
         color: color.category6,
         xAxis: {
           type: 'category',
-          data: this.prodlineList.map(item => item.pipelineName),
+          data: this.nameList,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -63,6 +69,8 @@ export default {
         yAxis: {
           type: 'value',
           name: '利用率: %',
+          max: 100,
+          min: 0,
           axisLabel: {
             textStyle: {
               color: '#fff'
@@ -110,6 +118,7 @@ export default {
     }
   },
   mounted() {
+    console.log('list', this.nameList)
   },
   methods: {
     getStateTime(range) {
@@ -129,6 +138,4 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>
