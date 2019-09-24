@@ -3,11 +3,11 @@
     <el-header class="header">
       <h2>产品配置</h2>
     </el-header>
-    <el-container style="margin-top: 10px">
+    <el-container style="margin-top: 10px; height: 700px">
       <el-tabs tab-position="left" type="border-card" style="width: 100%" @tab-click="handleTabClick">
-        <el-tab-pane v-for="item in companyList" :key="item._id" :label="item.companyName">
-          <el-table :data="productList" style="width: 100%">
-            <el-table-column label="生产线" width="180">
+        <el-tab-pane v-for="item in companyList" :key="item._id" :label="item.companyName" >
+          <el-table :data="productList" style="width: 100%" height="750px">
+            <el-table-column label="生产线" >
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.pipelineName }}</span>
               </template>
@@ -27,22 +27,22 @@
                 <span style="margin-left: 10px">{{ scope.row.type }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="产品净重">
+            <el-table-column label="产品净重(kg)">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.suttleWeight }}</span>
               </template>
             </el-table-column>
-            <el-table-column label=" 产品总重">
+            <el-table-column label=" 产品总重(kg)">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.totalWeight }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="长宽高">
+            <el-table-column label="长宽高(cm)" width="150px">
               <template slot-scope="scope">
-                <span style="margin-left: 10px">{{ scope.row.length }}X{{scope.row.width}}X{{scope.row.height}}</span>
+                <span style="margin-left: 10px">{{ scope.row.length}} X {{scope.row.width}} X {{scope.row.height}}</span>
               </template>
             </el-table-column>
-            <el-table-column align="right">
+            <el-table-column align="right" width="180px">
               <template slot="header">
                 <el-button size="mini" type="primary" @click="showCreateDialog">+新增产品</el-button>
               </template>
@@ -72,16 +72,16 @@
         <el-form-item label="产品类型" label-width="100px">
           <el-input v-model="product.type" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品净重" label-width="100px">
+        <el-form-item label="产品净重(kg)" label-width="100px">
           <el-input v-model="product.suttleWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品总重" label-width="100px">
+        <el-form-item label="产品总重(kg)" label-width="100px">
           <el-input v-model="product.totalWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="长宽高" label-width="100px">
+        <el-form-item label="长宽高(cm)" label-width="100px">
           <div style="display: flex">
-            <el-input v-model="product.length" autocomplete="off"></el-input>X
-            <el-input v-model="product.width" autocomplete="off"></el-input>X
+            <el-input v-model="product.length" autocomplete="off"></el-input> X
+            <el-input v-model="product.width" autocomplete="off"></el-input> X
             <el-input v-model="product.height" autocomplete="off"></el-input>
           </div>
 
@@ -111,13 +111,13 @@
         <el-form-item label="产品类型" label-width="100px">
           <el-input v-model="newProduct.type" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品净重" label-width="100px">
+        <el-form-item label="产品净重(kg)" label-width="100px">
           <el-input v-model="newProduct.suttleWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品总重" label-width="100px">
+        <el-form-item label="产品总重(kg)" label-width="100px">
           <el-input v-model="newProduct.totalWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品长宽高" label-width="100px">
+        <el-form-item label="产品长宽高(cm)" label-width="100px">
           <div style="display: flex">
             <el-input v-model="newProduct.length" autocomplete="off"></el-input>X
             <el-input v-model="newProduct.width" autocomplete="off"></el-input>X
