@@ -47,7 +47,7 @@ export default {
           trigger: 'axis',
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         color: color.category6,
         xAxis: {

@@ -27,7 +27,7 @@ export default {
           formatter: '{a}: {c}万元'
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         legend: {
           type: 'scroll',

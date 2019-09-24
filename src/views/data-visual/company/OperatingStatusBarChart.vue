@@ -82,7 +82,7 @@ export default {
           }
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         xAxis: {
           type: 'time',

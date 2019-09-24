@@ -56,7 +56,7 @@ export default {
           formatter: '{a}: {c}'
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         color: color.category6,
         xAxis: {
@@ -107,7 +107,7 @@ export default {
                 position: 'top',
                 formatter(params) { // 圆环显示文字
                   const value = Math.ceil(params.value * 100) / 100
-                  return value 
+                  return value
                 },
               }
             },
