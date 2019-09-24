@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 95%">
+  <div style="height: 100%">
     <time-switch v-on:getTimeRange="getStateTime"></time-switch>
     <div :id="id" style="height: 95%"></div>
   </div>
@@ -43,7 +43,7 @@ export default {
         tooltip: {
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         color: color.category6,
         xAxis: {

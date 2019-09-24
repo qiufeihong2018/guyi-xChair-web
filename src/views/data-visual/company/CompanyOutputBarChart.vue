@@ -46,7 +46,7 @@ export default {
           formatter: '{a}: {c}件'
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         color: color.category6,
         xAxis: {

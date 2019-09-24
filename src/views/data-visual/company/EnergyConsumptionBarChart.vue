@@ -33,7 +33,7 @@ export default {
           formatter: '{a}: {c}'
         },
         grid: {
-          left: '15%',
+          left: '10%',
         },
         xAxis: {
           type: 'category',

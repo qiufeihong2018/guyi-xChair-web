@@ -40,7 +40,7 @@ export default {
           trigger: 'axis',
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         color: color.category6,
         xAxis: {
@@ -139,7 +139,7 @@ export default {
         }
       })
       this.chartData = powers.map((item, index) => {
-        if (item === '0.000') {
+        if (item === '0.000' || productionQuantity[index] === 0) {
           return 0.00
         }
         return (item / (productionQuantity[index] / 100)).toFixed(2)

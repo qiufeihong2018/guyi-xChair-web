@@ -1,17 +1,17 @@
 <template>
   <div style="height: 100%">
     <div :id="id" style="height: 95%"></div>
-    <div>
-      <p class="legend" style="top: 5px;color: #60acfc;">
-        入口总数: {{repeatedNum}}
-      </p>
-      <p class="legend" style="top: 25px;color: #45d3eb;">
-        次品总数: {{defectiveNum}}
-      </p>
-      <p class="legend" style="top: 45px;color: #5bc59f;">
-        出品总数: {{productionNum}}
-      </p>
-    </div>
+    <!--<div>-->
+      <!--<p class="legend" style="top: 5px;color: #60acfc;">-->
+        <!--入口总数: {{repeatedNum}}-->
+      <!--</p>-->
+      <!--<p class="legend" style="top: 25px;color: #45d3eb;">-->
+        <!--次品总数: {{defectiveNum}}-->
+      <!--</p>-->
+      <!--<p class="legend" style="top: 45px;color: #5bc59f;">-->
+        <!--出品总数: {{productionNum}}-->
+      <!--</p>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -50,10 +50,19 @@ export default {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}'
+          // formatter: '{a}: {c}'
+          trigger: 'axis',
+          axisPointer: { // 坐标轴指示器，坐标轴触发有效
+            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+          }
+        },
+        legend: {
+          textStyle: {
+            color: '#fff'
+          }
         },
         grid: {
-          left: '15%',
+          left: '10%',
         },
         dataZoom: [
           {

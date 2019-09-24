@@ -50,7 +50,8 @@ export default {
           label: '昨日',
           value: 'yester'
         }
-      ]
+      ],
+      highlightInterval: undefined
     }
   },
   computed: {
@@ -62,7 +63,7 @@ export default {
           }
         },
         grid: {
-          left: '15%'
+          left: '10%'
         },
         color: ['#ff7c7c', '#5bc49f', '#feb64d'],
         series: [
@@ -73,10 +74,22 @@ export default {
             center: ['50%', '40%'],
             radius: [0, '60%'],
             label: {
-              formatter(params) {
-                return `${params.name}: ${formatSeconds(params.value / 1000)}`
+              normal: {
+                show: true,
+                formatter(params) {
+                  return `${params.name}: ${formatSeconds(params.value / 1000)}`
+                },
+                textStyle: {
+                  fontSize: 15
+                }
               },
-              fontSize: 15
+              emphasis: {
+                show: true,
+                textStyle: {
+                  fontWeight: 'bold',
+                  fontSize: 20
+                }
+              }
             }
           }]
       }
@@ -89,8 +102,37 @@ export default {
   },
   mounted() {
     this.openLoading()
+    this.highlightChart()
+  },
+  beforeDestroy() {
+    clearInterval(this.highlightInterval)
   },
   methods: {
+    highlightChart() {
+      let { chart } = this
+      let index = 0 // 播放所在下标
+      this.highlightInterval = setInterval(() => {
+        chart.dispatchAction({
+          type: 'downplay',
+          seriesIndex: 0,
+          dataIndex: index === 0 ? 2 : index - 1
+        })
+        chart.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+        index += 1
+        if (index > 2) index = 0
+        // index += 1
+        // if (index > 2) index = 0
+        // chart.dispatchAction({
+        //   type: 'highlight',
+        //   seriesIndex: 0,
+        //   dataIndex: index
+        // })
+      }, 2000)
+    },
     async getProdlineState(range) {
       const params = {
         id: '5d834e6c0c8e9f276745ded0',
