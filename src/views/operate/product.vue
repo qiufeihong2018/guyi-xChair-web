@@ -12,12 +12,12 @@
                 <span style="margin-left: 10px">{{ scope.row.pipelineName }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="产品注册代码">
+            <el-table-column label="产品型号">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.model }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="产品型号代号">
+            <el-table-column label="数字代号">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.no }}</span>
               </template>
@@ -42,8 +42,7 @@
                 <span style="margin-left: 10px">{{ scope.row.length }}X{{scope.row.width}}X{{scope.row.height}}</span>
               </template>
             </el-table-column>
-            <el-table-column
-              align="right">
+            <el-table-column align="right">
               <template slot="header">
                 <el-button size="mini" type="primary" @click="showCreateDialog">+新增产品</el-button>
               </template>
@@ -58,40 +57,35 @@
     </el-container>
     <el-dialog title="编辑" :visible.sync="dialogModifyVisible">
       <el-form :model="product" label-width="100px">
-        <el-form-item label="生产线"  label-width="100px">
-          <el-select v-model="product.pipelineId" placeholder="请选择"  @change="getPipeLineName">
-            <el-option
-              v-for="item in pipelineList"
-              :key="item.value"
-              :label="item.pipelineName"
-              :value="item.id">
+        <el-form-item label="生产线" label-width="100px">
+          <el-select v-model="product.pipelineId" placeholder="请选择" @change="getPipeLineName">
+            <el-option v-for="item in pipelineList" :key="item.value" :label="item.pipelineName" :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="产品注册代码"  label-width="100px">
+        <el-form-item label="产品型号" label-width="100px">
           <el-input v-model="product.model" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品型号"  label-width="100px">
+        <el-form-item label="数字代号" label-width="100px">
           <el-input v-model="product.no" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品类型"  label-width="100px">
+        <el-form-item label="产品类型" label-width="100px">
           <el-input v-model="product.type" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品净重"  label-width="100px">
+        <el-form-item label="产品净重" label-width="100px">
           <el-input v-model="product.suttleWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品总重"  label-width="100px">
+        <el-form-item label="产品总重" label-width="100px">
           <el-input v-model="product.totalWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品长宽高"  label-width="100px">
+        <el-form-item label="长宽高" label-width="100px">
           <div style="display: flex">
-            <el-input v-model="product.length" autocomplete="off" ></el-input>X
+            <el-input v-model="product.length" autocomplete="off"></el-input>X
             <el-input v-model="product.width" autocomplete="off"></el-input>X
             <el-input v-model="product.height" autocomplete="off"></el-input>
           </div>
 
         </el-form-item>
-
 
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -102,34 +96,30 @@
 
     <el-dialog title="新增产品" :visible.sync="dialogCreateVisible">
       <el-form :model="newProduct" label-width="100px">
-        <el-form-item label="生产线"  label-width="100px">
-          <el-select v-model="newProduct.pipelineId" placeholder="请选择"  @change="getNewPipeLineName">
-            <el-option
-              v-for="item in pipelineList"
-              :key="item.value"
-              :label="item.pipelineName"
-              :value="item.id">
+        <el-form-item label="生产线" label-width="100px">
+          <el-select v-model="newProduct.pipelineId" placeholder="请选择" @change="getNewPipeLineName">
+            <el-option v-for="item in pipelineList" :key="item.value" :label="item.pipelineName" :value="item.id">
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="产品注册代码"  label-width="100px">
+        <el-form-item label="产品型号" label-width="100px">
           <el-input v-model="newProduct.model" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品型号"  label-width="100px">
-        <el-input v-model="newProduct.no" autocomplete="off"></el-input>
-      </el-form-item>
-        <el-form-item label="产品类型"  label-width="100px">
+        <el-form-item label="产品注册代号" label-width="100px">
+          <el-input v-model="newProduct.no" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="产品类型" label-width="100px">
           <el-input v-model="newProduct.type" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品净重"  label-width="100px">
+        <el-form-item label="产品净重" label-width="100px">
           <el-input v-model="newProduct.suttleWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品总重"  label-width="100px">
+        <el-form-item label="产品总重" label-width="100px">
           <el-input v-model="newProduct.totalWeight" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品长宽高"  label-width="100px">
+        <el-form-item label="产品长宽高" label-width="100px">
           <div style="display: flex">
-            <el-input v-model="newProduct.length" autocomplete="off" ></el-input>X
+            <el-input v-model="newProduct.length" autocomplete="off"></el-input>X
             <el-input v-model="newProduct.width" autocomplete="off"></el-input>X
             <el-input v-model="newProduct.height" autocomplete="off"></el-input>
           </div>
@@ -183,8 +173,8 @@ export default {
       newProduct: {
         pipelineId: '',
         pipelineName: '',
-        model: '',
-        no: '',
+        model: '', // 产品型号(公司记录在册)
+        no: '', // 产品数字代号(生产线上采集器设置的)(纯数字)
         type: '',
         suttleWeight: 0,
         totalWeight: 0,
@@ -218,8 +208,8 @@ export default {
         id: row._id,
         pipelineId: row.pipelineId,
         pipelineName: row.pipelineName,
-        model: row.model,
-        no: row.no,
+        model: row.model, // 产品型号(公司记录在册)
+        no: row.no, // 产品数字代号(生产线上采集器设置的)(纯数字)
         type: row.type,
         suttleWeight: row.suttleWeight,
         totalWeight: row.totalWeight,
@@ -322,45 +312,45 @@ export default {
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .prodline {
-    .header {
-      text-align center
-      line-height 60px
-    }
+.prodline {
+  .header {
+    text-align center
+    line-height 60px
   }
-  .prodline {
-    .header {
-      text-align center
-      line-height 60px
-    }
-    .el-tag + .el-tag {
-      margin-left: 10px;
-    }
-    .button-new-tag {
-      height: 32px;
-      line-height: 30px;
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-    .input-new-tag {
-      width: 90px;
-      vertical-align: bottom;
-    }
-    .main {
-      margin-left 10px
-      table {
-        tr {
-          border-bottom 1px solid #d1dbe5
-          th {
-            padding 10px
-          }
-          td {
-            padding 5px 10px
-            text-align right
-            width 200px
-          }
+}
+.prodline {
+  .header {
+    text-align center
+    line-height 60px
+  }
+  .el-tag + .el-tag {
+    margin-left 10px
+  }
+  .button-new-tag {
+    height 32px
+    line-height 30px
+    padding-top 0
+    padding-bottom 0
+  }
+  .input-new-tag {
+    width 90px
+    vertical-align bottom
+  }
+  .main {
+    margin-left 10px
+    table {
+      tr {
+        border-bottom 1px solid #d1dbe5
+        th {
+          padding 10px
+        }
+        td {
+          padding 5px 10px
+          text-align right
+          width 200px
         }
       }
     }
   }
+}
 </style>

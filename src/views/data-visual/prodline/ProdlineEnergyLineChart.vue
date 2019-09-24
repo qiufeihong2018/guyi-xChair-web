@@ -92,12 +92,14 @@ export default {
             hoverAnimation: false,
             smooth: true,
             markPoint: {
-              symbolSize: 60,
+              symbol: 'arrow',
+              symbolSize: 16,
               data: [
                 { type: 'max', name: '最大值' },
               ]
             },
-          }]
+          }
+        ]
       }
     }
   },
@@ -158,6 +160,4 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>
