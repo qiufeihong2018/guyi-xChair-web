@@ -6,7 +6,7 @@ const state = {
     city: ''
   },
   collegeList: [],
-  year: 0
+  year: 2
 }
 
 const getters = {
