@@ -1,17 +1,7 @@
 <template>
   <div style="height: 100%">
+    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleOutputData"></time-switch>
     <div :id="id" style="height: 95%"></div>
-    <!--<div>-->
-      <!--<p class="legend" style="top: 5px;color: #60acfc;">-->
-        <!--入口总数: {{repeatedNum}}-->
-      <!--</p>-->
-      <!--<p class="legend" style="top: 25px;color: #45d3eb;">-->
-        <!--次品总数: {{defectiveNum}}-->
-      <!--</p>-->
-      <!--<p class="legend" style="top: 45px;color: #5bc59f;">-->
-        <!--出品总数: {{productionNum}}-->
-      <!--</p>-->
-    <!--</div>-->
   </div>
 </template>
 
@@ -27,10 +17,6 @@ export default {
       type: String,
       default: 'ProdlineOutputBarChart'
     },
-    outputData: {
-      type: Array,
-      default: () => []
-    }
   },
   data() {
     return {
@@ -44,6 +30,16 @@ export default {
       defectiveNum: 0,
       productionNum: 0,
       intervalId: undefined,
+      switchOptions: [
+        {
+          label: '本日',
+          value: 'day'
+        }, {
+          label: '昨日',
+          value: 'yester'
+        }
+      ],
+      durationType: 'day'
     }
   },
   computed: {
@@ -166,33 +162,40 @@ export default {
   watch: {
     option(prev, next) {
       this.updateChart()
-    },
-    outputData(prev, next) {
-      this.handleOutputData(prev)
-    },
+    }
   },
   mounted() {
     this.openLoading()
-    this.handleOutputData()
+    this.handleOutputData({
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
     // this.getPipelineData()
     this.intervalId = setInterval(() => {
-      this.handleOutputData()
+      if (this.durationType === 'day') {
+        this.handleOutputData({
+          start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+          end: +new Date()
+        })
+      }
     }, 30000)
   },
   beforeDestroy() {
     clearInterval(this.intervalId)
   },
   methods: {
-    async handleOutputData() {
+    async handleOutputData(timeData) {
+      this.durationType = timeData.durationType || this.durationType
       let repeatedCounting = []
       let defectiveNumber = []
       let productionQuantity = []
       const params = {
         id: this.pipelineId,
         dataType: 'counter',
-        durationType: 'today'
+        start: timeData.start,
+        end: timeData.end
       }
-      const res = await PipelineModel.getPipelineState(params)
+      const res = await PipelineModel.getPipelineState2(params)
       res.data.forEach((item, index) => {
         if (index > 0) {
           repeatedCounting.push(item.in - res.data[index - 1].in)

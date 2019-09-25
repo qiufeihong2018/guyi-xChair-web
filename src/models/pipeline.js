@@ -172,4 +172,9 @@ export default class Pipeline {
     const data = await post('pipeline/state/stats', params)
     return data
   }
+
+  static async getPipelineState2(params) {
+    const data = await post('pipeline/state/stats2', params)
+    return data
+  }
 }
