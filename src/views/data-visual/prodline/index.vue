@@ -20,15 +20,17 @@
           <el-row class="xpanel-wrapper-3">
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
-              <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
-                <ProdlineOutputBarChart :output-data="prodlineOutput" />
+              <GraphContainer title="产量统计图" class="graph-item xpanel-wrapper-1">
+                <ProdlineOutputBarChart></ProdlineOutputBarChart>
               </GraphContainer>
 
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
               <GraphContainer title="单位能耗系数" class="graph-item xpanel-wrapper-1">
-                <ProdlineCoefficientLineChart :energy-data="prodlineEnergy" :output-data="prodlineOutput" />
+                <ProdlineCoefficientLineChart
+                  :energy-data="prodlineEnergy" :output-data="prodlineOutput">
+                </ProdlineCoefficientLineChart>
               </GraphContainer>
 
             </el-col>
@@ -37,13 +39,13 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" class="col-item">
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
-            <ProdlineStatePieChart />
+            <ProdlineStatePieChart></ProdlineStatePieChart>
           </GraphContainer>
           <GraphContainer title="设备能耗" class="graph-item xpanel-wrapper-3">
-            <ProdlineEnergyLineChart :energy-data="prodlineEnergy" />
+            <ProdlineEnergyLineChart :energy-data="prodlineEnergy"></ProdlineEnergyLineChart>
           </GraphContainer>
           <GraphContainer title="产量趋势图" class="graph-item xpanel-wrapper-3">
-            <ProdlineTrendLineChart />
+            <ProdlineTrendLineChart></ProdlineTrendLineChart>
           </GraphContainer>
         </el-col>
       </el-row>

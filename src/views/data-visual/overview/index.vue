@@ -130,13 +130,13 @@ export default {
         border-left 1px solid #5dc2fe
         border-right 1px solid #5dc2fe
         border-bottom none
-        cursor pointer
       }
       .button-inactive{
         color #fff
         line-height 20px
         padding 5px
         border-radius 2px
+        cursor pointer
         border-bottom 1px solid #5dc2fe
       }
     }

@@ -59,6 +59,7 @@ export default {
       }
 
       this.$emit('getTimeRange', {
+        durationType: this.checkedTime,
         start,
         end
       })
