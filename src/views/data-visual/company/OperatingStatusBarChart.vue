@@ -184,21 +184,22 @@ export default {
   methods: {
     async handleList() {
       this.prodlineList.forEach((line, index) => {
-        if (line.state === 'on' || line.state === 'pending') {
-          this.getPipelineState(line.id, index)
-        } else {
-          this.chartData.push(
-            {
-              name: '关机',
-              value: [index, this.startTime, this.endTime, this.endTime - this.startTime],
-              itemStyle: {
-                normal: {
-                  color: 'red'
-                }
-              }
-            }
-          )
-        }
+        this.getPipelineState(line.id, index)
+        // if (line.state === 'on' || line.state === 'pending') {
+        //   this.getPipelineState(line.id, index)
+        // } else {
+        //   this.chartData.push(
+        //     {
+        //       name: '关机',
+        //       value: [index, this.startTime, this.endTime, this.endTime - this.startTime],
+        //       itemStyle: {
+        //         normal: {
+        //           color: 'red'
+        //         }
+        //       }
+        //     }
+        //   )
+        // }
       })
     },
     async getPipelineState(pipelineId, pipelineIndex) {

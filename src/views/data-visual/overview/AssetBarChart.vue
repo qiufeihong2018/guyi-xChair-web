@@ -24,7 +24,11 @@ export default {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          // formatter: '{a}: {c}万元'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
         },
         grid: {
           left: '10%'
@@ -85,10 +89,11 @@ export default {
           }]
       }
     }
-  }
+  },
+  mounted() {
+    this.carousel(0, 5)
+  },
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>

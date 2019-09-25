@@ -18,7 +18,6 @@ export default {
   data() {
     return {
       chart: null,
-      intervalId: null
     }
   },
   computed: {
@@ -88,28 +87,14 @@ export default {
           label: {
             show: true,
             position: 'inside'
-
           }
         }]
       }
     }
   },
-  destroyed() {
-    clearInterval(this.intervalId)
-  },
   mounted() {
-    let { chart } = this
-    let index = 2 // 播放所在下标
-    this.intervalId = setInterval(() => {
-      chart.dispatchAction({
-        type: 'showTip',
-        seriesIndex: 1,
-        dataIndex: index
-      })
-      index += 1
-      if (index > 6) index = 0
-    }, 2000)
-  }
+    this.carousel(0, 5)
+  },
 }
 </script>
 

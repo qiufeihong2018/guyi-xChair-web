@@ -8,7 +8,8 @@ export default {
       loadingOptions: {
         background: 'rgba(0, 0, 0, 0.2)',
         spinner: 'el-icon-loading'
-      }
+      },
+      carouselIntervalId: undefined
     }
   },
   watch: {
@@ -23,6 +24,7 @@ export default {
   },
   beforeDestroy() {
     this.destroyChart()
+    clearInterval(this.carouselIntervalId)
   },
   methods: {
     __resizeHanlder() {
@@ -53,6 +55,20 @@ export default {
     },
     closeLoading() {
       this.loadingInstance.close()
+    },
+    carousel(startIndex, endIndex) {
+      let { chart } = this
+      let index = startIndex // 播放所在下标
+      let len = endIndex + 1
+      this.carouselIntervalId = setInterval(() => {
+        chart.dispatchAction({
+          type: 'showTip',
+          seriesIndex: 1,
+          dataIndex: index
+        })
+        index += 1
+        if (index > len) index = 0
+      }, 2000)
     }
   },
 }
