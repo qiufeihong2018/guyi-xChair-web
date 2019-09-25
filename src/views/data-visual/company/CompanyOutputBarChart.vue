@@ -79,12 +79,10 @@ export default {
             }
           },
           splitLine: {
-            show: true,
             lineStyle: {
-              color: 'white',
-              type: 'dashed',
+              color: '#333'
             }
-          },
+          }
         },
         series: [
           {

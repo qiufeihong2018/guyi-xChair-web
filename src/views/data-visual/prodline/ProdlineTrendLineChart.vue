@@ -1,5 +1,8 @@
 <template>
-  <div :id="id" style="height: 95%"></div>
+  <div style="height: 100%">
+    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleCoefficientData"></time-switch>
+    <div :id="id" style="height: 95%"></div>
+  </div>
 </template>
 
 <script>
@@ -15,14 +18,6 @@ export default {
       type: String,
       default: 'ProdlineTrendLineChart'
     },
-    energyData: {
-      type: Array,
-      default: () => []
-    },
-    outputData: {
-      type: Array,
-      default: () => []
-    }
   },
   data() {
     return {
@@ -31,6 +26,16 @@ export default {
       timeData: [],
       chartData: [],
       intervalId: undefined,
+      switchOptions: [
+        {
+          label: '本日',
+          value: 'day'
+        }, {
+          label: '昨日',
+          value: 'yester'
+        }
+      ],
+      durationType: 'day'
     }
   },
   computed: {
@@ -103,29 +108,35 @@ export default {
     option(prev, next) {
       this.updateChart()
     },
-    energyData(prev, next) {
-      this.handleCoefficientData(prev)
-    },
   },
   mounted() {
     this.openLoading()
-    this.handleCoefficientData()
+    this.handleCoefficientData({
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
     // this.getPipelineData()
     this.intervalId = setInterval(() => {
-      this.handleCoefficientData()
+      if (this.durationType === 'day') {
+        this.handleCoefficientData({
+          start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+          end: +new Date()
+        })
+      }
     }, 30000)
   },
   methods: {
-    async handleCoefficientData(data) {
+    async handleCoefficientData(timeData) {
+      this.durationType = timeData.durationType || this.durationType
       let productionQuantity = []
       let time = []
-      const todayStart = +new Date(new Date(new Date().toLocaleDateString()).getTime())
-      const now = +new Date()
+      // const todayStart = +new Date(new Date(new Date().toLocaleDateString()).getTime())
+      // const now = +new Date()
       const counter = {
         id: this.pipelineId,
         dataType: 'counter',
-        start: todayStart,
-        end: now
+        start: timeData.start,
+        end: timeData.end
       }
       const counterData = await PipelineModel.getPipelineData(counter)
       counterData.data.forEach((item, index) => {

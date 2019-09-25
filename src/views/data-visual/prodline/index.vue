@@ -20,8 +20,8 @@
           <el-row class="xpanel-wrapper-3">
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
-              <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
-                <ProdlineOutputBarChart :output-data="prodlineOutput"></ProdlineOutputBarChart>
+              <GraphContainer title="产量统计图" class="graph-item xpanel-wrapper-1">
+                <ProdlineOutputBarChart></ProdlineOutputBarChart>
               </GraphContainer>
 
             </el-col>

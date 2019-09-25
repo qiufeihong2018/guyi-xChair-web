@@ -1,5 +1,8 @@
 <template>
-  <div :id="id" style="height: 95%"></div>
+  <div style="height: 100%">
+    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleCoefficientData"></time-switch>
+    <div :id="id" style="height: 95%"></div>
+  </div>
 </template>
 
 <script>
@@ -31,6 +34,16 @@ export default {
       timeData: [],
       chartData: [],
       intervalId: undefined,
+      durationType: 'day',
+      switchOptions: [
+        {
+          label: '本日',
+          value: 'day'
+        }, {
+          label: '昨日',
+          value: 'yester'
+        }
+      ],
     }
   },
   computed: {
@@ -109,28 +122,39 @@ export default {
   },
   mounted() {
     this.openLoading()
-    this.handleCoefficientData()
+    this.handleCoefficientData({
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
     // this.getPipelineData()
     this.intervalId = setInterval(() => {
-      this.handleCoefficientData()
+      if (this.durationType === 'day') {
+        this.handleCoefficientData({
+          start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+          end: +new Date()
+        })
+      }
     }, 30000)
   },
   methods: {
-    async handleCoefficientData(data) {
+    async handleCoefficientData(timeData) {
+      this.durationType = timeData.durationType || this.durationType
       let productionQuantity = []
       let powers = []
       const counter = {
         id: this.pipelineId,
         dataType: 'counter',
-        durationType: 'today'
+        start: timeData.start,
+        end: timeData.end
       }
       const power = {
         id: this.pipelineId,
         dataType: 'power',
-        durationType: 'today'
+        start: timeData.start,
+        end: timeData.end
       }
-      const counterData = await PipelineModel.getPipelineState(counter)
-      const powerData = await PipelineModel.getPipelineState(power)
+      const counterData = await PipelineModel.getPipelineState2(counter)
+      const powerData = await PipelineModel.getPipelineState2(power)
       counterData.data.forEach((item, index) => {
         if (index > 0) {
           productionQuantity.push(item.out - counterData.data[index - 1].out)
