@@ -1,6 +1,6 @@
 <template>
   <div style="height: 100%">
-    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleOutputData"></time-switch>
+    <time-switch :time-options="switchOptions" v-on:getTimeRange="handleOutputData" />
     <div :id="id" style="height: 95%"></div>
   </div>
 </template>
@@ -63,10 +63,11 @@ export default {
         },
         legend: {
           textStyle: {
+            fontSize: 16,
             color: '#fff'
           },
           formatter(name) {
-            return `${name}:${num[name]}`
+            return `${name.slice(0, 2)}: ${num[name]}`
           }
         },
         grid: {
@@ -102,6 +103,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          name: '单位: 把',
           minInterval: 1,
           axisLabel: {
             textStyle: {
@@ -216,9 +218,9 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .legend {
-    position absolute
-    right 40px
-    width 200px
-  }
+.legend {
+  position absolute
+  right 40px
+  width 200px
+}
 </style>

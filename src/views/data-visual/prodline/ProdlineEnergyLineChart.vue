@@ -92,12 +92,22 @@ export default {
             data: this.chartData,
             type: 'line',
             showSymbol: false,
+            areaStyle: {
+              opacity: 0.1,
+            },
             hoverAnimation: false,
             smooth: true,
             markPoint: {
-              symbol: 'arrow',
-              symbolSize: 16,
-              symbolOffset: [0, '50%'],
+              symbol: 'pin',
+              symbolSize: 10,
+              symbolOffset: [0, 0],
+              label: {
+                position: 'top',
+                fontSize: 18,
+                formatter(params) {
+                  return `${Math.ceil((params.value * 10)) / 10}`
+                }
+              },
               data: [
                 { type: 'max', name: '最大值' },
               ]
