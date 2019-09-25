@@ -70,7 +70,8 @@ export default {
 <style scoped lang="stylus">
 .time-switch {
   position absolute
-  right: 50px
+  top 10px
+  right: 20px
   border 1px solid #5dc2fe
   z-index 100
   p {

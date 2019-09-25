@@ -41,6 +41,9 @@ export default {
     }
   },
   computed: {
+    pipelineId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
@@ -94,6 +97,7 @@ export default {
             markPoint: {
               symbol: 'arrow',
               symbolSize: 16,
+              symbolOffset: [0, '50%'],
               data: [
                 { type: 'max', name: '最大值' },
               ]
@@ -123,7 +127,7 @@ export default {
       let energy = []
       let time = []
       const params = {
-        id: '5d834e6c0c8e9f276745ded0',
+        id: this.pipelineId,
         dataType: 'power',
         start: range.start,
         end: range.end
