@@ -2,15 +2,15 @@
   <div style="height: 100%">
     <div :id="id" style="height: 95%"></div>
     <!--<div>-->
-      <!--<p class="legend" style="top: 5px;color: #60acfc;">-->
-        <!--入口总数: {{repeatedNum}}-->
-      <!--</p>-->
-      <!--<p class="legend" style="top: 25px;color: #45d3eb;">-->
-        <!--次品总数: {{defectiveNum}}-->
-      <!--</p>-->
-      <!--<p class="legend" style="top: 45px;color: #5bc59f;">-->
-        <!--出品总数: {{productionNum}}-->
-      <!--</p>-->
+    <!--<p class="legend" style="top: 5px;color: #60acfc;">-->
+    <!--入口总数: {{repeatedNum}}-->
+    <!--</p>-->
+    <!--<p class="legend" style="top: 25px;color: #45d3eb;">-->
+    <!--次品总数: {{defectiveNum}}-->
+    <!--</p>-->
+    <!--<p class="legend" style="top: 45px;color: #5bc59f;">-->
+    <!--出品总数: {{productionNum}}-->
+    <!--</p>-->
     <!--</div>-->
   </div>
 </template>
@@ -67,10 +67,11 @@ export default {
         },
         legend: {
           textStyle: {
+            fontSize: 16,
             color: '#fff'
           },
           formatter(name) {
-            return `${name}:${num[name]}`
+            return `${name.slice(0, 2)}: ${num[name]}`
           }
         },
         grid: {
@@ -106,6 +107,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          name: '单位: 把',
           minInterval: 1,
           axisLabel: {
             textStyle: {
@@ -213,9 +215,9 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .legend {
-    position absolute
-    right 40px
-    width 200px
-  }
+.legend {
+  position absolute
+  right 40px
+  width 200px
+}
 </style>

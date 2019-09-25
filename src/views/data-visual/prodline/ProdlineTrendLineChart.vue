@@ -92,12 +92,21 @@ export default {
               opacity: 0.1,
             },
             hoverAnimation: false,
-            // markPoint: {
-            //   symbolSize: 60,
-            //   data: [
-            //     { type: 'max', name: '最大值' },
-            //   ]
-            // },
+            markPoint: {
+              symbol: 'pin',
+              symbolSize: 10,
+              symbolOffset: [0, 0],
+              label: {
+                position: 'top',
+                fontSize: 18,
+                formatter(params) {
+                  return params.value
+                }
+              },
+              data: [
+                { type: 'max', name: '最大值' },
+              ]
+            },
           }]
       }
     }
@@ -153,6 +162,4 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-
-</style>
+<style scoped lang="stylus"></style>
