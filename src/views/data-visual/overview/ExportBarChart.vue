@@ -17,7 +17,8 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      highlightInterval: null
     }
   },
   computed: {
@@ -66,6 +67,39 @@ export default {
             }
           }]
       }
+    }
+  },
+  mounted() {
+    this.highlightChart()
+  },
+  destroyed() {
+    clearInterval(this.highlightInterval)
+  },
+  methods: {
+    highlightChart() {
+      let { chart } = this
+      let index = 0 // 播放所在下标
+      this.highlightInterval = setInterval(() => {
+        chart.dispatchAction({
+          type: 'downplay',
+          seriesIndex: 0,
+          dataIndex: index === 0 ? 2 : index - 1
+        })
+        chart.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: index
+        })
+        index += 1
+        if (index > 6) index = 0
+        // index += 1
+        // if (index > 2) index = 0
+        // chart.dispatchAction({
+        //   type: 'highlight',
+        //   seriesIndex: 0,
+        //   dataIndex: index
+        // })
+      }, 2000)
     }
   }
 }
