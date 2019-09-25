@@ -77,7 +77,7 @@ export default {
               normal: {
                 show: true,
                 formatter(params) {
-                  return `${params.name}: ${formatSeconds(params.value / 1000)}`
+                  return `${params.name} \n ${formatSeconds(params.value / 1000)}`
                 },
                 textStyle: {
                   fontSize: 15
