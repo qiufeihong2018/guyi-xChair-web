@@ -88,6 +88,9 @@ export default {
             data: this.chartData,
             type: 'line',
             showSymbol: false,
+            areaStyle: {
+              opacity: 0.1,
+            },
             hoverAnimation: false,
             // markPoint: {
             //   symbolSize: 60,
