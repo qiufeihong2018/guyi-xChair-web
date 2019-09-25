@@ -17,14 +17,18 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      intervalId: null
     }
   },
   computed: {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}万元'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
         },
         grid: {
           left: '10%'
@@ -89,6 +93,22 @@ export default {
         }]
       }
     }
+  },
+  destroyed() {
+    clearInterval(this.intervalId)
+  },
+  mounted() {
+    let { chart } = this
+    let index = 2 // 播放所在下标
+    this.intervalId = setInterval(() => {
+      chart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 1,
+        dataIndex: index
+      })
+      index += 1
+      if (index > 6) index = 0
+    }, 2000)
   }
 }
 </script>
