@@ -13,6 +13,22 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="16" class="col-item">
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
+
+            <div class="visual-select">
+              <el-select
+                v-model="companyId"
+                placeholder="请选择"
+                size="mini"
+                popper-class="select-option"
+                @change="changeCompany">
+                <el-option
+                  v-for="item in companyList"
+                  :key="item._id"
+                  :label="item.chineseName"
+                  :value="item._id">
+                </el-option>
+              </el-select>
+            </div>
             <ProdlineStatus />
             <CompanyProdlineStateList />
           </GraphContainer>
@@ -121,13 +137,15 @@ export default {
         },
       ],
       timeRange: {},
-      utilizationData: []
+      utilizationData: [],
+      companyList: [],
+      companyId: ''
     }
   },
   computed: {
-    companyId() {
-      return this.$route.query.id
-    },
+    // companyId() {
+    //   return this.$route.query.id
+    // },
     ...mapState({
       showDetail: state => state.company.pipeLine.showDetail
     }),
@@ -136,17 +154,19 @@ export default {
     showDetail() {}
   },
   async created() {
-    let { id } = this.$route.query
-    let company = companies.find(item => item.id === id)
-    if ((id && id.length !== 24) || !company) {
-      // 返回到overview
-      this.$router.push({ path: '/data-visual/overview' })
-    }
-    this.title = company.alias
-
-    this.$store.dispatch('company/getCompanyAllPipelineStateStat', id)
+    this.companyId = this.$route.query.id
+    // let { id } = this.$route.query
+    // let company = companies.find(item => item.id === id)
+    // if ((id && id.length !== 24) || !company) {
+    //   // 返回到overview
+    //   this.$router.push({ path: '/data-visual/overview' })
+    // }
+    // this.title = company.alias
+    //
+    // this.$store.dispatch('company/getCompanyAllPipelineStateStat', id)
   },
   mounted() {
+    this.getCompanyList()
     this.getPipelineStateTime()
     this.intervalId = setInterval(() => {
       this.getPipelineStateTime()
@@ -158,6 +178,30 @@ export default {
     clearInterval(this.intervalIdOfgetPipelineList)
   },
   methods: {
+    changeCompany(value) {
+      const query = {
+        id: value
+      }
+      this.$router.push({
+        path: '/data-visual/company',
+        query
+      })
+      window.location.reload()
+    },
+
+    async getCompanyList() {
+      this.companyList = await CompanyModel.getList()
+      let { id } = this.$route.query
+      let company = this.companyList.find(item => item._id === id)
+      if ((id && id.length !== 24) || !company) {
+        // 返回到overview
+        this.$router.push({ path: '/data-visual/overview' })
+      }
+      this.title = company.chineseName
+
+      this.$store.dispatch('company/getCompanyAllPipelineStateStat', id)
+    },
+
     goOverviewPage() {
       this.$router.push('/data-visual/overview')
     },

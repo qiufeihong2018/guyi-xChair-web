@@ -55,6 +55,9 @@ export default {
     }
   },
   computed: {
+    pipelineId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
@@ -135,7 +138,7 @@ export default {
     },
     async getProdlineState(range) {
       const params = {
-        id: '5d834e6c0c8e9f276745ded0',
+        id: this.pipelineId,
         dataType: 'counter',
         start: range.start,
         end: range.end

@@ -34,6 +34,9 @@ export default {
     }
   },
   computed: {
+    pipelineId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
@@ -102,7 +105,7 @@ export default {
     },
     energyData(prev, next) {
       this.handleCoefficientData(prev)
-    },
+    }
   },
   mounted() {
     this.openLoading()
@@ -117,12 +120,12 @@ export default {
       let productionQuantity = []
       let powers = []
       const counter = {
-        id: '5d834e6c0c8e9f276745ded0',
+        id: this.pipelineId,
         dataType: 'counter',
         durationType: 'today'
       }
       const power = {
-        id: '5d834e6c0c8e9f276745ded0',
+        id: this.pipelineId,
         dataType: 'power',
         durationType: 'today'
       }

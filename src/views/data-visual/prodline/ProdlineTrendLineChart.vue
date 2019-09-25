@@ -34,6 +34,9 @@ export default {
     }
   },
   computed: {
+    pipelineId() {
+      return this.$route.query.id
+    },
     option() {
       return {
         tooltip: {
@@ -119,7 +122,7 @@ export default {
       const todayStart = +new Date(new Date(new Date().toLocaleDateString()).getTime())
       const now = +new Date()
       const counter = {
-        id: '5d834e6c0c8e9f276745ded0',
+        id: this.pipelineId,
         dataType: 'counter',
         start: todayStart,
         end: now

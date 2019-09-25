@@ -161,7 +161,7 @@
     border 0
   }
   .el-table--border th.gutter:last-of-type {
-    border 0  
+    border 0
   }
   // 滚动条的样式
   *::-webkit-scrollbar { /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
@@ -187,7 +187,11 @@
   }
 }
 /* el-select */
-.visual {
+.visual-select {
+  position absolute
+  right 10px
+  top 10px
+  z-index 100
   padding 10px
   .el-select {
     .el-input__inner { /* 定义输入框样式 */

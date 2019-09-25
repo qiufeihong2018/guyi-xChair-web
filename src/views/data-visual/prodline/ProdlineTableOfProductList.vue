@@ -20,9 +20,13 @@ export default {
       productList: []
     }
   },
-  computed: {},
-  async created() { 
-    const product = await ProductModel.getListByPipeline('5d834e6c0c8e9f276745ded0')
+  computed: {
+    pipelineId() {
+      return this.$route.query.id
+    },
+  },
+  async created() {
+    const product = await ProductModel.getListByPipeline(this.pipelineId)
   },
   mounted() { },
   methods: {},
