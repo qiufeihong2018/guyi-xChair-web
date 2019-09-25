@@ -13,22 +13,21 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="16" class="col-item">
 
           <GraphContainer title="运行状态" class="graph-item xpanel-wrapper-6">
-
-            <div class="visual-select">
-              <el-select
-                v-model="companyId"
-                placeholder="请选择"
-                size="mini"
-                popper-class="select-option"
-                @change="changeCompany">
-                <el-option
-                  v-for="item in companyList"
-                  :key="item._id"
-                  :label="item.chineseName"
-                  :value="item._id">
-                </el-option>
-              </el-select>
-            </div>
+            <!--<div class="visual-select">-->
+              <!--<el-select-->
+                <!--v-model="companyId"-->
+                <!--placeholder="请选择"-->
+                <!--size="mini"-->
+                <!--popper-class="select-option"-->
+                <!--@change="changeCompany">-->
+                <!--<el-option-->
+                  <!--v-for="item in companyList"-->
+                  <!--:key="item._id"-->
+                  <!--:label="item.chineseName"-->
+                  <!--:value="item._id">-->
+                <!--</el-option>-->
+              <!--</el-select>-->
+            <!--</div>-->
             <ProdlineStatus />
             <CompanyProdlineStateList />
           </GraphContainer>
