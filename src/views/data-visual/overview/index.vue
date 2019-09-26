@@ -5,10 +5,10 @@
       <p>安吉椅艺大数据平台</p>
       <div class="button-container">
         <p v-for="item in years"
-           :key="item.value"
-           class="button-inactive"
-           :class="{'button-active':year===item.value}"
-           @click="changeYear(item.value)"
+          :key="item.value"
+          class="button-inactive"
+          :class="{'button-active':year===item.value}"
+          @click="changeYear(item.value)"
         >{{item.name}}</p>
 
       </div>
