@@ -35,6 +35,8 @@ export default {
       let list = []
       this.companyAllPipelineCounterStat.forEach((item, index) => {
         let value = (this.companyAllPipelinePowerStat[index].power * 1000) / (item.out)
+        value = String(value).replace(/^(.*\..{4}).*$/, '$1')
+        value = Number(value) // number = 12.3321
         if (!value) value = 0
         list.push({ value, name: item.pipelineName })
       })

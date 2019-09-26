@@ -43,7 +43,16 @@ export default {
     option() {
       return {
         tooltip: {
-          formatter: '{a}: {c}件'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {
+          data: ['产量', '次品'],
+          textStyle: {
+            color: '#fff'
+          }
         },
         grid: {
           left: '10%'
@@ -101,7 +110,7 @@ export default {
             },
           },
           {
-            name: '失误次数',
+            name: '次品',
             data: this.seriesData.map(item => item.failed),
             type: 'bar',
           }
