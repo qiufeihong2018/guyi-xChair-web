@@ -37,7 +37,9 @@ export default {
           label: '昨日',
           value: 'yester'
         }
-      ]
+      ],
+      durationType: 'day',
+      intervalId: undefined,
     }
   },
   computed: {
@@ -131,9 +133,26 @@ export default {
     //   start: range.start,
     //   end: range.end
     // })
+    this.handleEnergyData({
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
+    // this.getPipelineData()
+    this.intervalId = setInterval(() => {
+      if (this.durationType === 'day') {
+        this.handleEnergyData({
+          start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+          end: +new Date()
+        })
+      }
+    }, 30000)
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalId)
   },
   methods: {
     async handleEnergyData(range) {
+      this.durationType = range.durationType || this.durationType
       let energy = []
       let time = []
       const params = {
