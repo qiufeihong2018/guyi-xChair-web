@@ -3,12 +3,13 @@
 </template>
 
 <script>
-import resize from '@/mixins/yearResize'
+import year from '@/mixins/yearResize'
+import resize from '@/mixins/resize'
 import { companies } from 'assets/data/company'
 import color from 'assets/data/color'
 export default {
   name: 'CompanyOutputInBarChart',
-  mixins: [resize],
+  mixins: [resize, year],
   props: {
     id: {
       type: String,
