@@ -6,12 +6,8 @@
     <el-container style="margin-top: 10px; height: 700px">
       <el-tabs tab-position="left" type="border-card" style="width: 100%" @tab-click="handleTabClick">
         <el-tab-pane v-for="item in companyList" :key="item._id" :label="item.companyName" >
-          <el-table :data="productList" style="width: 100%" height="750px">
-            <el-table-column label="生产线" >
-              <template slot-scope="scope">
-                <span style="margin-left: 10px">{{ scope.row.pipelineName }}</span>
-              </template>
-            </el-table-column>
+          <el-table :data="productList" style="width: 100%" height="80vh">
+            <el-table-column label="序号"  type="index" ></el-table-column>
             <el-table-column label="产品型号">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.model }}</span>
@@ -252,7 +248,7 @@ export default {
     },
     async handleEditPipeline() {
       const res = await ProductModel.updateProdcut(this.product)
-      if (res.status && res.status === 200) {
+      if (res._id) {
         this.handleCloseDialog()
       } else {
         this.$message.error(res.message)
