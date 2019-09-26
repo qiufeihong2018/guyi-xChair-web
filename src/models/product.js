@@ -18,14 +18,25 @@ export default class product {
   }
 
   /**
-   * 根据生产线查列表
+   * 查找产品生产历史数据
    *
    * @static
    * @returns
    */
-  static async getListByPipeline(pipelineId) {
-    const data = await get(`pipeline/${pipelineId}/productState`)
-    return data
+  static async getHistoryProduct(data) {
+    const res = await post('pipeline/state/history', data)
+    return res
+  }
+
+  /**
+   * 查找当前生产产品
+   *
+   * @static
+   * @returns
+   */
+  static async getCurrentProduct(data) {
+    const res = await post('pipeline/state/current', data)
+    return res
   }
   /**
    * 修改产品

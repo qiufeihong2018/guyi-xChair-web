@@ -18,7 +18,7 @@ function formatBit(val) {
 // 秒转时分秒，求模很重要，数字的下舍入
 function formatSeconds(time) {
   let min = Math.floor(time % 3600)
-  let val = `${formatBit(Math.floor(time / 3600))}时${formatBit(Math.floor(min / 60))}分${formatBit((time % 60).toFixed(0))}秒`
+  let val = `${formatBit(Math.floor(time / 3600))}时${formatBit(Math.floor(min / 60))}分`
   return val
 }
 
@@ -51,7 +51,9 @@ export default {
           value: 'yester'
         }
       ],
-      highlightInterval: undefined
+      highlightInterval: undefined,
+      durationType: 'day',
+      intervalId: undefined,
     }
   },
   computed: {
@@ -106,9 +108,23 @@ export default {
   mounted() {
     this.openLoading()
     this.highlightChart()
+    this.getProdlineState({
+      start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+      end: +new Date()
+    })
+    // this.getPipelineData()
+    this.intervalId = setInterval(() => {
+      if (this.durationType === 'day') {
+        this.getProdlineState({
+          start: +new Date(new Date(new Date().toLocaleDateString()).getTime()),
+          end: +new Date()
+        })
+      }
+    }, 30000)
   },
   beforeDestroy() {
     clearInterval(this.highlightInterval)
+    clearInterval(this.intervalId)
   },
   methods: {
     highlightChart() {
@@ -137,6 +153,7 @@ export default {
       }, 2000)
     },
     async getProdlineState(range) {
+      this.durationType = range.durationType || this.durationType
       const params = {
         id: this.pipelineId,
         dataType: 'counter',
