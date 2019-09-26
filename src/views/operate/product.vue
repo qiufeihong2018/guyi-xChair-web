@@ -6,9 +6,11 @@
     <el-container style="margin-top: 10px; height: 700px">
       <el-tabs tab-position="left" type="border-card" style="width: 100%" @tab-click="handleTabClick">
         <el-tab-pane v-for="item in companyList" :key="item._id" :label="item.companyName" >
-          <el-table :data="productList" style="width: 100%" height="80vh">
-            <el-table-column label="序号"  type="index" ></el-table-column>
-            <el-table-column label="产品型号">
+          <el-table :data="productList" style="width: 100%"  height="80vh">
+            <el-table-column label="序号"   type="index"  width="100px" ></el-table-column>
+            <el-table-column label="产品型号" prop="model"
+                             :sortable='true'
+                             :sort-method="sortChangeModel">
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.model }}</span>
               </template>
@@ -18,7 +20,10 @@
                 <span style="margin-left: 10px">{{ scope.row.no }}</span>
               </template>
             </el-table-column>
-            <el-table-column label="产品类型">
+            <el-table-column label="产品类型"
+                             :sortable='true'
+                             :sort-method="sortChangeType"
+            >
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.type }}</span>
               </template>
@@ -28,7 +33,10 @@
                 <span style="margin-left: 10px">{{ scope.row.suttleWeight }}</span>
               </template>
             </el-table-column>
-            <el-table-column label=" 产品总重(kg)">
+            <el-table-column label=" 产品总重(kg)"
+                             :sortable='true'
+                             :sort-method="sortChangeTotalWeight"
+            >
               <template slot-scope="scope">
                 <span style="margin-left: 10px">{{ scope.row.totalWeight }}</span>
               </template>
@@ -197,6 +205,16 @@ export default {
       this.companyId = this.companyList[tab.index]._id
       await this.getPipeLineList()
       await this.getList()
+    },
+    sortChangeTotalWeight(a, b) { // 排序
+      return a.type - b.type
+    },
+
+    sortChangeModel(a, b) { // 排序
+      return a.model - b.model
+    },
+    sortChangeType(a, b) { // 排序
+      return a.totalWeight - b.totalWeight
     },
     handleEdit(index, row) {
       this.dialogModifyVisible = true
