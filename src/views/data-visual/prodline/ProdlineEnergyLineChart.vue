@@ -94,6 +94,14 @@ export default {
             showSymbol: false,
             areaStyle: {
               opacity: 0.1,
+              // 颜色渐变
+              // color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+              //   offset: 0,
+              //   color: 'steelblue'
+              // }, {
+              //   offset: 1,
+              //   color: '#000000'
+              // }]),
             },
             hoverAnimation: false,
             smooth: true,

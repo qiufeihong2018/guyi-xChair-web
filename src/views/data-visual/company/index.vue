@@ -35,14 +35,14 @@
           <el-row class="xpanel-wrapper-3">
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
-              <GraphContainer title="本日产量统计图" class="graph-item xpanel-wrapper-1">
+              <GraphContainer title="产量统计图" class="graph-item xpanel-wrapper-1">
                 <CompanyOutputBarChart />
               </GraphContainer>
 
             </el-col>
             <el-col :xs="24" :sm="24" :md="24" :lg="12" class="col-item" style="height: 100%">
 
-              <GraphContainer title="本日单位能耗系数" class="graph-item xpanel-wrapper-1">
+              <GraphContainer title="单位能耗系数" class="graph-item xpanel-wrapper-1">
                 <BarChartOfEnergyCostFacter />
               </GraphContainer>
 
@@ -54,7 +54,7 @@
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
             <OperatingStatusBarChart />
           </GraphContainer>
-          <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="设备能耗" class="graph-item xpanel-wrapper-3">
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
             <UtilizationBarChart :chart-data="utilizationData" />
