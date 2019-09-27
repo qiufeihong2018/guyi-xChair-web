@@ -14,6 +14,13 @@
         <el-col :xs="24" :sm="24" :md="24" :lg="16" class="col-item">
 
           <GraphContainer title="当日生产详情" class="graph-item xpanel-wrapper-6">
+            <div class="button-container">
+              <el-tooltip content="返回公司详情" placement="right">
+                <p class="return" @click="backtoCompany">
+                  <fa-icon icon-name="rotate-left (alias)" ></fa-icon>
+                </p>
+              </el-tooltip>
+            </div>
             <ProdlineTableOfProductList />
           </GraphContainer>
 
@@ -102,6 +109,10 @@ export default {
     clearInterval(this.intervalId)
   },
   methods: {
+    async backtoCompany() {
+      const res = await PipelineModel.getDetail(this.pipelineId)
+      this.$router.push({ path: '/data-visual/company', query: { id: res.companyId } })
+    },
     goOverviewPage() {
       this.$router.push({ path: '/data-visual/overview' })
     },
@@ -140,6 +151,16 @@ export default {
       .graph-item {
         padding-bottom 10px
         box-sizing border-box
+      }
+      .button-container {
+        position absolute
+        right 12px
+        top 10px
+        .return {
+          cursor pointer
+          padding 5px 15px
+          font-size 10px
+        }
       }
     }
   }
