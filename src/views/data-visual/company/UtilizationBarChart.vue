@@ -117,9 +117,7 @@ export default {
       }
     }
   },
-  mounted() {
-    console.log('list', this.nameList)
-  },
+  mounted() {},
   methods: {
     getStateTime(range) {
       this.prodlineList.forEach(async (item, index) => {

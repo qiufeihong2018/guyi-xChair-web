@@ -44,7 +44,7 @@
               </el-form>
             </el-form>
             <el-tabs v-model="activeIndex">
-              <el-tab-pane v-for="item in company.kpi" :key="item.year" 
+              <el-tab-pane v-for="item in company.kpi" :key="item.year"
                 :label="`${item.year}年`" :name="item.year">
                 <table style="margin-top: 10px;">
                   <tr>
@@ -111,7 +111,6 @@ export default {
       setCompanyList: 'company/SET_COMPANY_LIST'
     }),
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
     },
   },
 }

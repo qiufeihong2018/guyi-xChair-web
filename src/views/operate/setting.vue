@@ -99,7 +99,7 @@ export default {
   methods: {
     handleChange(value) {
       // 在此可以获取唯一的["zhinan", "shejiyuanze", "fankui"]
-      console.log(value)
+      // console.log(value)
     }
   },
 }

@@ -87,10 +87,10 @@ export default {
       // console.log(key, keyPath)
     },
     _testRouterAttrs() {
-      console.log('$router:', this.$router)
-      console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
-      console.log('$route:', this.$route)
-      console.log('当前页面的name:', this.$route.name)
+      // console.log('$router:', this.$router)
+      // console.log('所有路由(含嵌套子路由):', this.$router.options.routes)
+      // console.log('$route:', this.$route)
+      // console.log('当前页面的name:', this.$route.name)
     },
   },
 }

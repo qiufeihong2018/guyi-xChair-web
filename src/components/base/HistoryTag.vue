@@ -36,7 +36,6 @@ export default {
   methods: {
     addTag() {
       const { name } = this.$route
-      console.log('name', name)
     },
   },
 }

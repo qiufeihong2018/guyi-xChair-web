@@ -19,7 +19,7 @@ export default {
   created() {},
   mounted() {
     axios.get('/mock/get_user_info').then(res => {
-      console.log('res', res)
+      // console.log('res', res)
     })
     user.getToken()
   },

@@ -59,80 +59,8 @@
         </el-tab-pane>
       </el-tabs>
     </el-container>
-    <el-dialog title="编辑" :visible.sync="dialogModifyVisible">
-      <el-form :model="product" label-width="100px">
-        <el-form-item label="生产线" label-width="100px">
-          <el-select v-model="product.pipelineId" placeholder="请选择" @change="getPipeLineName">
-            <el-option v-for="item in pipelineList" :key="item.value" :label="item.pipelineName" :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="产品型号" label-width="100px">
-          <el-input v-model="product.model" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="数字代号" label-width="100px">
-          <el-input v-model="product.no" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品类型" label-width="100px">
-          <el-input v-model="product.type" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品净重(kg)" label-width="100px">
-          <el-input v-model="product.suttleWeight" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品总重(kg)" label-width="100px">
-          <el-input v-model="product.totalWeight" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="长宽高(cm)" label-width="100px">
-          <div style="display: flex">
-            <el-input v-model="product.length" autocomplete="off"></el-input> X
-            <el-input v-model="product.width" autocomplete="off"></el-input> X
-            <el-input v-model="product.height" autocomplete="off"></el-input>
-          </div>
-
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="handleCloseDialog">取 消</el-button>
-        <el-button type="primary" @click="handleEditPipeline">确 定</el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog title="新增产品" :visible.sync="dialogCreateVisible">
-      <el-form :model="newProduct" label-width="100px">
-        <el-form-item label="生产线" label-width="100px">
-          <el-select v-model="newProduct.pipelineId" placeholder="请选择" @change="getNewPipeLineName">
-            <el-option v-for="item in pipelineList" :key="item.value" :label="item.pipelineName" :value="item.id">
-            </el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="产品型号" label-width="100px">
-          <el-input v-model="newProduct.model" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品注册代号" label-width="100px">
-          <el-input v-model="newProduct.no" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品类型" label-width="100px">
-          <el-input v-model="newProduct.type" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品净重(kg)" label-width="100px">
-          <el-input v-model="newProduct.suttleWeight" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品总重(kg)" label-width="100px">
-          <el-input v-model="newProduct.totalWeight" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="产品长宽高(cm)" label-width="100px">
-          <div style="display: flex">
-            <el-input v-model="newProduct.length" autocomplete="off"></el-input>X
-            <el-input v-model="newProduct.width" autocomplete="off"></el-input>X
-            <el-input v-model="newProduct.height" autocomplete="off"></el-input>
-          </div>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="handleCloseDialog">取 消</el-button>
-        <el-button type="primary" @click="handleCreateProduct">确 定</el-button>
-      </div>
+    <el-dialog :title="editTitle"  :visible.sync="showEdit">
+      <ProductEdit :id="companyId" :product="product" :is-add="isAdd" :pipelines="pipelineList" @handleCloseDig="handleCloseDig"/>
     </el-dialog>
 
   </el-container>
@@ -143,52 +71,26 @@ import { companies } from 'assets/data/company'
 import PipelineModel from '@/models/pipeline'
 import CompanyModel from '@/models/company'
 import ProductModel from '@/models/product'
+import ProductEdit from './ProductEdit'
 export default {
   name: 'OperateProduct',
-  components: {},
+  components: { ProductEdit },
   data() {
     return {
       companyList: companies,
       productList: [],
-      dialogModifyVisible: false,
-      dialogCreateVisible: false,
-      product: {
-        pipelineId: '5d834e6c0c8e9f276745ded0',
-        pipelineName: 'ALT01',
-        model: '8810',
-        no: '8810',
-        type: '办公转椅',
-        suttleWeight: 8,
-        totalWeight: 10,
-        length: 100,
-        width: 80,
-        height: 120
-      },
+      isAdd: false, // 是否新增
+      showEdit: false,
+      product: {},
       pipelineList: [],
-      inputVisible: false,
-      inputValue: '',
-      companyId: '',
-      currentProbe: { // 当前的采集器
-        companyId: '',
-        companyAlias: '',
-        pipelineId: '', // 采集器所属生产线的ID
-        probeNo: '', // 采集器的编号 AA01
-      },
-      newProduct: {
-        pipelineId: '',
-        pipelineName: '',
-        model: '', // 产品型号(公司记录在册)
-        no: '', // 产品数字代号(生产线上采集器设置的)(纯数字)
-        type: '',
-        suttleWeight: 0,
-        totalWeight: 0,
-        length: 0,
-        width: 0,
-        height: 0
-      }
+      companyId: ''
     }
   },
-  computed: {},
+  computed: {
+    editTitle() {
+      return this.isAdd ? '新建' : '编辑'
+    }
+  },
   async mounted() {
     this.getCompanies()
   },
@@ -198,12 +100,12 @@ export default {
       this.companyList = await CompanyModel.getList()
       this.companyId = this.companyList[0]._id
       this.probeList = await CompanyModel.getList(this.companyId)
+      this.getPipeLineList()
       await this.getList()
-      await this.getPipeLineList()
     },
     async handleTabClick(tab, event) {
       this.companyId = this.companyList[tab.index]._id
-      await this.getPipeLineList()
+      this.getPipeLineList()
       await this.getList()
     },
     sortChangeTotalWeight(a, b) { // 排序
@@ -217,7 +119,8 @@ export default {
       return a.totalWeight - b.totalWeight
     },
     handleEdit(index, row) {
-      this.dialogModifyVisible = true
+      this.showEdit = true
+      this.isAdd = false
       let data = {
         id: row._id,
         pipelineId: row.pipelineId,
@@ -233,92 +136,69 @@ export default {
       }
       this.product = data
     },
+    async getPipeLineList() {
+      this.pipelineList = await PipelineModel.getList(this.companyId)
+    },
+
     handleDelete(index, row) {
-      this.deleteProduct(index, row)
+      this.$confirm('此操作将删除该产品, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.deleteProduct(index, row)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     async deleteProduct(index, row) {
       const res = await ProductModel.deleteProduct(row._id)
       if (res.status && res.status === 200) {
-        this.handleCloseDialog()
+        this.getList()
       } else {
         this.$message.error(res.message)
       }
     },
-    // handleDeleteProbe(probe) {
-    //   this.pipeline.probeList.splice(this.pipeline.probeList.indexOf(probe), 1)
-    // },
-    // handleInputConfirm() {
-    //   let { inputValue } = this
-    //   if (inputValue) {
-    //     this.pipeline.probeList.push(inputValue)
-    //   }
-    //   this.inputVisible = false
-    //   this.inputValue = ''
-    // },
     showInput() {
       // 新增采集器
-
       //
       this.inputVisible = true
       this.$nextTick(_ => {
         this.$refs.saveTagInput.$refs.input.focus()
       })
     },
-    async handleEditPipeline() {
-      const res = await ProductModel.updateProdcut(this.product)
-      if (res._id) {
-        this.handleCloseDialog()
-      } else {
-        this.$message.error(res.message)
-      }
-    },
-    async handleCreateProduct() {
-      let data = this.newProduct
-      data.companyId = this.companyId
-      const res = await ProductModel.createProduct(data)
-      if (res.status && res.status === 200) {
-        this.handleCloseDialog()
-      } else {
-        this.$message.error(res.message)
-      }
-    },
     showCreateDialog() {
-      this.dialogCreateVisible = true
-      this.newProduct.companyId = this.companyId
-      this.newProduct = {
+      this.showEdit = true
+      this.isAdd = true
+      let data = {
         pipelineId: '',
         pipelineName: '',
-        model: '',
-        no: '',
+        model: '', // 产品型号(公司记录在册)
+        no: '', // 产品数字代号(生产线上采集器设置的)(纯数字)
         type: '',
         suttleWeight: 0,
         totalWeight: 0,
         length: 0,
         width: 0,
-        height: 0
+        height: 0,
+        companyId: this.companyId
       }
+      this.product = data
     },
     // select获取值
     getPipeLineName(val) {
       let object = this.pipelineList.find(item => item.id === val)
-      console.log('object', object)
       this.product.pipelineName = object.pipelineName
-    },
-    getNewPipeLineName(val) {
-      let object = this.pipelineList.find(item => item.id === val)
-      console.log('object', object)
-      this.newProduct.pipelineName = object.pipelineName
     },
     async getList() {
       this.productList = await ProductModel.getListByConmpany(this.companyId)
     },
-    async getPipeLineList() {
-      this.pipelineList = await PipelineModel.getList(this.companyId)
-    },
     // 关闭所有弹窗
-    async handleCloseDialog() {
-      this.dialogCreateVisible = false
-      this.dialogModifyVisible = false
+    async handleCloseDig() {
+      this.showEdit = false
       this.getList()
     }
   },
