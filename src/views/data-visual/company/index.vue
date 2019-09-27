@@ -58,7 +58,8 @@
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
             <OperatingStatusBarChart />
           </GraphContainer>
-          <GraphContainer title="本日设备能耗" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="生产状态" class="graph-item xpanel-wrapper-3">
+            <ProdlineStateTable></ProdlineStateTable>
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
             <UtilizationBarChart :chart-data="utilizationData" />
@@ -79,6 +80,7 @@ import GraphContainer from 'comps/base/GraphContainer'
 import CompanyProdlineStateList from './CompanyProdlineStateList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
+import ProdlineStateTable from './ProdlineStateTable'
 // import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import BarChartOfEnergyCostFacter from './BarChartOfEnergyCostFacter'
 import UtilizationBarChart from './UtilizationBarChart'
@@ -103,6 +105,7 @@ export default {
     CompanyProdlineStateList,
     ProdlineStatus,
     OperatingStatusBarChart,
+    ProdlineStateTable,
     // EnergyConsumptionBarChart,
     BarChartOfEnergyCostFacter,
     UtilizationBarChart,
