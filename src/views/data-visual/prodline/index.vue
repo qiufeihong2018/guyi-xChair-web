@@ -1,10 +1,14 @@
 <template>
   <el-container class="prodline">
-    <Screenfull style="position: fixed; top: 10px; right: 10px;" />
+    <el-tooltip content="全屏显示" placement="bottom">
+      <Screenfull style="position: fixed; top: 10px; right: 10px;" />
+    </el-tooltip>
 
-    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99"  @click="goOverviewPage">
-      <fa-icon icon-name="home" />
-    </div>
+    <el-tooltip content="返回大屏" placement="bottom">
+      <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99;cursor: pointer"  @click="goOverviewPage">
+        <fa-icon icon-name="home" />
+      </div>
+    </el-tooltip>
     <el-header class="header" height="72px">
       <p>生产线·详情</p>
       <DigitalClock/>
@@ -17,7 +21,7 @@
             <div class="button-container">
               <el-tooltip content="返回公司详情" placement="right">
                 <p class="return" @click="backtoCompany">
-                  <fa-icon icon-name="rotate-left (alias)" ></fa-icon>
+                  <fa-icon icon-name="long-arrow-left" ></fa-icon>
                 </p>
               </el-tooltip>
             </div>
