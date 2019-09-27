@@ -101,7 +101,6 @@ export default {
     async getData() {
       let { id, companyId } = this.pipeLine
       let res = await pipelineModel.getDetail(id, companyId)
-
     },
   },
 }

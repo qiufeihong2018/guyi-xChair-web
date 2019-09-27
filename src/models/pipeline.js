@@ -19,8 +19,8 @@ export default class Pipeline {
    * @param {*} id
    * @returns
    */
-  static async getDetail(id, companyId) {
-    const data = await get(`company/${companyId}/pipeline/${id}`)
+  static async getDetail(id) {
+    const data = await get(`/pipeline/${id}/detail`)
     return data
   }
 

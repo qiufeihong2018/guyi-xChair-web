@@ -1,10 +1,8 @@
-// Echart 详细参数信息： https://www.jianshu.com/p/3cf80b96a65d
-import echarts from 'echarts'
 import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      carouselIntervalId: undefined,
+      
     }
   },
   computed: {
@@ -14,13 +12,12 @@ export default {
   },
   watch: {
     year() {
-      this.updateChart()
+      this.updateChartByYear()
     }
   },
   methods: {
-
-    updateChart() {
+    updateChartByYear() {
       this.chart.setOption(this.option)
     }
-  },
+  }
 }
