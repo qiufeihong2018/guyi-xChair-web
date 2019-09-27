@@ -21,6 +21,19 @@ function formatSeconds(time) {
   let val = `${formatBit(Math.floor(time / 3600))}时${formatBit(Math.floor(min / 60))}分`
   return val
 }
+function formatTime(msTime) {
+  let time = msTime / 1000
+
+  let day = Math.floor(time / 60 / 60 / 24)
+
+  let hour = Math.floor(time / 60 / 60) % 24
+
+  let minute = Math.floor(time / 60) % 60
+
+  let second = Math.floor(time) % 60
+
+  return `${hour}时${minute}分`
+}
 
 export default {
   name: 'ProdlineStatePieChart',
@@ -64,7 +77,7 @@ export default {
       return {
         tooltip: {
           formatter(params) {
-            return `${params.marker + params.name}: ${formatSeconds(params.value / 1000)}`
+            return `${params.marker + params.name}: ${formatTime(params.value)}`
           }
         },
         grid: {
@@ -160,7 +173,10 @@ export default {
         start: range.start,
         end: range.end
       }
-      const res = await PipelineModel.getStateTime(params)
+      let res = await PipelineModel.getStateTime(params)
+      if (this.durationType === 'yester') {
+        res.data.offTime = 1000 * 60 * 60 * 24 - res.data.onTime - res.data.pendingTime
+      }
       this.chartData = Object.keys(res.data).map(item => ({
         name: this.states[item],
         value: res.data[item]
