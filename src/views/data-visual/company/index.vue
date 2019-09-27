@@ -1,10 +1,14 @@
 <template>
   <el-container class="overview">
-    <Screenfull style="position: fixed; top: 10px; right: 10px;" />
-    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99"
-      @click="goOverviewPage">
-      <fa-icon icon-name="home" />
-    </div>
+    <el-tooltip content="全屏显示" placement="bottom">
+      <Screenfull style="position: fixed; top: 10px; right: 10px;" />
+    </el-tooltip>
+    <el-tooltip content="返回大屏" placement="bottom">
+      <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99"
+           @click="goOverviewPage">
+        <fa-icon icon-name="home" />
+      </div>
+    </el-tooltip>
     <el-header class="header" height="72px">
       <p>{{this.title}}·详情</p>
     </el-header>
