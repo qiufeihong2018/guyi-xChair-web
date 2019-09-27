@@ -28,9 +28,14 @@ import {
   TabPane,
   Dialog,
   Tag,
+  MessageBox,
+  Message
 } from 'element-ui'
+import Vue from 'vue'
 import { loadPlugins } from '../utils/index'
 
+Vue.prototype.$confirm = MessageBox.confirm
+Vue.prototype.$message = Message
 loadPlugins([
   Icon,
   Button,
