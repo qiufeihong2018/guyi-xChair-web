@@ -65,13 +65,11 @@ export default {
   methods: {
     getPipeLineName(val) {
       let object = this.pipelines.find(item => item.id === val)
-      console.log('object', object)
       this.product.pipelineName = object.pipelineName
     },
     async handleEditPipeline() {
       if (this.isAdd) {
         let data = this.product
-        console.log('新增')
         const res = await ProductModel.createProduct(data)
         if (res.status === 200) {
           this.closeEdit()

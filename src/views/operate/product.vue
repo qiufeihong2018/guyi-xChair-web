@@ -75,7 +75,7 @@ export default {
     return {
       companyList: companies,
       productList: [],
-      isAdd: false,
+      isAdd: false, // 是否新增
       showEdit: false,
       product: {},
       pipelineList: [],
@@ -127,7 +127,7 @@ export default {
     },
 
     handleDelete(index, row) {
-      this.$confirm('此操作将永久删除该产品, 是否继续?', '提示', {
+      this.$confirm('此操作将删除该产品, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -177,7 +177,6 @@ export default {
     // select获取值
     getPipeLineName(val) {
       let object = this.pipelineList.find(item => item.id === val)
-      console.log('object', object)
       this.product.pipelineName = object.pipelineName
     },
     async getList() {
