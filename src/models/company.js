@@ -62,8 +62,6 @@ export default class Company {
       }
       return item
     })
-    
-    console.log('processedData', processedData)
     return processedData
   }
 
