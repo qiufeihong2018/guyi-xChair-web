@@ -1,10 +1,14 @@
 <template>
   <el-container class="overview">
-    <Screenfull style="position: fixed; top: 10px; right: 10px;" />
-    <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99"
-      @click="goOverviewPage">
-      <fa-icon icon-name="home" />
-    </div>
+    <el-tooltip content="全屏显示" placement="bottom">
+      <Screenfull style="position: fixed; top: 10px; right: 10px;" />
+    </el-tooltip>
+    <el-tooltip content="返回大屏" placement="bottom">
+      <div style="margin-right: 15px;position: absolute; top: 10px; right: 40px;z-index:99"
+           @click="goOverviewPage">
+        <fa-icon icon-name="home" />
+      </div>
+    </el-tooltip>
     <el-header class="header" height="72px">
       <p>{{this.title}}·详情</p>
     </el-header>
@@ -54,7 +58,8 @@
           <GraphContainer title="运行状态图" class="graph-item xpanel-wrapper-3">
             <OperatingStatusBarChart />
           </GraphContainer>
-          <GraphContainer title="设备能耗" class="graph-item xpanel-wrapper-3">
+          <GraphContainer title="生产状态" class="graph-item xpanel-wrapper-3">
+            <ProdlineStateTable />
           </GraphContainer>
           <GraphContainer title="设备有效利用率" class="graph-item xpanel-wrapper-3">
             <UtilizationBarChart :chart-data="utilizationData" />
@@ -75,6 +80,7 @@ import GraphContainer from 'comps/base/GraphContainer'
 import CompanyProdlineStateList from './CompanyProdlineStateList'
 import ProdlineStatus from './ProdlineStatus'
 import OperatingStatusBarChart from './OperatingStatusBarChart'
+import ProdlineStateTable from './ProdlineStateTable'
 // import EnergyConsumptionBarChart from './EnergyConsumptionBarChart'
 import BarChartOfEnergyCostFacter from './BarChartOfEnergyCostFacter'
 import UtilizationBarChart from './UtilizationBarChart'
@@ -99,6 +105,7 @@ export default {
     CompanyProdlineStateList,
     ProdlineStatus,
     OperatingStatusBarChart,
+    ProdlineStateTable,
     // EnergyConsumptionBarChart,
     BarChartOfEnergyCostFacter,
     UtilizationBarChart,
